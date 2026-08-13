@@ -1,0 +1,38 @@
+name: Weekly arXiv Digest
+
+on:
+  schedule:
+    - cron: '0 0 * * 1'   # 每周一 UTC 00:00 = 北京时间 08:00
+  workflow_dispatch:        # 支持手动触发（方便测试）
+
+permissions:
+  contents: write
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      
+      - name: Install dependencies
+        run: |
+          pip install arxiv openai jinja2
+      
+      - name: Generate weekly digest
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: python scripts/generate_digest.py
+      
+      - name: Commit and push new post
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add _posts/
+          git diff --cached --quiet || (git commit -m "📰 Add weekly arXiv digest $(date +%Y-%m-%d)" && git push)
