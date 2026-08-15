@@ -40,7 +40,7 @@ TIME_RANGE_DAYS = {
 
 # ==================== 配置 ====================
 MAX_RESULTS = 5
-SITE_URL = os.getenv("SITE_URL", "https://你的用户名.github.io")
+SITE_URL = os.getenv("SITE_URL", "https://ComplexLychee.github.io")
 ARXIV_DELAY = 5
 MAX_RETRIES = 3
 # ===========================================================
