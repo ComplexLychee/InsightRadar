@@ -27,7 +27,7 @@ jobs:
       
       - name: Generate weekly digest
         env:
-          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          OPENCODE_API_KEY: ${{ secrets.OPENCODE_API_KEY }}  # 改这里
         run: python scripts/generate_digest.py
       
       - name: Commit and push new post
