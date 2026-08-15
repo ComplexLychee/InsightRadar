@@ -2,6 +2,7 @@ import arxiv
 from openai import OpenAI
 import os
 import json
+import time
 from datetime import datetime, timedelta
 from jinja2 import Template
 
@@ -13,6 +14,8 @@ SEARCH_CONFIG = [
 ]
 MAX_RESULTS = 5
 SITE_URL = os.getenv("SITE_URL", "https://你的用户名.github.io")
+REQUEST_DELAY = 3  # arXiv 官方建议请求间隔 3 秒
+MAX_RETRIES = 3    # 最大重试次数
 # ===========================================================
 
 def get_last_week_range():
@@ -36,28 +39,46 @@ def search_papers():
             max_results=MAX_RESULTS,
         )
         
-        for result in client.results(search):
-            if result.entry_id in seen_ids:
-                continue
-            seen_ids.add(result.entry_id)
-            
-            pub_date = result.published.date()
-            if last_monday.date() <= pub_date <= last_sunday.date():
-                all_papers.append({
-                    "raw": result,
-                    "category_name": cfg["name"],
-                    "category_code": result.primary_category,
-                })
+        retry_count = 0
+        while retry_count < MAX_RETRIES:
+            try:
+                for result in client.results(search):
+                    if result.entry_id in seen_ids:
+                        continue
+                    seen_ids.add(result.entry_id)
+                    
+                    pub_date = result.published.date()
+                    if last_monday.date() <= pub_date <= last_sunday.date():
+                        all_papers.append({
+                            "raw": result,
+                            "category_name": cfg["name"],
+                            "category_code": result.primary_category,
+                        })
+                
+                # 请求成功后等待，避免触发下一个分类的速率限制
+                time.sleep(REQUEST_DELAY)
+                break
+                
+            except arxiv.HTTPError as e:
+                if e.status == 429:
+                    retry_count += 1
+                    if retry_count < MAX_RETRIES:
+                        wait_time = (2 ** retry_count) * 5  # 指数退避: 10s, 20s, 40s
+                        print(f"⚠️ 遇到速率限制，等待 {wait_time} 秒后重试 ({retry_count}/{MAX_RETRIES})...")
+                        time.sleep(wait_time)
+                    else:
+                        print(f"❌ 超过最大重试次数，跳过 {cfg['name']}")
+                        break
+                else:
+                    raise
     
     return all_papers, last_monday, last_sunday
 
 def analyze_paper(paper_info):
-   paper = paper_info["raw"]
-    
-    # 改为 OpenCode Zen 网关
+    paper = paper_info["raw"]
     client = OpenAI(
-        api_key=os.getenv("sk-l0tl1ehFkqGb190yrXSvVODR0U5yiTreNvXAfFPRyun9lwBFbxDAI1mdwEfJ1MCu"),  # 从新的环境变量读取
-        base_url="https://opencode.ai/zen/v1",   # OpenCode Zen 统一入口
+        api_key=os.getenv("OPENCODE_API_KEY"),
+        base_url="https://opencode.ai/zen/v1",
     )
     
     authors = ", ".join([a.name for a in paper.authors[:5]])
@@ -83,7 +104,7 @@ def analyze_paper(paper_info):
 
     try:
         resp = client.chat.completions.create(
-            model="deepseek-v4-flash",  # 或换成 deepseek-v4-pro（质量更高，更贵）
+            model="deepseek-v4-flash",
             messages=[{"role": "user", "content": prompt}],
             response_format={"type": "json_object"},
             temperature=0.5,
