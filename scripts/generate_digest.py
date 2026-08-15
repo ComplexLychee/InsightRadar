@@ -9,9 +9,8 @@ from jinja2 import Template
 # ==================== 关键词预设 ====================
 KEYWORD_PRESETS = {
     "default": [
-        {"query": "cat:cs.AI AND (large language model OR LLM OR transformer)", "name": "大模型"},
-        {"query": "cat:cs.CV AND (multimodal OR vision language model OR VLM)", "name": "多模态"},
-        {"query": "cat:cs.LG AND (reinforcement learning OR RLHF OR alignment)", "name": "强化学习"},
+        {"query": "cat:cs.AI AND (SDC)", "name": "静默故障"},
+        {"query": "cat:cs.AI AND (AI Infra)", "name": "AI Infra"},
     ],
     "llm_only": [
         {"query": "cat:cs.AI AND (large language model OR LLM OR transformer OR GPT OR reasoning)", "name": "大模型"},
