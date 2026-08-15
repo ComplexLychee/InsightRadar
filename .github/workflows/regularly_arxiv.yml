@@ -2,8 +2,34 @@ name: Weekly arXiv Digest
 
 on:
   schedule:
-    - cron: '0 0 * * 1'   # 每周一 UTC 00:00 = 北京时间 08:00
-  workflow_dispatch:        # 支持手动触发（方便测试）
+    - cron: '0 0 * * 1'   # 每周一自动运行（默认1周）
+  workflow_dispatch:
+    inputs:
+      time_range:
+        description: '搜索时间范围'
+        required: true
+        default: '1_week'
+        type: choice
+        options:
+          - 1_week
+          - 1_month
+          - 3_months
+          - 6_months
+      keyword_preset:
+        description: '关键词预设'
+        required: true
+        default: 'default'
+        type: choice
+        options:
+          - default
+          - llm_only
+          - vision_only
+          - rl_only
+          - all_areas
+      custom_query:
+        description: '自定义 arXiv 查询语句（留空则使用预设）'
+        required: false
+        type: string
 
 permissions:
   contents: write
@@ -25,14 +51,17 @@ jobs:
         run: |
           pip install arxiv openai jinja2
       
-      - name: Generate weekly digest
+      - name: Generate digest
         env:
-          OPENCODE_API_KEY: ${{ secrets.OPENCODE_API_KEY }}  # 改这里
+          OPENCODE_API_KEY: ${{ secrets.OPENCODE_API_KEY }}
+          TIME_RANGE: ${{ github.event.inputs.time_range || '1_week' }}
+          KEYWORD_PRESET: ${{ github.event.inputs.keyword_preset || 'default' }}
+          CUSTOM_QUERY: ${{ github.event.inputs.custom_query || '' }}
         run: python scripts/generate_digest.py
       
-      - name: Commit and push new post
+      - name: Commit and push
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add _posts/
-          git diff --cached --quiet || (git commit -m "📰 Add weekly arXiv digest $(date +%Y-%m-%d)" && git push)
+          git diff --cached --quiet || (git commit -m "📰 Add arXiv digest $(date +%Y-%m-%d)" && git push)
