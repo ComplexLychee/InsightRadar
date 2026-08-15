@@ -14,8 +14,10 @@ SEARCH_CONFIG = [
 ]
 MAX_RESULTS = 5
 SITE_URL = os.getenv("SITE_URL", "https://你的用户名.github.io")
-REQUEST_DELAY = 3  # arXiv 官方建议请求间隔 3 秒
-MAX_RETRIES = 3    # 最大重试次数
+# arXiv API 官方建议：任何自动化脚本请求间隔 ≥ 3 秒
+# 这里设 5 秒更保守，避免 429/503
+ARXIV_DELAY = 5
+MAX_RETRIES = 3
 # ===========================================================
 
 def get_last_week_range():
@@ -25,13 +27,23 @@ def get_last_week_range():
     return last_monday, last_sunday
 
 def search_papers():
-    client = arxiv.Client()
+    """
+    使用 arxiv.Client 内置 delay 自动处理请求间隔，
+    同时在外层加指数退避重试，应对 429/503。
+    """
     last_monday, last_sunday = get_last_week_range()
     seen_ids = set()
     all_papers = []
     
     for cfg in SEARCH_CONFIG:
         print(f"🔍 检索: {cfg['name']} ...")
+        
+        # 每次搜索用新的 Client，内置 delay_seconds 自动节流
+        client = arxiv.Client(
+            delay_seconds=ARXIV_DELAY,
+            page_size=MAX_RESULTS,  # 减少分页请求次数
+        )
+        
         search = arxiv.Search(
             query=cfg["query"],
             sort_by=arxiv.SortCriterion.SubmittedDate,
@@ -39,8 +51,7 @@ def search_papers():
             max_results=MAX_RESULTS,
         )
         
-        retry_count = 0
-        while retry_count < MAX_RETRIES:
+        for attempt in range(MAX_RETRIES):
             try:
                 for result in client.results(search):
                     if result.entry_id in seen_ids:
@@ -55,22 +66,27 @@ def search_papers():
                             "category_code": result.primary_category,
                         })
                 
-                # 请求成功后等待，避免触发下一个分类的速率限制
-                time.sleep(REQUEST_DELAY)
-                break
+                print(f"   ✅ {cfg['name']} 完成，找到 {len([p for p in all_papers if p['category_name'] == cfg['name']])} 篇")
+                break  # 成功，跳出重试循环
                 
             except arxiv.HTTPError as e:
-                if e.status == 429:
-                    retry_count += 1
+                status = getattr(e, 'status', None)
+                if status in (429, 503):
+                    retry_count = attempt + 1
                     if retry_count < MAX_RETRIES:
-                        wait_time = (2 ** retry_count) * 5  # 指数退避: 10s, 20s, 40s
-                        print(f"⚠️ 遇到速率限制，等待 {wait_time} 秒后重试 ({retry_count}/{MAX_RETRIES})...")
+                        # 指数退避：5s, 10s, 20s
+                        wait_time = ARXIV_DELAY * (2 ** attempt)
+                        print(f"   ⚠️ arXiv 限流 (HTTP {status})，等待 {wait_time} 秒后重试 ({retry_count}/{MAX_RETRIES})...")
                         time.sleep(wait_time)
                     else:
-                        print(f"❌ 超过最大重试次数，跳过 {cfg['name']}")
+                        print(f"   ❌ {cfg['name']} 超过最大重试次数，跳过")
                         break
                 else:
-                    raise
+                    print(f"   ❌ {cfg['name']} 请求失败: {e}")
+                    break
+            except Exception as e:
+                print(f"   ❌ {cfg['name']} 异常: {e}")
+                break
     
     return all_papers, last_monday, last_sunday
 
