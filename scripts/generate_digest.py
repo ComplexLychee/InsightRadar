@@ -52,8 +52,13 @@ def search_papers():
     return all_papers, last_monday, last_sunday
 
 def analyze_paper(paper_info):
-    paper = paper_info["raw"]
-    client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+   paper = paper_info["raw"]
+    
+    # 改为 OpenCode Zen 网关
+    client = OpenAI(
+        api_key=os.getenv("sk-l0tl1ehFkqGb190yrXSvVODR0U5yiTreNvXAfFPRyun9lwBFbxDAI1mdwEfJ1MCu"),  # 从新的环境变量读取
+        base_url="https://opencode.ai/zen/v1",   # OpenCode Zen 统一入口
+    )
     
     authors = ", ".join([a.name for a in paper.authors[:5]])
     if len(paper.authors) > 5:
@@ -78,7 +83,7 @@ def analyze_paper(paper_info):
 
     try:
         resp = client.chat.completions.create(
-            model="gpt-4o-mini",
+            model="deepseek-v4-flash",  # 或换成 deepseek-v4-pro（质量更高，更贵）
             messages=[{"role": "user", "content": prompt}],
             response_format={"type": "json_object"},
             temperature=0.5,
