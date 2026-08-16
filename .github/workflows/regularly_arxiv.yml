@@ -2,19 +2,14 @@ name: Weekly arXiv Digest
 
 on:
   schedule:
-    - cron: '0 0 * * 1'   # 每周一自动运行（默认1周）
+    - cron: '0 0 * * 1'
   workflow_dispatch:
     inputs:
       time_range:
-        description: '搜索时间范围'
+        description: '时间范围（例如：1 week, 2 weeks, 1 month, 3 months, 1 year）'
         required: true
-        default: '1_week'
-        type: choice
-        options:
-          - 1_week
-          - 1_month
-          - 3_months
-          - 6_months
+        default: '1 week'
+        type: string
       keyword_preset:
         description: '关键词预设'
         required: true
@@ -25,6 +20,7 @@ on:
           - llm_only
           - vision_only
           - rl_only
+          - sdc_reliability
           - all_areas
       custom_query:
         description: '自定义 arXiv 查询语句（留空则使用预设）'
@@ -54,7 +50,7 @@ jobs:
       - name: Generate digest
         env:
           OPENCODE_API_KEY: ${{ secrets.OPENCODE_API_KEY }}
-          TIME_RANGE: ${{ github.event.inputs.time_range || '1_week' }}
+          TIME_RANGE: ${{ github.event.inputs.time_range || '1 week' }}
           KEYWORD_PRESET: ${{ github.event.inputs.keyword_preset || 'default' }}
           CUSTOM_QUERY: ${{ github.event.inputs.custom_query || '' }}
         run: python scripts/generate_digest.py
