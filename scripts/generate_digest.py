@@ -3,14 +3,16 @@ from openai import OpenAI
 import os
 import json
 import time
+import re
 from datetime import datetime, timedelta
 from jinja2 import Template
 
 # ==================== 关键词预设 ====================
 KEYWORD_PRESETS = {
     "default": [
-        {"query": "cat:cs.AI AND (SDC)", "name": "静默故障"},
-        {"query": "cat:cs.AI AND (AI Infra)", "name": "AI Infra"},
+        {"query": "cat:cs.AI AND (large language model OR LLM OR transformer)", "name": "大模型"},
+        {"query": "cat:cs.CV AND (multimodal OR vision language model OR VLM)", "name": "多模态"},
+        {"query": "cat:cs.LG AND (reinforcement learning OR RLHF OR alignment)", "name": "强化学习"},
     ],
     "llm_only": [
         {"query": "cat:cs.AI AND (large language model OR LLM OR transformer OR GPT OR reasoning)", "name": "大模型"},
@@ -21,6 +23,13 @@ KEYWORD_PRESETS = {
     "rl_only": [
         {"query": "cat:cs.LG AND (reinforcement learning OR RLHF OR alignment OR agent OR policy)", "name": "强化学习与智能体"},
     ],
+    "sdc_reliability": [
+        {"query": "cat:cs.LG AND (silent data corruption OR SDC OR soft error OR hardware fault OR training reliability)", "name": "ML训练可靠性"},
+        {"query": "cat:cs.AR AND (silent data corruption OR SDC OR soft error OR fault tolerance OR ECC OR reliability)", "name": "硬件架构可靠性"},
+        {"query": "cat:cs.DC AND (silent data corruption OR SDC OR distributed training fault OR cluster reliability)", "name": "分布式系统可靠性"},
+        {"query": "cat:cs.CV AND (silent data corruption OR SDC OR model robustness OR fault injection)", "name": "视觉模型可靠性"},
+        {"query": "cat:cs.AI AND (silent data corruption OR SDC OR AI reliability OR hardware fault)", "name": "AI系统可靠性"},
+    ],
     "all_areas": [
         {"query": "cat:cs.AI", "name": "人工智能"},
         {"query": "cat:cs.CV", "name": "计算机视觉"},
@@ -30,25 +39,71 @@ KEYWORD_PRESETS = {
     ],
 }
 
-TIME_RANGE_DAYS = {
-    "1_week": 7,
-    "1_month": 30,
-    "3_months": 90,
-    "6_months": 180,
-    "1_year": 365,
-    "2_year":365*2,
-    "3_year":365*3,
-    "4_year":365*4,
-    "5_year":365*5,
-    "10_year":365*10
-}
-
 # ==================== 配置 ====================
 MAX_RESULTS = 5
-SITE_URL = os.getenv("SITE_URL", "https://ComplexLychee.github.io")
+SITE_URL = os.getenv("SITE_URL", "https://complexlychee.github.io")
 ARXIV_DELAY = 5
 MAX_RETRIES = 3
 # ===========================================================
+
+def parse_time_range(time_str):
+    """
+    解析时间范围字符串，支持格式：
+    - "1 week", "2 weeks", "1 month", "3 months", "1 year"
+    - 简写："1w", "2w", "1m", "3m", "1y", "2y"
+    - 数字+空格+单位（单复数均可）
+    
+    返回：(start_date, end_date, range_display, days)
+    """
+    time_str = time_str.strip().lower()
+    
+    # 尝试匹配 "数字 单位" 格式
+    match = re.match(r'^(\d+)\s*([a-z]+)$', time_str)
+    if not match:
+        # 默认回退到 1 周
+        print(f"⚠️ 无法解析时间范围 '{time_str}'，默认使用 1 周")
+        end_date = datetime.now()
+        start_date = end_date - timedelta(days=7)
+        return start_date, end_date, "过去1周", 7
+    
+    num = int(match.group(1))
+    unit_raw = match.group(2)
+    
+    # 单位标准化
+    unit_map = {
+        'd': 'day', 'day': 'day', 'days': 'day',
+        'w': 'week', 'week': 'week', 'weeks': 'week',
+        'm': 'month', 'month': 'month', 'months': 'month',
+        'y': 'year', 'year': 'year', 'years': 'year',
+    }
+    
+    unit = unit_map.get(unit_raw)
+    if not unit:
+        print(f"⚠️ 未知时间单位 '{unit_raw}'，默认使用 1 周")
+        end_date = datetime.now()
+        start_date = end_date - timedelta(days=7)
+        return start_date, end_date, "过去1周", 7
+    
+    # 计算天数（月份按30天，年份按365天估算）
+    if unit == 'day':
+        days = num
+        unit_display = f"{num}天" if num > 1 else "1天"
+    elif unit == 'week':
+        days = num * 7
+        unit_display = f"{num}周" if num > 1 else "1周"
+    elif unit == 'month':
+        days = num * 30
+        unit_display = f"{num}个月" if num > 1 else "1个月"
+    elif unit == 'year':
+        days = num * 365
+        unit_display = f"{num}年" if num > 1 else "1年"
+    
+    end_date = datetime.now()
+    start_date = end_date - timedelta(days=days)
+    range_display = f"过去{unit_display}"
+    
+    print(f"📅 解析时间范围: {time_str} → {range_display} ({days}天)")
+    return start_date, end_date, range_display, days
 
 def get_search_config():
     """根据环境变量返回搜索配置"""
@@ -56,7 +111,6 @@ def get_search_config():
     custom_query = os.getenv("CUSTOM_QUERY", "").strip()
     
     if custom_query:
-        # 自定义查询：单分类模式
         return [{"query": custom_query, "name": "自定义检索"}]
     
     if preset in KEYWORD_PRESETS:
@@ -66,30 +120,17 @@ def get_search_config():
 
 def get_date_range():
     """根据环境变量返回搜索日期范围"""
-    range_key = os.getenv("TIME_RANGE", "1_week")
-    days = TIME_RANGE_DAYS.get(range_key, 7)
-    
-    end_date = datetime.now()
-    start_date = end_date - timedelta(days=days)
-    
-    # 格式化显示
-    range_display = {
-        "1_week": "过去1周",
-        "1_month": "过去1个月",
-        "3_months": "过去3个月",
-        "6_months": "过去6个月",
-    }.get(range_key, f"过去{days}天")
-    
-    return start_date, end_date, range_display
+    range_str = os.getenv("TIME_RANGE", "1 week")
+    return parse_time_range(range_str)
 
 def search_papers():
     search_config = get_search_config()
-    start_date, end_date, range_display = get_date_range()
+    start_date, end_date, range_display, days = get_date_range()
     
-    print(f"📅 时间范围: {range_display} ({start_date.date()} ~ {end_date.date()})")
     print(f"🔧 关键词预设: {os.getenv('KEYWORD_PRESET', 'default')}")
     if os.getenv("CUSTOM_QUERY"):
         print(f"🔧 自定义查询: {os.getenv('CUSTOM_QUERY')}")
+    print(f"📅 检索区间: {start_date.date()} ~ {end_date.date()}")
     print("=" * 50)
     
     seen_ids = set()
@@ -206,16 +247,14 @@ def analyze_paper(paper_info):
         }
 
 def generate_post(papers_data, start_date, end_date, range_display):
-    # 生成唯一标识：用日期+时间范围
     date_str = end_date.strftime("%Y-%m-%d")
-    range_slug = range_display.replace("过去", "").replace(" ", "_")
     
     # 标题根据时间范围调整
     if range_display == "过去1周":
-        title = f"AI 论文周刊 · {end_date.strftime('%Y-%m-%d')}"
+        title = f"Insight Radar · 周刊 {end_date.strftime('%Y-%m-%d')}"
         tag_label = "论文周刊"
     else:
-        title = f"AI 论文洞察 · {range_display}精选 ({start_date.date()} ~ {end_date.date()})"
+        title = f"Insight Radar · {range_display}精选 ({start_date.date()} ~ {end_date.date()})"
         tag_label = "论文洞察"
     
     papers_data.sort(key=lambda x: x.get("score", 5), reverse=True)
@@ -224,7 +263,6 @@ def generate_post(papers_data, start_date, end_date, range_display):
     for p in papers_data:
         all_tags.update(p.get("tags", []))
     
-    # 如果没有论文，生成提示性内容
     if not papers_data:
         content_body = """
 > ⚠️ **本期未检索到符合条件的论文**
@@ -234,7 +272,7 @@ def generate_post(papers_data, start_date, end_date, range_display):
 > - 关键词过滤条件过于严格
 > 
 > 建议尝试：
-> - 扩大时间范围（如从1周改为1个月）
+> - 扩大时间范围（如从 1 周改为 1 个月）
 > - 切换关键词预设（如从"大模型"改为"全部领域"）
 > - 使用自定义查询扩大检索范围
 """
@@ -266,7 +304,6 @@ def generate_post(papers_data, start_date, end_date, range_display):
         
         content_body = template.render(papers=papers_data)
     
-    # 组装完整 Markdown
     md = f"""---
 title: "{title}"
 date: {date_str} 08:00:00 +0800
@@ -296,7 +333,7 @@ toc_sticky: true
 |------|------|
 | 🌐 博客主页 | {SITE_URL} |
 | 📡 RSS 订阅 | {SITE_URL}/feed.xml |
-| 🐙 源码仓库 | https://github.com/你的用户名/你的用户名.github.io |
+| 🐙 源码仓库 | https://github.com/ComplexLychee/ComplexLychee.github.io |
 
 ---
 
@@ -336,7 +373,6 @@ def main():
     md_content = generate_post(papers_data, start_date, end_date, range_display)
     
     os.makedirs("_posts", exist_ok=True)
-    # 文件名包含时间范围，避免覆盖
     range_slug = range_display.replace("过去", "").replace(" ", "_")
     filename = f"_posts/{end_date.strftime('%Y-%m-%d')}-insight-radar-{range_slug}.md"
     
