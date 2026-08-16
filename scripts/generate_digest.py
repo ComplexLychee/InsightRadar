@@ -8,27 +8,44 @@ from datetime import datetime, timedelta
 from jinja2 import Template
 
 # ==================== 关键词预设 ====================
+# 注意：arXiv API 中双引号 "phrase" 表示精确短语匹配，避免被拆成单个词
 KEYWORD_PRESETS = {
     "default": [
-        {"query": "cat:cs.AI AND (large language model OR LLM OR transformer)", "name": "大模型"},
-        {"query": "cat:cs.CV AND (multimodal OR vision language model OR VLM)", "name": "多模态"},
-        {"query": "cat:cs.LG AND (reinforcement learning OR RLHF OR alignment)", "name": "强化学习"},
+        {"query": 'cat:cs.AI AND (llm OR "large language model" OR transformer)', "name": "大模型"},
+        {"query": 'cat:cs.CV AND (multimodal OR "vision language model" OR VLM)', "name": "多模态"},
+        {"query": 'cat:cs.LG AND ("reinforcement learning" OR RLHF OR alignment)', "name": "强化学习"},
     ],
     "llm_only": [
-        {"query": "cat:cs.AI AND (large language model OR LLM OR transformer OR GPT OR reasoning)", "name": "大模型"},
+        {"query": 'cat:cs.AI AND (llm OR "large language model" OR transformer OR GPT OR reasoning)', "name": "大模型"},
     ],
     "vision_only": [
-        {"query": "cat:cs.CV AND (multimodal OR vision language model OR VLM OR diffusion OR image generation)", "name": "多模态与视觉"},
+        {"query": 'cat:cs.CV AND (multimodal OR "vision language model" OR VLM OR diffusion OR "image generation")', "name": "多模态与视觉"},
     ],
     "rl_only": [
-        {"query": "cat:cs.LG AND (reinforcement learning OR RLHF OR alignment OR agent OR policy)", "name": "强化学习与智能体"},
+        {"query": 'cat:cs.LG AND ("reinforcement learning" OR RLHF OR alignment OR agent OR policy)', "name": "强化学习与智能体"},
     ],
+    # SDC 预设：严格使用精确短语，去掉宽泛词，覆盖硬件/分布式/ML/安全/软件工程
     "sdc_reliability": [
-        {"query": "cat:cs.LG AND (silent data corruption OR SDC OR soft error OR hardware fault OR training reliability)", "name": "ML训练可靠性"},
-        {"query": "cat:cs.AR AND (silent data corruption OR SDC OR soft error OR fault tolerance OR ECC OR reliability)", "name": "硬件架构可靠性"},
-        {"query": "cat:cs.DC AND (silent data corruption OR SDC OR distributed training fault OR cluster reliability)", "name": "分布式系统可靠性"},
-        {"query": "cat:cs.CV AND (silent data corruption OR SDC OR model robustness OR fault injection)", "name": "视觉模型可靠性"},
-        {"query": "cat:cs.AI AND (silent data corruption OR SDC OR AI reliability OR hardware fault)", "name": "AI系统可靠性"},
+        {
+            "query": 'cat:cs.AR AND ("silent data corruption" OR "soft error" OR SDC OR "bit flip" OR "memory error" OR "transient fault")',
+            "name": "硬件架构可靠性"
+        },
+        {
+            "query": 'cat:cs.DC AND ("silent data corruption" OR "soft error" OR SDC OR "fault tolerance" OR "error resilience" OR checkpoint)',
+            "name": "分布式系统可靠性"
+        },
+        {
+            "query": 'cat:cs.LG AND ("silent data corruption" OR "soft error" OR SDC OR "training fault" OR "data integrity")',
+            "name": "ML训练可靠性"
+        },
+        {
+            "query": 'cat:cs.SE AND ("silent data corruption" OR "soft error" OR SDC OR "fault injection" OR "error detection")',
+            "name": "软件工程可靠性"
+        },
+        {
+            "query": 'cat:cs.CR AND ("silent data corruption" OR "soft error" OR SDC OR "data integrity" OR "corruption detection")',
+            "name": "安全与数据完整性"
+        },
     ],
     "all_areas": [
         {"query": "cat:cs.AI", "name": "人工智能"},
@@ -40,27 +57,19 @@ KEYWORD_PRESETS = {
 }
 
 # ==================== 配置 ====================
-MAX_RESULTS = 5
+# 默认每分类抓取数量
+DEFAULT_MAX_RESULTS = 5
+# SDC 预设使用更大的抓取量，因为精确查询结果少，需要多翻几篇才能覆盖时间范围
+SDC_MAX_RESULTS = 20
 SITE_URL = os.getenv("SITE_URL", "https://complexlychee.github.io")
 ARXIV_DELAY = 5
 MAX_RETRIES = 3
 # ===========================================================
 
 def parse_time_range(time_str):
-    """
-    解析时间范围字符串，支持格式：
-    - "1 week", "2 weeks", "1 month", "3 months", "1 year"
-    - 简写："1w", "2w", "1m", "3m", "1y", "2y"
-    - 数字+空格+单位（单复数均可）
-    
-    返回：(start_date, end_date, range_display, days)
-    """
     time_str = time_str.strip().lower()
-    
-    # 尝试匹配 "数字 单位" 格式
     match = re.match(r'^(\d+)\s*([a-z]+)$', time_str)
     if not match:
-        # 默认回退到 1 周
         print(f"⚠️ 无法解析时间范围 '{time_str}'，默认使用 1 周")
         end_date = datetime.now()
         start_date = end_date - timedelta(days=7)
@@ -69,7 +78,6 @@ def parse_time_range(time_str):
     num = int(match.group(1))
     unit_raw = match.group(2)
     
-    # 单位标准化
     unit_map = {
         'd': 'day', 'day': 'day', 'days': 'day',
         'w': 'week', 'week': 'week', 'weeks': 'week',
@@ -84,7 +92,6 @@ def parse_time_range(time_str):
         start_date = end_date - timedelta(days=7)
         return start_date, end_date, "过去1周", 7
     
-    # 计算天数（月份按30天，年份按365天估算）
     if unit == 'day':
         days = num
         unit_display = f"{num}天" if num > 1 else "1天"
@@ -106,7 +113,6 @@ def parse_time_range(time_str):
     return start_date, end_date, range_display, days
 
 def get_search_config():
-    """根据环境变量返回搜索配置"""
     preset = os.getenv("KEYWORD_PRESET", "default")
     custom_query = os.getenv("CUSTOM_QUERY", "").strip()
     
@@ -119,15 +125,21 @@ def get_search_config():
     return KEYWORD_PRESETS["default"]
 
 def get_date_range():
-    """根据环境变量返回搜索日期范围"""
     range_str = os.getenv("TIME_RANGE", "1 week")
     return parse_time_range(range_str)
+
+def get_max_results():
+    """根据预设动态调整抓取数量"""
+    preset = os.getenv("KEYWORD_PRESET", "default")
+    return SDC_MAX_RESULTS if preset == "sdc_reliability" else DEFAULT_MAX_RESULTS
 
 def search_papers():
     search_config = get_search_config()
     start_date, end_date, range_display, days = get_date_range()
+    max_results = get_max_results()
     
     print(f"🔧 关键词预设: {os.getenv('KEYWORD_PRESET', 'default')}")
+    print(f"📊 每分类抓取: {max_results} 篇")
     if os.getenv("CUSTOM_QUERY"):
         print(f"🔧 自定义查询: {os.getenv('CUSTOM_QUERY')}")
     print(f"📅 检索区间: {start_date.date()} ~ {end_date.date()}")
@@ -138,17 +150,18 @@ def search_papers():
     
     for cfg in search_config:
         print(f"🔍 检索: {cfg['name']} ...")
+        print(f"   查询: {cfg['query'][:80]}...")
         
         client = arxiv.Client(
             delay_seconds=ARXIV_DELAY,
-            page_size=MAX_RESULTS,
+            page_size=max_results,
         )
         
         search = arxiv.Search(
             query=cfg["query"],
             sort_by=arxiv.SortCriterion.SubmittedDate,
             sort_order=arxiv.SortOrder.Descending,
-            max_results=MAX_RESULTS,
+            max_results=max_results,
         )
         
         for attempt in range(MAX_RETRIES):
@@ -249,7 +262,6 @@ def analyze_paper(paper_info):
 def generate_post(papers_data, start_date, end_date, range_display):
     date_str = end_date.strftime("%Y-%m-%d")
     
-    # 标题根据时间范围调整
     if range_display == "过去1周":
         title = f"Insight Radar · 周刊 {end_date.strftime('%Y-%m-%d')}"
         tag_label = "论文周刊"
