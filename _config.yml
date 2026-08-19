@@ -1,33 +1,21 @@
-# Welcome to Jekyll!
-#
-# This config file is meant for settings that affect your whole blog, values
-# which you are expected to set up once and rarely edit after that. If you find
-# yourself editing this file very often, consider using Jekyll's data files
-# feature for the data you need to update frequently.
-#
-# For technical reasons, this file is *NOT* reloaded automatically when you use
-# 'bundle exec jekyll serve'. If you change this file, please restart the server process.
-
-# Site settings
-# These are used to personalize your new site. If you look in the HTML files,
-# you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
-# You can create any custom variable you would like, and they will be accessible
-# in the templates via {{ site.myvariable }}.
 # ==================== 站点信息 ====================
-title: "Insights Radar"
+title: "Insight Radar"
 title_separator: "|"
-subtitle: "AI Infra & SDC"
+subtitle: "AI 论文追踪与洞察"
 name: "ComplexLychee"
-description: "Regularly&actively collect insights from the latest updates"
-url: "https://ComplexLychee.github.io"
-baseurl: ""
-repository: "ComplexLychee/ComplexLychee.github.io"
+description: "追踪人工智能领域最新研究动态，每周一更新"
+url: "https://complexlychee.github.io"
+baseurl: "/InsightRadar"
+repository: "ComplexLychee/InsightRadar"
+
+# ==================== 主题配置 ====================
+# GitHub Pages 不支持直接安装 gem 主题，必须用 remote_theme
+remote_theme: mmistakes/minimal-mistakes
 
 # ==================== 作者信息 ====================
 author:
-  name: "Lychee"
-  avatar: "/assets/images/bio-photo.jpg"  # 放一张你的头像到该路径
-  bio: "Background in statistics and network science, currently working on AI Infra & Agent"
+  name: "ComplexLychee"
+  bio: "AI 研究者，关注大模型与系统可靠性。每周为你解读最新论文。"
   location: "China"
   links:
     - label: "GitHub"
@@ -35,12 +23,13 @@ author:
       url: "https://github.com/ComplexLychee"
 
 # ==================== 构建配置 ====================
-theme: minimal-mistakes-jekyll
 plugins:
-  - jekyll-feed        # 自动生成 RSS
-  - jekyll-sitemap     # SEO 站点地图
-  - jekyll-seo-tag     # SEO 优化
-  - jekyll-paginate    # 首页分页
+  - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-seo-tag
+  - jekyll-paginate
+  - jekyll-remote-theme    # ← 关键：支持远程主题
+  - jekyll-include-cache
 
 paginate: 10
 paginate_path: /page:num/
@@ -54,7 +43,7 @@ defaults:
       layout: single
       author_profile: true
       read_time: true
-      comments: true
+      comments: false
       share: true
       related: true
       toc: true
@@ -67,104 +56,3 @@ category_archive:
 tag_archive:
   type: liquid
   path: /tags/
-
-# title: MM
-# email:
-# description: >- # this means to ignore newlines until "baseurl:"
-#   Write an awesome description for your new site here. You can edit this
-#   line in _config.yml. It will appear in your document head meta (for
-#   Google search results) and in your feed.xml site description.
-# twitter_username: username
-# github_username: username
-# minimal_mistakes_skin: default
-# search: true
-
-# # Build settings
-# markdown: kramdown
-# remote_theme: mmistakes/minimal-mistakes
-# # Outputting
-# permalink: /:categories/:title/
-# paginate: 5 # amount of posts to show
-# paginate_path: /page:num/
-# timezone: # https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
-
-# include:
-#   - _pages
-
-# # Exclude from processing.
-# # The following items will not be processed, by default. Create a custom list
-# # to override the default setting.
-# # exclude:
-# #   - Gemfile
-# #   - Gemfile.lock
-# #   - node_modules
-# #   - vendor/bundle/
-# #   - vendor/cache/
-# #   - vendor/gems/
-# #   - vendor/ruby/
-
-# # Plugins (previously gems:)
-# plugins:
-#   - jekyll-paginate
-#   - jekyll-sitemap
-#   - jekyll-gist
-#   - jekyll-feed
-#   - jemoji
-#   - jekyll-include-cache
-
-# author:
-#   name   : "First Lastname"
-#   avatar : "/assets/images/bio-photo.jpg"
-#   bio    : "My awesome biography constrained to a sentence or two goes here."
-#   links:
-#     - label: "Website"
-#       icon: "fas fa-fw fa-link"
-#       url: "https://"
-#     - label: "Twitter"
-#       icon: "fab fa-fw fa-twitter-square"
-#       url: "https://twitter.com/"
-#     - label: "GitHub"
-#       icon: "fab fa-fw fa-github"
-#       url: "https://github.com/"
-#     - label: "Instagram"
-#       icon: "fab fa-fw fa-instagram"
-#       url: "https://instagram.com/"
-
-# footer:
-#   links:
-#     - label: "Twitter"
-#       icon: "fab fa-fw fa-twitter-square"
-#       url: "https://twitter.com/"
-#     - label: "GitHub"
-#       icon: "fab fa-fw fa-github"
-#       url: "https://github.com/"
-#     - label: "Instagram"
-#       icon: "fab fa-fw fa-instagram"
-#       url: "https://instagram.com/"
-
-# defaults:
-#   # _posts
-#   - scope:
-#       path: ""
-#       type: posts
-#     values:
-#       layout: single
-#       author_profile: true
-#       read_time: true
-#       comments: true
-#       share: true
-#       related: true
-#   # _pages
-#   - scope:
-#       path: "_pages"
-#       type: pages
-#     values:
-#       layout: single
-#       author_profile: true
-
-# category_archive:
-#   type: liquid
-#   path: /categories/
-# tag_archive:
-#   type: liquid
-#   path: /tags/
