@@ -1,8 +1,21 @@
 ---
+title: "关于 Insight Radar"
 permalink: /about/
-title: "About"
+layout: single
 ---
 
-Tempor velit sint sunt ipsum tempor enim ad qui ullamco. Est dolore anim ad velit duis dolore minim sunt aliquip amet commodo labore. Ut eu pariatur aute ea aute excepteur laborum. Esse ea esse excepteur minim mollit qui cillum excepteur ex dolore magna. Labore deserunt fugiat incididunt incididunt sint ea. Consequat dolore aute laboris quis proident quis non et est consectetur ex eiusmod sit culpa.
+Insight Radar 是一个全自动化的 arXiv 论文追踪与解读系统。
 
-Cupidatat ea do et in excepteur in. Ad nostrud ut est esse eu duis ea sunt eiusmod. Aliquip tempor veniam sint elit fugiat. Velit incididunt laboris amet incididunt labore dolore irure velit excepteur commodo deserunt laborum. Consectetur eu fugiat veniam veniam Lorem labore magna eiusmod. Ea occaecat reprehenderit pariatur consectetur minim labore ut aliquip.
+## 工作流
+
+1. **候选生成**：GitHub Actions 定期检索 arXiv 最新论文
+2. **人工筛选**：从候选池中勾选感兴趣的论文
+3. **AI 解读**：调用 DeepSeek 模型生成结构化摘要
+4. **自动发布**：生成 Markdown 并部署到博客
+
+## 技术栈
+
+- **检索**：arXiv API
+- **解读**：DeepSeek via OpenCode
+- **博客**：Jekyll + Minimal Mistakes
+- **部署**：GitHub Pages
