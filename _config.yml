@@ -56,3 +56,14 @@ category_archive:
 tag_archive:
   type: liquid
   path: /tags/
+
+
+# 在文件末尾添加
+include:
+  - _pages
+
+# 页面集合配置（可选，但推荐）
+collections:
+  pages:
+    output: true
+    permalink: /:path/
