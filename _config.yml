@@ -15,7 +15,7 @@ remote_theme: mmistakes/minimal-mistakes
 # ==================== 作者信息 ====================
 author:
   name: "ComplexLychee"
-  bio: "AI 研究者，关注大模型与系统可靠性。每周为你解读最新论文。"
+  bio: "PhD in Math&Statistics，working on AI Infra & Agent"
   location: "China"
   links:
     - label: "GitHub"
