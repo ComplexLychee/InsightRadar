@@ -21,12 +21,15 @@ KEYWORD_PRESETS = {
         {"query": 'cat:cs.LG AND ("reinforcement learning" OR RLHF OR alignment OR agent OR policy)', "name": "强化学习与智能体"},
     ],
     # 核心修复：去掉 cat: 前缀，改用全站搜索
+    # "sdc_reliability": [
+    #     {"query": "silent data corruption", "name": "SDC精确短语"},
+    #     {"query": "soft error", "name": "软错误"},
+    #     {"query": "data corruption", "name": "数据损坏"},
+    #     {"query": "hardware fault", "name": "硬件故障"},
+    #     {"query": "fault tolerance", "name": "容错计算"},
+    # ],
     "sdc_reliability": [
-        {"query": "silent data corruption", "name": "SDC精确短语"},
-        {"query": "soft error", "name": "软错误"},
-        {"query": "data corruption", "name": "数据损坏"},
-        {"query": "hardware fault", "name": "硬件故障"},
-        {"query": "fault tolerance", "name": "容错计算"},
+    {"query": "all:corruption", "name": "损坏（测试API）"},
     ],
     "all_areas": [
         {"query": "cat:cs.AI", "name": "人工智能"},
