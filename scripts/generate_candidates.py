@@ -83,15 +83,15 @@ def get_search_config():
     
     print(f"   [DEBUG] KEYWORD_PRESET='{preset}'")
     print(f"   [DEBUG] CUSTOM_QUERY='{custom}'")
-    
-    if preset in KEYWORD_PRESETS:
-        print(f"   [DEBUG] 使用预设: {preset}")
-        return KEYWORD_PRESETS[preset]
-    
+
     if custom:
         print(f"   [DEBUG] 使用自定义查询: {custom}")
         return [{"query": custom, "name": "自定义检索"}]
-    
+            
+    if preset in KEYWORD_PRESETS:
+        print(f"   [DEBUG] 使用预设: {preset}")
+        return KEYWORD_PRESETS[preset]
+
     print(f"   [DEBUG] 回退到 sdc_reliability")
     return KEYWORD_PRESETS["sdc_reliability"]
 
