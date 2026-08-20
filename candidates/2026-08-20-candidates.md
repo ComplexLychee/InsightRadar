@@ -13,7 +13,7 @@
 ---
 
 ## 论文 1
-- [ ] **发布**
+- [x] **发布**
 - **标题**: SCOUT: Symmetric Consensus Outlier Detection for Failure Localization in LLM Pre-Training
 - **作者**: Zhuang Wang (单位未提供)
 - **发表日期**: 2026-08-11
@@ -24,7 +24,7 @@
 ---
 
 ## 论文 2
-- [ ] **发布**
+- [x] **发布**
 - **标题**: Distribution of Relaxation Times analysis of evolution of Oxygen Reduction Pathways for ionic conductor infiltration on MIEC cathode
 - **作者**: Rakhi Saha (单位未提供), Preethi Sudarsan (单位未提供), Manju Kumari (单位未提供), Hee Jung Park (单位未提供), Abdelkrim Mekki (单位未提供) 等（共7人）
 - **发表日期**: 2026-08-09
@@ -35,7 +35,7 @@
 ---
 
 ## 论文 3
-- [ ] **发布**
+- [x] **发布**
 - **标题**: HINT: Toward an Executable Hardware-Intent Representation Layer for LLM-Driven RTL Generation
 - **作者**: Tairan Cheng (单位未提供), Yi Liu (单位未提供), Dongsheng Zuo (单位未提供), Zhengyuan Shi (单位未提供), Hongji Zhang (单位未提供) 等（共9人）
 - **发表日期**: 2026-08-07
