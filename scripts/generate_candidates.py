@@ -195,7 +195,7 @@ def search_papers():
     seen_ids = set()
     all_papers = []
     log_records = []
-    
+    print("Debugging: ", search_config, "\n")
     for cfg in search_config:
         print(f"🔍 {cfg['name']}: {cfg['query']}")
         
