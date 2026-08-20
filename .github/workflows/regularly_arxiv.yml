@@ -42,6 +42,7 @@ jobs:
           TIME_RANGE: ${{ github.event.inputs.time_range }}
           KEYWORD_PRESET: ${{ github.event.inputs.keyword_preset }}
           CUSTOM_QUERY: ${{ github.event.inputs.custom_query || 'sdc_reliability' }}
+          OPENCODE_API_KEY: ${{ secrets.OPENCODE_API_KEY }}  #
         run: python scripts/generate_candidates.py
       - name: Commit candidates and logs
         run: |
