@@ -1,8 +1,8 @@
-# 📋 候选论文池 · 过去1年
+# 📋 候选论文池 · 过去3个月
 
-> **检索区间**: 2025-08-20 ~ 2026-08-20
-> **候选总数**: 67 篇
-> **生成时间**: 2026-08-20 07:02
+> **检索区间**: 2026-05-22 ~ 2026-08-20
+> **候选总数**: 43 篇
+> **生成时间**: 2026-08-20 07:13
 
 ## ✅ 使用说明
 1. 浏览下方论文列表
@@ -14,737 +14,473 @@
 
 ## 论文 1
 - [ ] **发布**
-- **标题**: A Localized Fourier Extension Method for Piecewise-Smooth Inverse Source Reconstruction
-- **作者**: Zhihong Dou (单位未提供), Zhenyu Zhao (单位未提供)
-- **发表日期**: 2026-08-19
-- **所属领域**: SDC精确短语 (`math.NA`)
-- **arXiv链接**: [2608.19193v1](https://arxiv.org/pdf/2608.19193v1)
-- **摘要预览**: We reconstruct a piecewise-smooth source in a Poisson equation on a semi-infinite strip from noisy solution values measured along an interior line. Applying the one-dimensional Dirichlet Laplacian to the observation reduces the inverse problem to regularized second-order differentiation followed by a boundedly invertible correction. The differentiated trace and the source differ by an analytic smo...
+- **标题**: Fault-Tolerant Quantum Computation with Adversarial Errors
+- **作者**: Nikolas P. Breuckmann (单位未提供), Louis Golowich (单位未提供), Umesh Vazirani (单位未提供)
+- **发表日期**: 2026-08-17
+- **所属领域**: 容错计算 (`quant-ph`)
+- **arXiv链接**: [2608.16857v1](https://arxiv.org/pdf/2608.16857v1)
+- **摘要预览**: We prove a fault-tolerance theorem for quantum computation against adversarial noise. For every quantum circuit on $\bar{N}$ logical qudits of depth $\bar{T}$, we construct a fault-tolerant circuit on $N=\text{poly}(\bar{N})$ physical qudits of depth $\bar{T}\cdot\bar{N}^{o(1)}$, which is robust against an adversary who may arbitrarily choose and corrupt an almost-linear number $N^{1-o(1)}$ of physical qudits at each time step. This robustness significantly improves upon prior fault-tolerance theorems, which assumed corruptions were either local and stochastic, or else only act on a polynomial...
 
 ---
 
 ## 论文 2
 - [ ] **发布**
-- **标题**: The Structured Totient Preimage Problem: Reconstruction, Collisions, and Cryptographic Implications
-- **作者**: Luis Adrián Lizama-Pérez (单位未提供)
-- **发表日期**: 2026-08-19
-- **所属领域**: SDC精确短语 (`cs.CR`)
-- **arXiv链接**: [2608.19191v1](https://arxiv.org/pdf/2608.19191v1)
-- **摘要预览**: We define and study the Structured Totient Preimage (STP) problem as a restricted reconstruction relation with a direct cryptographic motivation. Let $p_1,\ldots,p_k$ be distinct primes of the same bit length and reveal only $x=\prod_{i=1}^k(p_i-1)$. Given $(x,λ,k)$, STP asks for any set of $k$ distinct $λ$-bit primes satisfying this product. The relation is efficiently verifiable, but its reconst...
+- **标题**: Universal magic state concentration
+- **作者**: Jacopo Rizzo (单位未提供), Lorenzo Leone (单位未提供)
+- **发表日期**: 2026-08-13
+- **所属领域**: 容错计算 (`quant-ph`)
+- **arXiv链接**: [2608.13376v1](https://arxiv.org/pdf/2608.13376v1)
+- **摘要预览**: Magic plays a dual role in quantum computation: it promotes stabilizer dynamics from efficient classical simulability to universality, but it presents a central challenge for fault tolerance, since non-stabilizer operations are harder to protect against noise. Magic state distillation addresses this issue; however, existing protocols typically assume prior structure in the input, such as proximity to the target or a specified noise model. Here we introduce universal magic state concentration: a fixed stabilizer protocol that converts a few copies of an unknown pure non-stabilizer qubit state i...
 
 ---
 
 ## 论文 3
 - [ ] **发布**
-- **标题**: SiNMULI: Novel Signed Network Approach for Malicious URL Identification
-- **作者**: Avijit Gayen (单位未提供), Sayan Mondal (单位未提供), Angshuman Jana (单位未提供)
-- **发表日期**: 2026-08-19
-- **所属领域**: SDC精确短语 (`cs.CR`)
-- **arXiv链接**: [2608.19190v1](https://arxiv.org/pdf/2608.19190v1)
-- **摘要预览**: In today's era of rapid advancements in artificial intelligence, computer security and online safeguarding measures have undergone significant improvements. However, malicious websites continue to facilitate the spread of phishing schemes, fraudulent activities and unsolicited communications. Conventional methodologies in machine learning, deep learning and counterfeit website detection predominan...
+- **标题**: Efficient Quantum Modular Reduction: Crandall reduction and its Fault-tolerant resource analysis
+- **作者**: Changyeol Lee (单位未提供), Sungyeon Kook (单位未提供), Wooyeong Song (单位未提供), Kwangil Bae (单位未提供), Wonhyuk Lee (单位未提供) 等（共6人）
+- **发表日期**: 2026-08-12
+- **所属领域**: 容错计算 (`quant-ph`)
+- **arXiv链接**: [2608.11563v1](https://arxiv.org/pdf/2608.11563v1)
+- **摘要预览**: Modular arithmetic is central to quantum algorithms for cryptographic problems, including Shor's algorithm and Grover-based cryptanalysis, with modular reduction contributing substantially to circuit cost. Pseudo-Mersenne moduli $q=2^n-c$ allow classical Crandall reduction to replace division with folding and constant arithmetic, providing a structural opportunity for more efficient quantum modular reduction than Barrett reduction. We translate this advantage into a reversible quantum setting by deriving explicit folding and normalization conditions for $2n$-bit inputs. To the best of our know...
 
 ---
 
 ## 论文 4
 - [ ] **发布**
-- **标题**: Image-Guided Pavement Defect Recognition in GPR Data with novel 3D Deep Learning Architecture
-- **作者**: Yuandong Pan (单位未提供), Linjun Lu (单位未提供), Mudan Wang (单位未提供), Florian Noichl (单位未提供), Fan Xue (单位未提供) 等（共9人）
-- **发表日期**: 2026-08-19
-- **所属领域**: SDC精确短语 (`cs.CV`)
-- **arXiv链接**: [2608.19177v1](https://arxiv.org/pdf/2608.19177v1)
-- **摘要预览**: Ground Penetrating Radar (GPR) is a widely adopted non-destructive sensing technology for subsurface inspection in civil and transportation engineering. Despite its potential for pavement condition assessment, the large-scale application of GPR in automated inspection has two key challenges: the scarcity of annotated real-world datasets and the lack of deep learning models designed for the unique ...
+- **标题**: On the Sensitivity to Errors in Homomorphic Computing: Single Transient Bit-flip Client-side Error Characterization
+- **作者**: Matías Mazzanti (单位未提供), Vattana Chan (单位未提供), Karthik Swaminathan (单位未提供), Augusto Vega (单位未提供), Esteban Mocskos (单位未提供) 等（共6人）
+- **发表日期**: 2026-08-11
+- **所属领域**: SDC精确短语 (`cs.AR`)
+- **arXiv链接**: [2608.11155v1](https://arxiv.org/pdf/2608.11155v1)
+- **摘要预览**: Homomorphic Encryption (HE) enables computation on encrypted data without decryption and is a key primitive for privacy-preserving computation in sensitive domains such as healthcare, finance, and government. Its security relies on noise injection, which introduces intrinsic error sensitivity and raises concerns about the fault tolerance of HE systems, as hardware- and software-induced faults can evade traditional detection mechanisms and lead to silent data corruption.   In this work, we analyze the sensitivity of HE to bit-level faults, focusing on the CKKS (Cheon--Kim--Kim--Song) scheme wid...
 
 ---
 
 ## 论文 5
 - [ ] **发布**
-- **标题**: Cell-Probe Lower Bounds and Complexity-Preserving Reductions for Suffix Array Queries
-- **作者**: Dominik Kempa (单位未提供), Tomasz Kociumaka (单位未提供)
-- **发表日期**: 2026-08-19
-- **所属领域**: SDC精确短语 (`cs.DS`)
-- **arXiv链接**: [2608.19172v1](https://arxiv.org/pdf/2608.19172v1)
-- **摘要预览**: For a text $T$ of length $n$ over an alphabet of size $σ$, its suffix array lists the starting positions of the suffixes of $T$ in lexicographic order, and its inverse suffix array gives the lexicographic rank of the suffix starting at each position. Since the introduction of the FM-index and the compressed suffix array in 2000, both queries have been supported in $O((\log_σn)^ε)$ time using $O(n\...
+- **标题**: SCOUT: Symmetric Consensus Outlier Detection for Failure Localization in LLM Pre-Training
+- **作者**: Zhuang Wang (单位未提供)
+- **发表日期**: 2026-08-11
+- **所属领域**: SDC精确短语 (`cs.DC`)
+- **arXiv链接**: [2608.11034v1](https://arxiv.org/pdf/2608.11034v1)
+- **摘要预览**: In LLM pre-training, synchronization propagates rank-local stalls, slowdowns, and numerical errors into job-wide symptoms, obscuring their origin. Existing diagnosis often relies on in-process monitors that cannot report after the trainer blocks or terminates, or on post-mortem logs that preserve only synchronized symptoms; offline health tests lose the workload and operating conditions that triggered the failure. We present SCOUT, a unified runtime failure-localization framework built on one design principle: identify outliers through strict-majority consensus among equivalent replicas. SCOUT...
 
 ---
 
 ## 论文 6
 - [ ] **发布**
-- **标题**: Lévy Attention: Single-Pass Predictive Uncertainty for Continuous-Time Attention
-- **作者**: Sotirios P. Chatzis (单位未提供), Loukas Papadoulas (单位未提供)
-- **发表日期**: 2026-08-19
-- **所属领域**: SDC精确短语 (`cs.LG`)
-- **arXiv链接**: [2608.19171v1](https://arxiv.org/pdf/2608.19171v1)
-- **摘要预览**: Deep models for irregularly-sampled time series answer queries at arbitrary continuous timestamps, yet report nothing about how far each answer should be trusted. We show the attention layer itself can close that gap: with the right stochastic formulation, the pass that makes each prediction also reports, in closed form and at no extra cost, how far it should be trusted. We introduce Lévy Attentio...
+- **标题**: Neural implants and human safety: single-fault detection for DC-coupled recording front ends
+- **作者**: Dimitris Antoniadis (单位未提供), Timothy Constandinou (单位未提供)
+- **发表日期**: 2026-08-11
+- **所属领域**: 容错计算 (`eess.SP`)
+- **arXiv链接**: [2608.10361v1](https://arxiv.org/pdf/2608.10361v1)
+- **摘要预览**: DC-coupled analogue front ends (AFEs) for neural implants provide a low-area solution. However, removing the coupling capacitor eliminates the intrinsic barrier that protects cortical tissue: a single-fault event, such as gate-oxide breakdown of a low-noise amplifier (LNA) input transistor, can open a direct DC path from the supply rail into the brain. On the stimulation side this hazard is well understood, and single-fault tolerance is enforced by a series DC-blocking capacitor; on the recording side, DC-coupled front ends discard the equivalent safeguard, yet their protection has gone almost...
 
 ---
 
 ## 论文 7
 - [ ] **发布**
-- **标题**: ChildSafeAds Shared Task 2026: Commercial Content in Child-Facing YouTube Videos
-- **作者**: Thales Bertaglia (单位未提供), Catalina Goanta (单位未提供), Gerasimos Spanakis (单位未提供), Gunes Acar (单位未提供)
-- **发表日期**: 2026-08-19
-- **所属领域**: SDC精确短语 (`cs.CL`)
-- **arXiv链接**: [2608.19165v1](https://arxiv.org/pdf/2608.19165v1)
-- **摘要预览**: ChildSafeAds is a shared task on commercial content in YouTube videos likely to reach children and teenagers. It contains 3,360 videos from 939 channels. Each instance begins with a segment submitted to SponsorBlock, an open-source crowdsourced browser extension whose users mark sponsor segments so that others can skip them. We pair the segment with its available transcript, video and channel info...
+- **标题**: MicroEvo: Knowledge-Guided LLM Sampling for Efficient Microarchitecture Design Space Exploration
+- **作者**: Jia Xiong (单位未提供), Runkai Li (单位未提供), Chenxu Niu (单位未提供), Guangyuan Gao (单位未提供), Changwen Xing (单位未提供) 等（共14人）
+- **发表日期**: 2026-08-06
+- **所属领域**: 软错误 (`cs.AI`)
+- **arXiv链接**: [2608.06183v1](https://arxiv.org/pdf/2608.06183v1)
+- **摘要预览**: Microarchitecture design space exploration suffers from expansive search spaces and expensive PPA evaluation, leaving only a small simulation budget for design decision-making. Existing methods perform blind search without considering microarchitectural dependencies and fail to learn from the iterative search effectively, leading to wasted evaluations and weak Pareto convergence. In this paper, we propose MicroEvo, a knowledge-guided framework that couples off-the-shelf LLMs with Monte Carlo Tree Search (MCTS) for multi-objective microarchitecture optimization. MicroEvo combines LLM-driven evo...
 
 ---
 
 ## 论文 8
 - [ ] **发布**
-- **标题**: Interpretable AI predicts a 2026 summer dry anomaly in central China
-- **作者**: Anran Wang (单位未提供), Wen Shi (单位未提供), Yong Luo (单位未提供), Jianbin Huang (单位未提供), Lijuan Chen (单位未提供) 等（共8人）
-- **发表日期**: 2026-08-19
-- **所属领域**: SDC精确短语 (`physics.ao-ph`)
-- **arXiv链接**: [2608.19163v1](https://arxiv.org/pdf/2608.19163v1)
-- **摘要预览**: Seasonal precipitation anomalies are largely regulated by atmospheric circulation, which dynamical models predict with greater reliability than precipitation itself. Here, we employ a deep learning model that translates dynamical circulation predictions into precipitation estimates. Predictions initialized from March to May consistently indicate a dry anomaly over central China in summer 2026. Ret...
+- **标题**: Quantum error correction with global control
+- **作者**: Roberto Menta (单位未提供), Lindsay Bassman Oftelie (单位未提供), Ashkan Abedi (单位未提供), Francesco Cioni (单位未提供), Marco Polini (单位未提供) 等（共8人）
+- **发表日期**: 2026-08-06
+- **所属领域**: 容错计算 (`quant-ph`)
+- **arXiv链接**: [2608.05821v1](https://arxiv.org/pdf/2608.05821v1)
+- **摘要预览**: Reaching fault tolerance means scaling qubit counts by orders of magnitude, a jump that conventional superconducting architectures cannot sustain without solving the so-called `wiring problem'. Global control sidesteps this bottleneck, but implementing quantum error correction (QEC) on previously proposed global architectures incurs extremely steep overhead costs, due to the need for separate correction procedures for the computational and auxiliary qubits that comprise the global device. We resolve this by introducing the first globally-controlled architecture with zero qubit overhead. Every ...
 
 ---
 
 ## 论文 9
 - [ ] **发布**
-- **标题**: FedGuard-DC: Privacy-Preserving Federated Load Forecasting and Cyber-Attack Detection for Data-Center Loads in Transmission Systems
-- **作者**: Md Kibria Saroare (单位未提供), Md Rubel Ahmed (单位未提供)
-- **发表日期**: 2026-08-19
-- **所属领域**: SDC精确短语 (`cs.CR`)
-- **arXiv链接**: [2608.19155v1](https://arxiv.org/pdf/2608.19155v1)
-- **摘要预览**: The rapid growth of large data-center (DC) loads is creating new challenges for power-system visibility, privacy, and cyber-physical security. System operators need accurate short-term information about these fast-varying loads, while DC operators may avoid sharing raw megawatt measurements because they can reveal sensitive workload and utilization patterns. This paper presents FedGuard-DC, a fede...
+- **标题**: Provably Efficient Self-Calibrating Quantum Fault Tolerance
+- **作者**: Weiyuan Gong (单位未提供), Hong-Ye Hu (单位未提供)
+- **发表日期**: 2026-08-06
+- **所属领域**: 容错计算 (`quant-ph`)
+- **arXiv链接**: [2608.05686v1](https://arxiv.org/pdf/2608.05686v1)
+- **摘要预览**: Quantum error correction protects logical information only when every physical operation remains below the fault-tolerance threshold, a condition that must be maintained continuously rather than only at the initial calibration. In practice, however, analog control parameters inevitably drift because of environmental fluctuations. As future fault-tolerant quantum computations are expected to run for days or even months, interrupting computation for repeated recalibration becomes fundamentally impractical. A promising alternative is to integrate calibration directly into computation by repurposi...
 
 ---
 
 ## 论文 10
 - [ ] **发布**
-- **标题**: Simple Low-Overhead Communication-Efficient String Reconciliation and Edit Distance
-- **作者**: Michael T. Goodrich (单位未提供), Gonzalo Navarro (单位未提供), Claire A. To (单位未提供)
-- **发表日期**: 2026-08-19
-- **所属领域**: SDC精确短语 (`cs.DS`)
-- **arXiv链接**: [2608.19149v1](https://arxiv.org/pdf/2608.19149v1)
-- **摘要预览**: Suppose two parties, Alice and Bob, hold long character strings, $X$ and $Y$, respectively, and they are interested in determining how similar $X$ and $Y$ are. {Moreover, they want to exchange the strings with cost proportional to their degree of dissimilarity.} Such problems arise, for example, in database and file system synchronization operations, as well as in DNA sequence comparisons. Since t...
+- **标题**: Understanding Fault Tolerance of Adversarially Robust Pruned Models
+- **作者**: Manali Dangarikar (单位未提供), Cory Merkel (单位未提供)
+- **发表日期**: 2026-08-04
+- **所属领域**: 容错计算 (`cs.LG`)
+- **arXiv链接**: [2608.04173v1](https://arxiv.org/pdf/2608.04173v1)
+- **摘要预览**: Deep neural networks (DNNs) deployed on resource-constrained neuromorphic hardware face three concurrent challenges: the need for model compression through pruning, vulnerability to adversarial input perturbations, and susceptibility to hardware-induced weight faults such as stuck-at-zero errors. While each of these factors has been studied in isolation, their combined effects on model reliability have received little attention. This paper presents an empirical investigation of how pruning, adversarial training, and hardware fault injection interact to affect the robustness of convolutional ne...
 
 ---
 
 ## 论文 11
 - [ ] **发布**
-- **标题**: Trade-offs in Data Color Palette Design Tools
-- **作者**: Shiyi He (单位未提供), Andrew M McNutt (单位未提供)
-- **发表日期**: 2026-08-19
-- **所属领域**: SDC精确短语 (`cs.HC`)
-- **arXiv链接**: [2608.19148v1](https://arxiv.org/pdf/2608.19148v1)
-- **摘要预览**: Designing a color palette for data requires designers to balance multiple constraints, including accessibility and aesthetics. Color palette tools support this process through features including direct manipulation, automated palette generation and evaluation, previews, and so on. Despite their prominence, relatively little is known about how these different mechanisms shape design across contexts...
+- **标题**: The Utility of Sparse Error Detection in Quantum Simulations
+- **作者**: Henry Froland (单位未提供), Dorota M. Grabowska (单位未提供), Sebastian Grieninger (单位未提供), Jeremy Hartse (单位未提供), Anne L. Lashbrook (单位未提供) 等（共11人）
+- **发表日期**: 2026-08-03
+- **所属领域**: 容错计算 (`quant-ph`)
+- **arXiv链接**: [2608.02944v1](https://arxiv.org/pdf/2608.02944v1)
+- **摘要预览**: The recent success of error detecting codes points toward their potential application to fault-tolerant simulations of nature. In this work, we examine the utility of sparse error detection for simulating lattice gauge theories using quantum computers. In particular, we study the time evolution of the lattice Schwinger model embedded into the Iceberg code family, $[[N+2, N, 2]]$, as well as the Hypercube code family, $[[2^N, N, 2]]$. The lattice of electrons and positrons in the axial gauge is embedded into a single code block or into multiple code blocks, and this work finds that large codebl...
 
 ---
 
 ## 论文 12
 - [ ] **发布**
-- **标题**: Network-Scale Road Disruption from Liquefaction in Cascadia Subduction Zone Earthquakes
-- **作者**: M. D. Sanger (单位未提供), O. Blaze-Smith (单位未提供), B. W. Maurer (单位未提供), L. Wotherspoon (单位未提供), M. O. Eberhard (单位未提供) 等（共6人）
-- **发表日期**: 2026-08-19
-- **所属领域**: SDC精确短语 (`cs.CE`)
-- **arXiv链接**: [2608.19143v1](https://arxiv.org/pdf/2608.19143v1)
-- **摘要预览**: This paper presents a mechanics-informed, data-driven framework for modeling liquefaction-induced disruption of roadway networks following a magnitude-9 earthquake on the Cascadia Subduction Zone (CSZ). Liquefaction hazard is predicted using a geospatial liquefaction model trained on more than 37,000 cone penetration tests (CPTs) and conditioned on spatial data describing geomorphology, hydrology,...
+- **标题**: The Pangaea Architecture: Fault-Tolerant Heterogeneous Topological Codes via a Quantum Bus
+- **作者**: Sheir Yarkoni (单位未提供), Chen Scheim (单位未提供), Daniel Hakshuri (单位未提供), Nadav Katz (单位未提供)
+- **发表日期**: 2026-08-03
+- **所属领域**: 容错计算 (`quant-ph`)
+- **arXiv链接**: [2608.01887v2](https://arxiv.org/pdf/2608.01887v2)
+- **摘要预览**: We introduce Pangaea, a fault-tolerant quantum architecture that uses a quantum bus to mediate logical operations between remote patches of two-dimensional topological codes. The bus is an auxiliary gauge-code strip whose measurements reconstruct joint logical operators while preserving nearest-neighbor physical connectivity. Enabling native heterogeneous topological codes and multi-qubit Pauli operations, the quantum bus can be interpreted as a three-dimensional generalization of lattice surgery. We require only $O(dN_L)$ physical qubits to implement multi-qubit interactions for $N_L$ distanc...
 
 ---
 
 ## 论文 13
 - [ ] **发布**
-- **标题**: U.S. National Liquefaction Hazard Maps and their Implications for Engineering Practice and Policy
-- **作者**: Morgan D. Sanger (单位未提供), Victoria P. Zdanovski (单位未提供), Brett W. Maurer (单位未提供)
-- **发表日期**: 2026-08-19
-- **所属领域**: SDC精确短语 (`cs.CE`)
-- **arXiv链接**: [2608.19137v1](https://arxiv.org/pdf/2608.19137v1)
-- **摘要预览**: This study introduces U.S. national liquefaction hazard maps (NLHMs) developed using a mechanics-informed, geospatial machine learning model which surrogates state-of-practice liquefaction models, exploits a large library of geospatial predictors to infer subsurface conditions, and is anchored to measured conditions with in-situ test data. By convolving this geospatial liquefaction model with the ...
+- **标题**: CheckOne: Lightweight Fault Detection and Mitigation for Vision Transformers
+- **作者**: Mohammad Hasan Ahmadilivani (单位未提供), Sven-Markus Loorits (单位未提供), Jaan Raik (单位未提供)
+- **发表日期**: 2026-08-03
+- **所属领域**: 容错计算 (`cs.AR`)
+- **arXiv链接**: [2608.04035v1](https://arxiv.org/pdf/2608.04035v1)
+- **摘要预览**: The wide adoption of Vision Transformers (ViTs) in safety-critical applications raises reliability concerns related to hardware faults. Algorithm-Based Fault Tolerance (ABFT) methods have emerged as lightweight and symmetric protection mechanisms for DNNs. However, they are particularly challenging for ViTs due to their significant computational requirements. This work comprehensively evaluates the reliability of ViTs, emphasizing the need for symmetric protection in their layers. Furthermore, we present CheckOne, a novel, cost-effective method for fault detection and mitigation in ViTs that s...
 
 ---
 
 ## 论文 14
 - [ ] **发布**
-- **标题**: SCORE: Subject Coordinate Recovery for Label-Free Cross-Subject EEG-to-Image Retrieval
-- **作者**: Zhenyao Cui (单位未提供), Siyuan Kan (单位未提供), Siyang Li (单位未提供), Ziwei Wang (单位未提供), Dongrui Wu (单位未提供)
-- **发表日期**: 2026-08-19
-- **所属领域**: SDC精确短语 (`cs.LG`)
-- **arXiv链接**: [2608.19134v1](https://arxiv.org/pdf/2608.19134v1)
-- **摘要预览**: Accurate visual decoding can reveal how the brain represents visual information and recover perceived content from neural signals such as electroencephalography (EEG), with potential for neural communication. However, current EEG-to-image retrieval methods perform far below their within-subject counterparts for new users without labeled calibration, limiting real-world deployment. To understand th...
+- **标题**: PATH-Bench: Path-Dependent Evaluation of Lifelong Agents
+- **作者**: Xidong Yang (单位未提供), Xingyi Zhang (单位未提供), Wenhao Li (单位未提供), Wenyan Liu (单位未提供), Junjie Sheng (单位未提供) 等（共10人）
+- **发表日期**: 2026-08-02
+- **所属领域**: 软错误 (`cs.AI`)
+- **arXiv链接**: [2608.01149v1](https://arxiv.org/pdf/2608.01149v1)
+- **摘要预览**: Lifelong LLM agents increasingly adapt through external learning states that store past interactions as retrievable memories or reusable skills, yet existing benchmarks rarely account for how the path of accumulated experience shapes what agents transfer and retain. In this work, we establish PATH-Bench, a benchmark for path-dependent evaluation of lifelong agents. PATH-Bench estimates directed task relationships via multi-model in-context learning, constructs probe-centered sequences with controlled helpful and interfering histories, and repeatedly evaluates probe tasks to measure average per...
 
 ---
 
 ## 论文 15
 - [ ] **发布**
-- **标题**: Tuning the Stochastic Machine: A Systems Engineer's Operating Model for Human-AI Engineering
-- **作者**: George Andrikopoulos (单位未提供)
-- **发表日期**: 2026-08-19
-- **所属领域**: SDC精确短语 (`cs.AI`)
-- **arXiv链接**: [2608.19125v1](https://arxiv.org/pdf/2608.19125v1)
-- **摘要预览**: When an expert corrects an LLM assistant's error, the correction usually dies with the session, and the error class returns. I argue this is an operations problem, not a tooling problem: mechanisms for persisting corrections exist and are shipping, but the discipline for governing them -- versioning with provenance, recurrence monitoring, counter-metrics, retirement of stale rules -- does not. Wri...
+- **标题**: Measurement-Based Loss Tolerance in Graph-GKP Codes through Syndrome-Resolved Pauli-Frame Decoding
+- **作者**: Seid Koudia (单位未提供), Symeon Chatzinotas (单位未提供)
+- **发表日期**: 2026-08-01
+- **所属领域**: 容错计算 (`quant-ph`)
+- **arXiv链接**: [2608.00830v1](https://arxiv.org/pdf/2608.00830v1)
+- **摘要预览**: Graph codes offer multiple physical representatives of logical observables, while Gottesman-Kitaev-Preskill (GKP) codes retain analog information about bosonic displacement noise. We develop a causal framework that unifies these mechanisms for measurement-based loss tolerance under pure loss followed by quantum-limited amplification. In this framework, each local GKP recovery produces a refreshed logical block, a continuous syndrome record, and a confidence score for the inferred Pauli class. Low-confidence outcomes are deliberately converted into located erasures, so the availability pattern ...
 
 ---
 
 ## 论文 16
 - [ ] **发布**
-- **标题**: Constant-Time Inverse Suffix Array Queries in Compact Space and Sublinear-Time Construction of Suffix Array Indexes
-- **作者**: Dominik Kempa (单位未提供), Tomasz Kociumaka (单位未提供)
-- **发表日期**: 2026-08-19
-- **所属领域**: SDC精确短语 (`cs.DS`)
-- **arXiv链接**: [2608.19123v1](https://arxiv.org/pdf/2608.19123v1)
-- **摘要预览**: For a text $T\in[0..σ)^n$ with $2\leqσ\leq n$, its suffix array orders the suffix starting positions lexicographically, while its inverse suffix array maps each position to its suffix's rank. Since compressed suffix arrays and FM-indexes appeared in 2000, a central goal has been to support both queries in $O(n\logσ)$ bits. Thankachan recently reduced inverse suffix array query time to $O(\log\log ...
+- **标题**: RAID: Towards Robust AI-Generated Image Detection with Bit-Reversed Images
+- **作者**: Renxi Cheng (单位未提供), Jie Gui (单位未提供), Hongsong Wang (单位未提供)
+- **发表日期**: 2026-07-31
+- **所属领域**: 软错误 (`cs.CV`)
+- **arXiv链接**: [2607.28974v1](https://arxiv.org/pdf/2607.28974v1)
+- **摘要预览**: The rapid advancement of image generation models has made it increasingly difficult for people to distinguish AI-generated images from real ones. To prevent the potential risks associated with the misuse of fake images, AI-generated image detection has gained significant attention. Existing methods neglect the inherent differences between real and fake images, thus lacking robustness and generalization ability. In this work, we innovatively investigate AI-generated image detection using bit-planes, and introduce the bit-reversed image. We propose a simple yet effective pipeline consisting of c...
 
 ---
 
 ## 论文 17
 - [ ] **发布**
-- **标题**: Discretizing Continuous Time Series for Imputation with Masked Diffusion Training
-- **作者**: Dongbin Kim (单位未提供), Seungyun Lee (单位未提供), Geonwoo Shin (单位未提供), Jaewook Lee (单位未提供)
-- **发表日期**: 2026-08-19
-- **所属领域**: SDC精确短语 (`cs.LG`)
-- **arXiv链接**: [2608.19119v1](https://arxiv.org/pdf/2608.19119v1)
-- **摘要预览**: Time series imputation is a crucial area for reliable time series analysis, yet it remains challenging due to the complex temporal dynamics and noise of real-world data. Existing approaches, however, exhibit two limitations: missing and observed values are embedded within the same representation space without explicit structural separation, and continuous diffusion-based methods are trained to pre...
+- **标题**: Retrieval-Driven Training-Free AI-Generated Video Attribution
+- **作者**: Renxi Cheng (单位未提供), Chaolei Han (单位未提供), Jie Gui (单位未提供), Hongsong Wang (单位未提供)
+- **发表日期**: 2026-07-31
+- **所属领域**: 软错误 (`cs.CV`)
+- **arXiv链接**: [2607.28955v1](https://arxiv.org/pdf/2607.28955v1)
+- **摘要预览**: AI-generated videos are becoming increasingly realistic and difficult to distinguish from authentic ones, which facilitates malicious misuse and poses growing threats to cybersecurity and social governance. Attributing AI-generated videos to their specific generative sources is therefore of critical importance for forensic investigation and legal regulation. However, most existing visual attribution methods focus on images and particularly rely on the image generation model, thereby lacking the ability to generalize to large-scale AI-generated video data. To address these limitations, we intro...
 
 ---
 
 ## 论文 18
 - [ ] **发布**
-- **标题**: Enhancing EBSD throughput of battery electrode materials using super-resolution generative adversarial networks
-- **作者**: John Mangum (单位未提供), Andrew Glaws (单位未提供), Francois Usseglio-Viretta (单位未提供), Steven Spurgeon (单位未提供), Donal Finegan (单位未提供)
-- **发表日期**: 2026-08-19
-- **所属领域**: SDC精确短语 (`cs.LG`)
-- **arXiv链接**: [2608.19117v1](https://arxiv.org/pdf/2608.19117v1)
-- **摘要预览**: Quantitative microstructural characterization of Li-ion battery electrode materials using electron backscatter diffraction (EBSD) has been proven as a critical method for optimizing cell performance. However, the inherently slow nature of EBSD can hinder the throughput of analyses needed for statistical representation of a material microstructure being developed. This work demonstrates a machine l...
+- **标题**: Restrictions on non-Clifford fault tolerance and ruling out beyond-SQL quantum metrology
+- **作者**: Constantin Cedillo Vayson de Pradenne (单位未提供), Ishaan Kannan (单位未提供), Harald Putterman (单位未提供), Jordan Cotler (单位未提供)
+- **发表日期**: 2026-07-29
+- **所属领域**: 容错计算 (`quant-ph`)
+- **arXiv链接**: [2607.27342v1](https://arxiv.org/pdf/2607.27342v1)
+- **摘要预览**: Quantum metrology promises a quadratic speedup over the standard quantum limit (SQL), but signal-aligned noise is expected to preclude this advantage in realistic settings. A potential route around known no-go results is to encode the sensors in a quantum code where the physical signal acts transversally as a logical gate. Understanding restrictions on transversal non-Clifford gates is therefore central to both quantum metrology and fault-tolerant quantum computation. Here, we prove such restrictions and apply them to transversal sensing. For any stabilizer code of distance $d\ge 3$ supporting...
 
 ---
 
 ## 论文 19
 - [ ] **发布**
-- **标题**: JANUS: A Multi-modal Foundation Neural Sampler for Disordered Materials
-- **作者**: Denis Blessing (单位未提供), Mouyang Cheng (单位未提供), Maximilian Schebek (单位未提供), Jutta Rogal (单位未提供), Mingda Li (单位未提供) 等（共7人）
-- **发表日期**: 2026-08-19
-- **所属领域**: SDC精确短语 (`cond-mat.mtrl-sci`)
-- **arXiv链接**: [2608.19116v1](https://arxiv.org/pdf/2608.19116v1)
-- **摘要预览**: Many problems in disordered materials require sampling beyond fixed composition and volume, where coupled changes in atomic identities and structure create a prohibitively expensive discrete-continuous sampling problem. Here we introduce JANUS, a multimodal neural sampler that couples continuous and masked discrete diffusion through an equivariant graph neural network trained directly from energy ...
+- **标题**: Improved Methods for Determining Quantum Error Correcting Code Performance and Fault Tolerance
+- **作者**: Michael Mullan (单位未提供), Matthew Weippert (单位未提供), Winton Brown (单位未提供)
+- **发表日期**: 2026-07-29
+- **所属领域**: 容错计算 (`quant-ph`)
+- **arXiv链接**: [2607.27153v1](https://arxiv.org/pdf/2607.27153v1)
+- **摘要预览**: One of the central challenges in quantum error correction is determining the performance of a code in the low-error regimes needed to implement utility-scale computations. While performance at these error rates is not amenable to direct Monte Carlo simulation, it can be extrapolated from simulations at higher logical error rates, assuming the logical error rate scales predictably with increasing distance or decreasing physical error rate. However, the expected scaling depends sensitively on the minimum weight of uncorrectable error patterns. In many cases, the minimum weight is unknown since i...
 
 ---
 
 ## 论文 20
 - [ ] **发布**
-- **标题**: Real-Time RFI Mitigation in SPOTLIGHT: A Two-Stage Approach for Transient Searches
-- **作者**: Raghav Wani (单位未提供), Jayanta Roy (单位未提供), Harshavardhan Reddy (单位未提供), Sanjay Kudale (单位未提供), Ujjwal Panda (单位未提供) 等（共13人）
-- **发表日期**: 2026-08-19
-- **所属领域**: SDC精确短语 (`astro-ph.IM`)
-- **arXiv链接**: [2608.19102v1](https://arxiv.org/pdf/2608.19102v1)
-- **摘要预览**: Radio Frequency Interference (RFI) remains one of the primary challenges limiting the sensitivity and reliability of modern radio transient surveys, particularly for real-time searches of fast radio transients. The SPOTLIGHT system is a commensal real-time transient search backend operating at the upgraded Giant Metrewave Radio Telescope (uGMRT), where robust and computationally efficient RFI miti...
+- **标题**: Belayer: Efficient Fault Tolerance for LLM Agentic RL Training
+- **作者**: Jiecheng Zhou (单位未提供), Qinghao Hu (单位未提供), Peng Sun (单位未提供), Xingcheng Zhang (单位未提供), Weiming Zhang (单位未提供)
+- **发表日期**: 2026-07-28
+- **所属领域**: 容错计算 (`cs.DC`)
+- **arXiv链接**: [2608.14635v2](https://arxiv.org/pdf/2608.14635v2)
+- **摘要预览**: Large language model (LLM) agents are increasingly trained with reinforcement learning in long-horizon, sandboxed environments. Unlike conventional RL, agentic RL couples GPU-intensive rollout engines with stateful environment containers whose actions may produce visible side effects, such as file edits, command execution, and dependency installation. A single trajectory can span many rounds of gen- eration and environment interaction, so a component failure can discard completed work or expose the model to an environment state that is inconsistent with its context. However, existing systems l...
 
 ---
 
 ## 论文 21
 - [ ] **发布**
-- **标题**: An Exact-Moment Local Legendre Frame Method with Block Convolution for Caputo Fractional Differentiation
-- **作者**: Zhenyu Zhao (单位未提供), Benxue Gong (单位未提供), Tinggang Zhao (单位未提供), Xianzheng Jia (单位未提供)
-- **发表日期**: 2026-08-19
-- **所属领域**: 软错误 (`math.NA`)
-- **arXiv链接**: [2608.19157v1](https://arxiv.org/pdf/2608.19157v1)
-- **摘要预览**: We propose a local Legendre frame method for the accurate computation of Caputo fractional derivatives of order \(0<α<1\). On each local subinterval, the function is represented by a restricted Legendre frame obtained from scaled Legendre polynomials on an extended interval. The local coefficients are computed from equispaced samples by an exponentially weighted GTSVD regularization. The Caputo de...
+- **标题**: Absent, Not Faint: Fisher-Information Limits and a Logarithmic Measurement-Design Cure for Passive Characterization of Coherent Qubit Noise
+- **作者**: Yi Pan (单位未提供), Meng Hsiu Tsai (单位未提供), Weihang You (单位未提供), Hanqi Jiang (单位未提供), Junhao Chen (单位未提供) 等（共9人）
+- **发表日期**: 2026-07-23
+- **所属领域**: 硬件故障 (`quant-ph`)
+- **arXiv链接**: [2607.21663v1](https://arxiv.org/pdf/2607.21663v1)
+- **摘要预览**: Calibrating a quantum processor means estimating error parameters, and estimation theory usually assumes a parameter hard to estimate is faint: its signal is weak but present, so more repetitions or a richer model will recover it. This assumption fails for a leading hardware fault. A coherent over-rotation is a small systematic gate miscalibration. Measured through the cheapest data a device returns--one fixed-basis histogram--it is not faint but absent: to first order it leaves the distribution unchanged, indistinguishable from a compensating stochastic error, exactly as two numbers cannot be...
 
 ---
 
 ## 论文 22
 - [ ] **发布**
-- **标题**: Quantum circuit optimization using deep reinforcement learning: Applications across multiple gate sets
-- **作者**: Khoa Dang Tao (单位未提供), Sumin Jin (单位未提供), Muhammad Raza (单位未提供), Changhyoup Lee (单位未提供)
-- **发表日期**: 2026-08-19
-- **所属领域**: 软错误 (`quant-ph`)
-- **arXiv链接**: [2608.19103v1](https://arxiv.org/pdf/2608.19103v1)
-- **摘要预览**: The practical implementation of quantum algorithms on noisy intermediate-scale quantum devices encounters operational limitations due to decoherence and other sources of noise inherent in real hardware. To mitigate these errors while preserving the original functionality of the algorithm, shorter quantum circuits are therefore preferred. This motivates the development of effective quantum circuit ...
+- **标题**: An Efficient Fault-Tolerance Scheme for CKKS Computation on CPUs
+- **作者**: Jianan Mu (单位未提供), Ge Yu (单位未提供), Tenghui Hua (单位未提供), Liang Kong (单位未提供), Jing Ye (单位未提供) 等（共9人）
+- **发表日期**: 2026-07-21
+- **所属领域**: SDC精确短语 (`cs.AR`)
+- **arXiv链接**: [2607.18720v1](https://arxiv.org/pdf/2607.18720v1)
+- **摘要预览**: Fully homomorphic encryption (FHE) enables computation on encrypted data, but its long ciphertext dataflow and high-dimensional modular arithmetic make it vulnerable to silent data corruption caused by transient hardware faults. Existing protection methods either target dedicated accelerators or impose substantial execution, modular-arithmetic, and memory-access overheads on CPUs.   This work presents an efficient fault-tolerance scheme for CPU-based CKKS computation. It checks the input-output consistency of polynomial operators while reducing protection overhead at three levels. First, modul...
 
 ---
 
 ## 论文 23
 - [ ] **发布**
-- **标题**: Phase-Shifted Nanopteron Solutions to a Singularly Perturbed Korteweg--de Vries Equation
-- **作者**: Timothy E. Faver (单位未提供)
-- **发表日期**: 2026-08-19
-- **所属领域**: 软错误 (`math.AP`)
-- **arXiv链接**: [2608.19097v1](https://arxiv.org/pdf/2608.19097v1)
-- **摘要预览**: We construct nanopteron solutions to the differential equation \[ ε^2u^{(4)}+u''-u+u^2 =0, \] which is a singular perturbation of the traveling wave problem $u''-u+u^2=0$ for the Korteweg--de Vries (KdV) equation. These nanopteron solutions are the superposition of the sech$^2$-type KdV traveling wave profile, a small localized error, and a periodic "ripple." The ripple is parametrized by its ampl...
+- **标题**: CoG-Guided Weight Correction for Fault-Tolerant Deep Neural Networks
+- **作者**: Bahram Parchekani (单位未提供), Samira Nazari (单位未提供), Ali Azarpeyvand (单位未提供), Mohammad Hasan Ahmadilivani (单位未提供), Tara Ghasempouri (单位未提供) 等（共6人）
+- **发表日期**: 2026-07-17
+- **所属领域**: 硬件故障 (`cs.LG`)
+- **arXiv链接**: [2607.15753v1](https://arxiv.org/pdf/2607.15753v1)
+- **摘要预览**: Deep Neural Networks (DNNs) used in safety-critical applications are vulnerable to hardware and memory faults that corrupt network weights and degrade reliability. In this paper, we propose a Center of Gravity (CoG) guided weight correction method that restores faulty weights based on their spatial characteristics within each layer. The proposed approach detects and corrects weight faults using distance-aware correction rules, eliminating the need for retraining or architectural modification. The effectiveness of the proposed method in terms of the capability of tolerating hardware faults has ...
 
 ---
 
 ## 论文 24
 - [ ] **发布**
-- **标题**: Does Mapping Non-Maximal Probabilities to GMM Components Matter for S-JEPA Encoder Representations?
-- **作者**: Wenxuan He (单位未提供), Yunpeng Li (单位未提供), Shan Liang (单位未提供)
-- **发表日期**: 2026-08-19
-- **所属领域**: 软错误 (`cs.LG`)
-- **arXiv链接**: [2608.19084v1](https://arxiv.org/pdf/2608.19084v1)
-- **摘要预览**: S-JEPA uses soft Gaussian mixture model (GMM) posteriors instead of hard cluster labels to preserve uncertainty. It remains unclear whether the probability values alone are sufficient, or whether it also matters which GMM components receive the non-maximal probabilities. We test this with two matched controls. FIXED-RANDPERM keeps the top-1 component and probability together with the multiset of n...
+- **标题**: Quality control and quality assurance evaluation of ALFE2, a large-dynamic-range front-end ASIC de-veloped for the ATLAS Liquid Argon Calorimeter high-luminosity LHC upgrade
+- **作者**: E. Buschmann (单位未提供), G. Carini (单位未提供), G. Chatzianastasiou (单位未提供), H. Chen (单位未提供), Y. Chen (单位未提供) 等（共20人）
+- **发表日期**: 2026-07-11
+- **所属领域**: 软错误 (`physics.ins-det`)
+- **arXiv链接**: [2607.10458v2](https://arxiv.org/pdf/2607.10458v2)
+- **摘要预览**: ALFE2 is a front-end ASIC developed for the ATLAS Liquid Argon (LAr) Calorimeter upgrade during the High-Luminosity Large Hadron Collider (HL-LHC) phase. ALFE2 comprises four preamplifier/shaper channels, each providing two distinct gain outputs to cover a 16-bit dynamic range. A robotic system has been developed for the automatic quality control test of ALFE2, and over 10% of the 80,000 chips have been evaluated by September 2025. The evaluation has allowed us to establish grading criteria. Using these criteria, a yield of over 85% was achieved in the evaluation tests, and these criteria are ...
 
 ---
 
 ## 论文 25
 - [ ] **发布**
-- **标题**: Learning Random Geometric Graphs Drawn in Probabilistic Metric Spaces
-- **作者**: Dalia Chakrabarty (单位未提供), Kangrui Wang (单位未提供), Chuqiao Zhang (单位未提供), Ye Liu (单位未提供)
-- **发表日期**: 2026-08-19
-- **所属领域**: 软错误 (`stat.ML`)
-- **arXiv链接**: [2608.19082v1](https://arxiv.org/pdf/2608.19082v1)
-- **摘要预览**: We present a new data-driven learning of a Random Geometric Graph (RGG) of a multivariate dataset, where the graph is drawn in a probabilistic metric space. This graph learning works for generic datasets, irrespective of the type of the observables; their probability distributions; or size of the data. We identify a metric of the space that the graph is drawn in, as a probability distribution of a...
+- **标题**: Sensitivity to Subjective Expected Utility Maximization: A Methodological Study, with an Illustrative Application to LLM Decision-Making
+- **作者**: Jeff Helzner (单位未提供)
+- **发表日期**: 2026-07-08
+- **所属领域**: 软错误 (`econ.EM`)
+- **arXiv链接**: [2607.11920v1](https://arxiv.org/pdf/2607.11920v1)
+- **摘要预览**: Evaluating decisions made under uncertainty is hard when labeled outcomes are scarce, costly, or confounded with luck. We treat subjective expected utility (SEU) maximization as a stated standard and define a graded measure -- SEU sensitivity -- of an agent's conformity to it. The vehicle is a softmax choice model with a sensitivity parameter $α$ on SEU-valued alternatives; the contribution is a sequence of identifiability results for $α$ and for belief and utility parameters $(β, δ)$, validated in Stan via prior predictive checks, parameter recovery, and simulation-based calibration (SBC), wi...
 
 ---
 
 ## 论文 26
 - [ ] **发布**
-- **标题**: Diffusion Models for High-Dimensional Clustered Data: Intrinsic-Dimension Adaptivity via Bayesian Classification
-- **作者**: Yuga Iguchi (单位未提供), Paul Fearnhead (单位未提供)
-- **发表日期**: 2026-08-19
-- **所属领域**: 软错误 (`stat.ML`)
-- **arXiv链接**: [2608.19067v1](https://arxiv.org/pdf/2608.19067v1)
-- **摘要预览**: The empirical success of diffusion models in generative modelling has motivated theoretical work, including quantitative error bounds and qualitative analyses that characterise the different phases of denoising. We bring these two areas together by studying the adaptivity of diffusion models to the structured geometry of multimodal high-dimensional data that consists of multiple clusters in $\math...
+- **标题**: Self-Heating and Radiation Hardness Studies of 3nm GAA-FET-Based SRAM with Different Substrate Isolation Techniques
+- **作者**: Albert Lu (单位未提供), Junipero Verbeke (单位未提供), Phil Oldiges (单位未提供), Reza Arghavani (单位未提供), Hiu Yung Wong (单位未提供)
+- **发表日期**: 2026-07-07
+- **所属领域**: 软错误 (`cs.ET`)
+- **arXiv链接**: [2607.05789v1](https://arxiv.org/pdf/2607.05789v1)
+- **摘要预览**: In this work, 3D full-domain 3 nm gate-all-around field-effect transistor (GAA-FET) static random access memories (SRAMs) with various substrate isolation techniques are simulated using Technology Computer-Aided Design (TCAD). In addition to the traditional bottom dielectric isolation (BDI), which isolates the source/drain (S/D) from the substrate (dubbed SDBDI), and the punch-through stopper (PTS), a novel channel-BDI (C-BDI) is proposed, allowing S/D-to-substrate connection. The self-heating effect and radiation hardness due to various isolation techniques are studied. It is found that, firs...
 
 ---
 
 ## 论文 27
 - [ ] **发布**
-- **标题**: An Open Source Reference System for Portable Low-Field MRI
-- **作者**: David Schote (单位未提供), Helge Herthum (单位未提供), Umberto Zanovello (单位未提供), Julia Pfitzer (单位未提供), Ivo Jutte (单位未提供) 等（共11人）
-- **发表日期**: 2026-08-19
-- **所属领域**: 软错误 (`physics.med-ph`)
-- **arXiv链接**: [2608.19062v1](https://arxiv.org/pdf/2608.19062v1)
-- **摘要预览**: Despite its renewed attention, the pathway to point-of-care portable low-field MRI systems remains challenging, limiting adoption across research groups. Incomplete documentation limits reproducibility, causing redesign and complicating cross-system comparison. Moreover, non-standardized testing and characterization complicates ethical approval for clinical studies.   We present an open-source ref...
+- **标题**: Self-Specializing Vision-Language Transmon Chip Calibration in a Physics-Grounded Environment
+- **作者**: Animesh Tripathy (单位未提供), Aswanth Krishnan (单位未提供)
+- **发表日期**: 2026-07-03
+- **所属领域**: 硬件故障 (`quant-ph`)
+- **arXiv链接**: [2607.03193v1](https://arxiv.org/pdf/2607.03193v1)
+- **摘要预览**: Calibrating a superconducting transmon chip is a sequential decision problem under noise, drift, and a finite budget: an expert must choose experiments, read ambiguous plots, judge fit quality, and revise stale beliefs as the chip drifts. We study whether a vision-language agent can close this loop and specialize itself to one physical device without weight updates, via three co-designed artifacts. The first is a physics-grounded simulation environment for transmon chips: calibration observables derive from circuit-quantized parameters via scqubits, with realistic flux-line distortion, wall-ti...
 
 ---
 
 ## 论文 28
 - [ ] **发布**
-- **标题**: The Position-wise Prime Digit Distribution Theorem: A Formal Proof of Position-wise Digit Equidistribution in the Prime Numbers
-- **作者**: Mahadee Al Mobin (单位未提供), Md. Shariful Islam (单位未提供)
-- **发表日期**: 2026-08-19
-- **所属领域**: 软错误 (`math.NT`)
-- **arXiv链接**: [2608.19058v1](https://arxiv.org/pdf/2608.19058v1)
-- **摘要预览**: We state and prove the Theorem: for primes $p < 10^n$ with base-$10$ expansion $p = \sum_{k=0}^{n(p)-1} d_k(p) 10^k$, the positional digit probabilities $P_n(d \mid k)$ satisfy   \[   \lim_{n \to \infty} P_n(d \mid k) =   \begin{cases}   1/10, & k \ge 1,\ d \in \{0,\dots,9\}, \\[4pt]   1/9, & k = \mathrm{lead},\ d \in \{1,\dots,9\}.   \end{cases}   \]   The limiting behavior splits cleanly into tw...
+- **标题**: Embodied.cpp: A Portable Inference Runtime of Embodied AI Models on Heterogeneous Robots
+- **作者**: Ling Xu (单位未提供), Borui Li (单位未提供), Hao Wu (单位未提供), Chuyu Han (单位未提供), Xiangyu Li (单位未提供) 等（共11人）
+- **发表日期**: 2026-07-02
+- **所属领域**: 软错误 (`cs.RO`)
+- **arXiv链接**: [2607.02501v3](https://arxiv.org/pdf/2607.02501v3)
+- **摘要预览**: Embodied AI models now span vision-language-action (VLA) models and world-action models (WAMs), but practical deployment remains fragmented across model-specific Python stacks, backend assumptions, and robot-side glue code, especially on heterogeneous edge devices. Existing inference runtimes are designed mainly for request-response serving and therefore do not satisfy the runtime contract of embodied deployment: multi-rate execution inside closed-loop control, latency-first batch-1 inference on heterogeneous hardware, and extensible embodied interfaces beyond fixed token I/O. We present Embod...
 
 ---
 
 ## 论文 29
 - [ ] **发布**
-- **标题**: APEX: A Dual-Sparsity Accelerator for Precise and Efficient SNN Inference
-- **作者**: Devgokul Bawa Venkatesh (单位未提供), Sreeram Radhakrishnan (单位未提供), Rajshekhar Rakshit (单位未提供), Gopalakrishnan Srinivasan (单位未提供)
-- **发表日期**: 2026-08-19
-- **所属领域**: 软错误 (`cs.AR`)
-- **arXiv链接**: [2608.19046v1](https://arxiv.org/pdf/2608.19046v1)
-- **摘要预览**: Spiking Neural Networks (SNNs) have emerged as an energy-efficient alternative to Artificial Neural Networks (ANNs), leveraging sparse accumulate operations in the place of power-hungry multiply-and-accumulate operations. ANN-SNN conversion is a widely adopted approach to realize deep SNNs with accuracy comparable to that of ANNs. The Quantization-Clip-Floor-Shift (QCFS) activation minimizes conve...
+- **标题**: ProWAFT: A ROMA-LPD Instance for Workload-Aware and Dynamic Fault Tolerance in FPGA-Based CNN Accelerators
+- **作者**: Xinxin Chen (单位未提供), Haoran Qiao (单位未提供), Yiming Guo (单位未提供), Kecheng Luo (单位未提供), Siyuan Feng (单位未提供) 等（共6人）
+- **发表日期**: 2026-07-02
+- **所属领域**: 软错误 (`cs.CL`)
+- **arXiv链接**: [2607.01602v1](https://arxiv.org/pdf/2607.01602v1)
+- **摘要预览**: SRAM-based FPGAs provide an attractive platform for energy- and latency-constrained CNN inference at the network edge, yet transient faults can lead to silent errors that compromise reliability. Always-on redundancy (e.g., full TMR) improves correctness but incurs substantial performance and energy overhead, while reactive recovery may introduce unacceptable latency on the critical path. We propose \textbf{ProWAFT}, a proactive workload-aware fault-tolerance framework for FPGA-based CNN accelerators that uses partial reconfiguration to selectively apply TMR across reconfigurable partitions. Pr...
 
 ---
 
 ## 论文 30
 - [ ] **发布**
-- **标题**: Distributed Online Estimation of Spiked Eigenvalues with Adaptive Weighting under Persistent Aspect Ratio Heterogeneity
-- **作者**: Lu Yan (单位未提供), Jiang Hu (单位未提供), Yonghan Zhang (单位未提供), Xiaoyue Li (单位未提供)
-- **发表日期**: 2026-08-19
-- **所属领域**: 软错误 (`math.ST`)
-- **arXiv链接**: [2608.19045v1](https://arxiv.org/pdf/2608.19045v1)
-- **摘要预览**: We study online estimation of spiked covariance eigenvalues from observations distributed across $L$ nodes with heterogeneous and persistent effective sample sizes. In the proportional high-dimensional regime, local Rayleigh statistics are deterministically distorted by node-specific aspect ratios $c_{\ell,t}=p/N^{\mathrm{eff}}_{\ell,t}$, and direct aggregation of uncorrected statistics converges ...
+- **标题**: Protecting Futures against Silent Data Corruption -- Efficient Task Replication for Dynamic Data Dependencies
+- **作者**: Rüdiger Nather (单位未提供), Claudia Fohry (单位未提供), Mia Reitz (单位未提供)
+- **发表日期**: 2026-06-29
+- **所属领域**: SDC精确短语 (`cs.DC`)
+- **arXiv链接**: [2606.30771v1](https://arxiv.org/pdf/2606.30771v1)
+- **摘要预览**: As the size of computational problems grows, so does the likelihood of Silent Data Corruptions (SDCs). A common defense is replication, where the computation is repeated and correct results are determined by majority voting. Asynchronous Many-Task (AMT) runtimes are generally well suited for this approach, since the inputs and outputs of task replicas can be compared, and the tasks can be recomputed if necessary. Most existing SDC protection schemes assume static tasks and dependencies. Dynamic settings are more challenging, especially in clusters, since the tasks/data must be tracked for the ...
 
 ---
 
 ## 论文 31
 - [ ] **发布**
-- **标题**: Universal Machine-learning Molecular Dynamics at the Speed of Empirical Potentials
-- **作者**: Tiancheng Li (单位未提供), Jianming Xue (单位未提供), Linfeng Zhang (单位未提供), Duo Zhang (单位未提供), Han Wang (单位未提供)
-- **发表日期**: 2026-08-19
-- **所属领域**: 软错误 (`physics.chem-ph`)
-- **arXiv链接**: [2608.19041v1](https://arxiv.org/pdf/2608.19041v1)
-- **摘要预览**: No interatomic potential has offered universality across chemistry, near-first-principles accuracy and the speed of empirical potentials at once. Here we introduce DPA4C, an equivariant potential whose architecture and compressed CUDA operators are co-designed under deployment constraints to pursue accuracy and efficiency together. Five variants spanning a 49-fold parameter range form the high-thr...
+- **标题**: StreamGuard: Low-Overhead Resilience for Real-time HPC Data Streams
+- **作者**: Hai Duc Nguyen (单位未提供), Bogdan Nicolae (单位未提供), Tekin Bicer (单位未提供), Amal Gueroudji (单位未提供), Matthieu Dorier (单位未提供) 等（共7人）
+- **发表日期**: 2026-06-29
+- **所属领域**: 硬件故障 (`cs.DC`)
+- **arXiv链接**: [2606.30848v1](https://arxiv.org/pdf/2606.30848v1)
+- **摘要预览**: Real-time scientific workflows operate on continuous data streams and must produce timely, high-quality results despite executing on complex, failure-prone infrastructure. Hardware faults, network disruptions, and performance anomalies caused by resource contention or system heterogeneity can severely degrade performance and violate real-time constraints. We focus on strengthening the resilience of the producer-consumer streaming pattern, a fundamental building block of scientific streaming workflows. We present two complementary techniques: (i) a dynamic, asynchronous, non-blocking checkpoint...
 
 ---
 
 ## 论文 32
 - [ ] **发布**
-- **标题**: Molecular Implementation of the Machine-Learned Skala Exchange-Correlation Functional in CP2K through GauXC
-- **作者**: Franz Pöschel (单位未提供), Johann Pototschnig (单位未提供), Frederick Stein (单位未提供), Andreas Knüpfer (单位未提供), Thijs Vogels (单位未提供) 等（共9人）
-- **发表日期**: 2026-08-19
-- **所属领域**: 软错误 (`physics.chem-ph`)
-- **arXiv链接**: [2608.19033v1](https://arxiv.org/pdf/2608.19033v1)
-- **摘要预览**: Machine-learned exchange--correlation (XC) functionals offer a route to improve Kohn--Sham density-functional theory without incurring the cost of explicitly correlated electronic-structure methods. Their use in production simulation codes, however, requires a well-defined mapping between the learned model and the host-code density representation. We formulate and implement a Skala-1.1 interface i...
+- **标题**: LibEvoBench: Probing Temporal Knowledge Stratification in Code Generation Models
+- **作者**: Daniele Cipollone (单位未提供), Sergey Titov (单位未提供), Maliheh Izadi (单位未提供), Egor Bogomolov (单位未提供), Arie van Deursen (单位未提供)
+- **发表日期**: 2026-06-24
+- **所属领域**: 软错误 (`cs.SE`)
+- **arXiv链接**: [2606.25402v1](https://arxiv.org/pdf/2606.25402v1)
+- **摘要预览**: Large software projects often depend on older versions of libraries, even as APIs continue to evolve across releases. This creates a challenge for LLMs: they must maintain knowledge of multiple API versions, not merely the latest or most common one. However, current LLMs are trained on temporally mixed corpora and lack explicit mechanisms for such version-specific reasoning, leading to anachronistic errors - calling APIs as they exist in a different library version. To systematically evaluate this phenomenon, we introduce LibEvoBench, a multi-task benchmark spanning multiple versions of widely...
 
 ---
 
 ## 论文 33
 - [ ] **发布**
-- **标题**: Counterfactual Contrastive Analysis
-- **作者**: Yunlong He (单位未提供), Pietro Gori (单位未提供)
-- **发表日期**: 2026-08-19
-- **所属领域**: 软错误 (`cs.CV`)
-- **arXiv链接**: [2608.19032v1](https://arxiv.org/pdf/2608.19032v1)
-- **摘要预览**: Visual Counterfactual Explanations (VCEs) aim to explain image classifiers by generating minimally edited and realistic versions of an input image that change the classifier's prediction. Existing VCE methods are inherently classifier-dependent and therefore susceptible to classifier biases and failure modes, such as sensitivity to shortcut features and calibration errors. In this paper, we propos...
+- **标题**: Single-Event Upsets in 3D Gaussian Splatting Rendering: Bit-Level Criticality, Spatial Extent, and a Parallel Support Guard
+- **作者**: Faruk Alpay (单位未提供), Baris Basaran (单位未提供)
+- **发表日期**: 2026-06-19
+- **所属领域**: SDC精确短语 (`cs.GR`)
+- **arXiv链接**: [2606.21791v1](https://arxiv.org/pdf/2606.21791v1)
+- **摘要预览**: Three-dimensional Gaussian splatting is a standard real-time scene representation increasingly deployed on hardware exposed to transient faults, such as spaceborne processors and robotic edge devices where silent data corruption occurs. A trained model is a large array of floating-point parameters in GPU memory, where a single-event upset corresponds to a single flipped bit. This paper measures these effects and constructs a defense. A GPU-resident parallel fault-injection engine applies over 3.8 million controlled single-bit upsets across four scenes, six fields, all bit positions, and three ...
 
 ---
 
 ## 论文 34
 - [ ] **发布**
-- **标题**: Constrained Spatial Pricing of On-Street Parking with Bayesian Demand Calibration
-- **作者**: Ananya Kale (单位未提供), Mohit Apte (单位未提供)
-- **发表日期**: 2026-08-19
-- **所属领域**: 软错误 (`math.OC`)
-- **arXiv链接**: [2608.19015v1](https://arxiv.org/pdf/2608.19015v1)
-- **摘要预览**: Occupancy-targeted curb pricing, including San Francisco's SFpark pilot, often relies on local threshold rules that do not account for spatial substitution or uncertainty in demand response. We estimate parking-price elasticities from disaggregated SFpark data using a hierarchical Bayesian demand model and use the resulting posterior distribution in a spatially coupled constrained pricing model. P...
+- **标题**: Nanoscale memristive devices: Threats and solutions
+- **作者**: Amir M. Hajisadeghi (单位未提供), Javad Talafy (单位未提供), Hamid R. Zarandi (单位未提供)
+- **发表日期**: 2026-06-17
+- **所属领域**: 软错误 (`cs.ET`)
+- **arXiv链接**: [2606.18978v1](https://arxiv.org/pdf/2606.18978v1)
+- **摘要预览**: Due to their incentivizing features, memristors are a promising candidate for replacing CMOS-based memories, which are faced with various functional challenges in deep submicron process technologies. Memristors are nonvolatile, have low leakage, and are dense in comparison to CMOS-based memories like SRAM. In this regard, resistive RAM (ReRAM) and spin-transfer-torque RAM (STT-RAM) memristors are distinguished among other memristor-based memory technologies, due to their superiority in process maturity and metrics such as memory operation energy, memory latency, and area. Hence, this chapter f...
 
 ---
 
 ## 论文 35
 - [ ] **发布**
-- **标题**: Grading the Graders: Verification Autonomy Levels (L0-L5) for LLM Reasoning
-- **作者**: Yajie Yin (单位未提供)
-- **发表日期**: 2026-08-19
-- **所属领域**: 软错误 (`cs.CL`)
-- **arXiv链接**: [2608.19009v1](https://arxiv.org/pdf/2608.19009v1)
-- **摘要预览**: Large language models (LLMs) are increasingly paired with verifiers (step checkers, self-consistency filters, tool-based fact checkers, formal proof assistants) that claim to detect the model's errors. Yet the verification literature uses the word "level" to mean at least five different things: verification granularity, concept abstraction, risk tier, system-stack layer, and the epistemic source o...
+- **标题**: Characterization of nested Walsh parity-check filters in a single-photon eight-mode register on a cloud photonic processor
+- **作者**: Emma Tully (单位未提供), Jonathan Washburn (单位未提供), Megan Simons (单位未提供)
+- **发表日期**: 2026-06-16
+- **所属领域**: 软错误 (`quant-ph`)
+- **arXiv链接**: [2606.18408v2](https://arxiv.org/pdf/2606.18408v2)
+- **摘要预览**: We characterize two nested Walsh parity-check filters implemented on Quandela's Belenos cloud photonic processor in a single-photon eight-mode spatial register. The modes are indexed by the vertices of the cube $Q_3$. The filters realize the classical $[8,7,2]$ single-parity-check code, the zero-sum neutral subspace $\mathcal{N}$ and the $[8,4,4]$ extended Hamming code, the parity-checked subspace $\mathcal{S}\subset\mathcal{N}$ with one DC and three face-parity syndrome channels. These are first-quantized path/mode encodings of classical codes: the experiment verifies leakage suppression and ...
 
 ---
 
 ## 论文 36
 - [ ] **发布**
-- **标题**: Modeling of an ODE-constrained optimization problem describing tumor dynamics, and numerical approximation via sequential physics-informed neural networks
-- **作者**: Juan J. Forero-Hernández (单位未提供), Élder J. Villamizar-Roa (单位未提供)
-- **发表日期**: 2026-08-19
-- **所属领域**: 软错误 (`math.OC`)
-- **arXiv链接**: [2608.18974v1](https://arxiv.org/pdf/2608.18974v1)
-- **摘要预览**: In this paper, we study an optimal control problem related to an ODE model of glioblastoma growth influenced by the oxygen. The model considers a couple of controls describing the chemotherapy and antiangiogenic therapies. The cost functional aims to reduce the tumor growth, bring the oxygen concentration close to a desired value, and penalize the use of therapies. We solve the optimal control pro...
+- **标题**: Uncovering Vulnerability of Vision-Language-Action Models under Joint-Level Physical Faults
+- **作者**: Minsoo Jo (单位未提供), Taeju Kwon (单位未提供), Junha Chun (单位未提供), Youngjoon Jeong (单位未提供), Taesup Kim (单位未提供)
+- **发表日期**: 2026-06-09
+- **所属领域**: 硬件故障 (`cs.RO`)
+- **arXiv链接**: [2606.10501v1](https://arxiv.org/pdf/2606.10501v1)
+- **摘要预览**: Deploying Vision-Language-Action (VLA) models in real robotic systems requires robustness not only to semantic and perceptual variations, but also to embodiment-side faults that change how actions are physically realized. Real robots can experience joint-level changes caused by actuator degradation, hardware faults, safety limits, collision damage, or wear-induced friction. These faults are critical because they alter the action-to-motion interface of a policy, disrupting the learned closed-loop relationship between commanded actions, realized motion, and subsequent observations. In this work,...
 
 ---
 
 ## 论文 37
 - [ ] **发布**
-- **标题**: The Limits of Black-Box Reductions for All-Pairs Triangle Detection
-- **作者**: Nathan Sheffield (单位未提供), Virginia Vassilevska Williams (单位未提供), Zoe Xi (单位未提供)
-- **发表日期**: 2026-08-19
-- **所属领域**: 数据损坏 (`cs.DS`)
-- **arXiv链接**: [2608.19092v1](https://arxiv.org/pdf/2608.19092v1)
-- **摘要预览**: For any tripartite relation $R\subseteq \mathbb{Z}^3$, the $R$-Triangle problem asks, given an edge-weighted graph, whether it contains a triangle whose weights form a triple in $R$. The All-Edge $R$-Triangle problem asks to determine for every edge whether it is contained in such a triangle. It is known that $R$-Triangle and All-Edge $R$-Triangle are subcubically fine-grained equivalent for every...
+- **标题**: Model Poisoning Against Federated Model Adaptation with Chain of Bit-Flips
+- **作者**: Bastien Vuillod (单位未提供), Kevin Hector (单位未提供), Pierre-Alain Moellic (单位未提供), Jean-Max Dutertre (单位未提供), Olivier Potin (单位未提供)
+- **发表日期**: 2026-06-08
+- **所属领域**: 硬件故障 (`cs.CR`)
+- **arXiv链接**: [2606.09548v1](https://arxiv.org/pdf/2606.09548v1)
+- **摘要预览**: Federated Learning (FL) allows a set of clients to collectively train a global model without sharing local training data. Giving the responsibility of the training to decentralized actors may lead to poisoning attacks: clients controlled by malicious third party potentially poison the training dataset to install a backdoor in neural networks. In FL, these backdoor attacks rely solely on algorithmic approach, however, recent advances in hardware faults threats (e.g, Rowhammer) have widen the overall attack surface. In the context of federated model adaptation, we introduce a novel category of b...
 
 ---
 
 ## 论文 38
 - [ ] **发布**
-- **标题**: Sweep-based, implicit solutions of the multidimensional BGK equation on unstructured grids
-- **作者**: Thomas M. Evans (单位未提供), Ryan Glasby (单位未提供), Cory Hauck (单位未提供), Stefan R. Schnake (单位未提供), Kyle J. Schwiebert (单位未提供) 等（共7人）
-- **发表日期**: 2026-08-19
-- **所属领域**: 硬件故障 (`cs.CE`)
-- **arXiv链接**: [2608.19150v1](https://arxiv.org/pdf/2608.19150v1)
-- **摘要预览**: We present a nodal discontinuous Galerkin method for solving the Bhatnagar-Gross-Krook (BGK) kinetic equation on multi-dimensional, unstructured grids. The method uses implicit, sweep-based solvers and a moment-preserving projection of the Maxwellian source to enable high-order accuracy in time while avoiding restrictive time steps imposed by boundary layers and other geometry-induced features. We...
+- **标题**: Not All Errors Are Equal: A Systematic Study of Error Propagation in Large Language Model Inference
+- **作者**: Yafan Huang (单位未提供), Sheng Di (单位未提供), Guanpeng Li (单位未提供)
+- **发表日期**: 2026-06-01
+- **所属领域**: 软错误 (`cs.DC`)
+- **arXiv链接**: [2606.02430v1](https://arxiv.org/pdf/2606.02430v1)
+- **摘要预览**: Large language models (LLMs) are increasingly integrated into high-performance computing (HPC) workflows, accelerating scientific discovery through diverse perspectives such as code generation and domain-specific decision-making. Yet, how soft errors propagate and affect LLM inference remains largely unexplored. To bridge this gap, we present a comprehensive study on error propagation in LLM inference, enabled by our proposed LLMFI, a configurable and deterministic fault-injection framework. Using LLMFI, we systematically inject faults across three open-weighted LLMs and thirteen representativ...
 
 ---
 
 ## 论文 39
 - [ ] **发布**
-- **标题**: Pre-Compiled Pipeline Shards for Distributed LLM Inference on Intel AI PC Fleets
-- **作者**: Tate Berenbaum (单位未提供), Muthaiah Venkatachalam (单位未提供)
-- **发表日期**: 2026-08-19
+- **标题**: Don't Let a Few Network Failures Slow the Entire AllReduce
+- **作者**: Peiqing Chen (单位未提供), Jiedong Jiang (单位未提供), Nengneng Yu (单位未提供), Yuefeng Wang (单位未提供), Sixian Xiong (单位未提供) 等（共7人）
+- **发表日期**: 2026-06-01
 - **所属领域**: 硬件故障 (`cs.DC`)
-- **arXiv链接**: [2608.19147v1](https://arxiv.org/pdf/2608.19147v1)
-- **摘要预览**: Modern Intel AI PCs ship capable integrated GPUs and NPUs with 16+ GB of unified memory, and they spend considerable time idle. That is not enough memory to fit a large model such as a 70B-parameter LLM. We show that a handful of AIPCs, working together over an ordinary network, can serve models beyond the capability of any single one. We use pipeline parallelism: a model is split by layer into pe...
+- **arXiv链接**: [2606.01680v1](https://arxiv.org/pdf/2606.01680v1)
+- **摘要预览**: Network failures are among the most frequent hardware faults in large-scale GPU clusters and a leading cause of training-job interruptions. Modern collective communication libraries such as NCCL mitigate network failures by rerouting traffic through surviving NICs on the same server, trading reduced inter-node bandwidth for uninterrupted training. However, the degraded server remains on the critical path of the standard ring algorithm, slowing the entire collective. We present the first information-theoretic lower bound on AllReduce completion time under asymmetric network bandwidth and show t...
 
 ---
 
 ## 论文 40
 - [ ] **发布**
-- **标题**: Effect of style of faulting on the probabilistic characterization of directionality of horizontal response spectral ordinates
-- **作者**: Nathan Girmay (单位未提供), Eduardo Miranda (单位未提供)
-- **发表日期**: 2026-08-19
-- **所属领域**: 硬件故障 (`physics.geo-ph`)
-- **arXiv链接**: [2608.19142v1](https://arxiv.org/pdf/2608.19142v1)
-- **摘要预览**: Horizontal earthquake ground motions exhibit substantial changes in amplitude with changes in orientation. While the effects of style of faulting on central tendency measures of ground motion intensity such as RotD50 are well established in ground motion models, less attention has been given to how faulting mechanism influences the complete directional characteristics of ground motions. This study...
+- **标题**: SENTRY: Statistical Reliability Analysis of Vision Transformers Under Soft Errors
+- **作者**: Pramit Kumar Bhaduri (单位未提供), Mahdi Taheri (单位未提供), Samira Nazari (单位未提供), Maksim Jenihhin (单位未提供), Christian Herglotz (单位未提供) 等（共6人）
+- **发表日期**: 2026-05-30
+- **所属领域**: 软错误 (`cs.CV`)
+- **arXiv链接**: [2606.07620v1](https://arxiv.org/pdf/2606.07620v1)
+- **摘要预览**: With the growth of Vision Transformers in safety-critical domains like autonomous systems and medical imaging, ensuring their reliability against soft errors is paramount. While ViTs offer state-of-the-art accuracy, their massive parameter counts render exhaustive fault injection campaigns infeasible. To bridge this gap, a statistical fault injection framework is presented, leveraging finite-population sampling theory to provide formal reliability guarantees. It is demonstrated that failure rates are bounded within a 1% margin at 99\% confidence using only a few thousand samples, regardless of...
 
 ---
 
 ## 论文 41
 - [ ] **发布**
-- **标题**: Autonomous Cyber Defense in Connected Vehicles: A Multi-Agent Approach to V2X Security
-- **作者**: Krishna Teja Medam (单位未提供)
-- **发表日期**: 2026-08-19
-- **所属领域**: 硬件故障 (`cs.CR`)
-- **arXiv链接**: [2608.19135v1](https://arxiv.org/pdf/2608.19135v1)
-- **摘要预览**: A connected vehicle has roughly 100 milliseconds to decide whether an incoming Basic Safety Message is real or fabricated. If a false emergency braking alert reaches the planning pipeline in time, the car brakes - a safety failure triggered by a security failure. Existing intrusion detection systems are not designed to handle that coupling. They operate per vehicle, per message, with static rules ...
+- **标题**: Silent Data Corruption Protection through Efficient Task Replication
+- **作者**: Mia Reitz (单位未提供), Claudia Fohry (单位未提供)
+- **发表日期**: 2026-05-28
+- **所属领域**: SDC精确短语 (`cs.DC`)
+- **arXiv链接**: [2605.29506v1](https://arxiv.org/pdf/2605.29506v1)
+- **摘要预览**: The trend of increasing cluster sizes of supercomputers leads to a growing susceptibility to Silent Data Corruption (SDC) that can invalidate program results. A common strategy for SDC protection is replication, where the computation is repeated, and the correct result is determined as the one that is the same in at least two different computations. Applying replication to Asynchronous Many-Task (AMT) runtimes on clusters is challenging due to dynamic task spawning and work stealing, which complicate the identification of replicated tasks.   To address the challenge, this paper introduces a no...
 
 ---
 
 ## 论文 42
 - [ ] **发布**
-- **标题**: Open-MOPD: Diagnosing and Fixing Capability Imbalance in Multi-Teacher On-Policy Distillation
-- **作者**: Huan-ang Gao (单位未提供), Haohan Chi (单位未提供), Yong Yan (单位未提供), Shiyuan Feng (单位未提供), Hanlin Wu (单位未提供) 等（共10人）
-- **发表日期**: 2026-08-19
-- **所属领域**: 硬件故障 (`cs.LG`)
-- **arXiv链接**: [2608.19098v1](https://arxiv.org/pdf/2608.19098v1)
-- **摘要预览**: Multi-teacher on-policy distillation (M-OPD) has emerged as a promising paradigm for consolidating domain-specialized reinforcement learning (RL) experts into a single generalist student via dense, token-level reward supervision. Despite its practical success, the optimization dynamics governing multi-teacher capability integration remain poorly understood, and open, rigorously reproducible recipe...
+- **标题**: FT-Pilot: Automated Fault-Tolerant RTL Rewriting via Vulnerability-Guided LLMs
+- **作者**: Weixing Liu (单位未提供), Zizhen Liu (单位未提供), Jing Ye (单位未提供), Naixing Wang (单位未提供), Cheng Liu (单位未提供) 等（共7人）
+- **发表日期**: 2026-05-27
+- **所属领域**: 软错误 (`cs.AR`)
+- **arXiv链接**: [2605.28169v1](https://arxiv.org/pdf/2605.28169v1)
+- **摘要预览**: As integrated circuit technologies continue to scale toward advanced process nodes, the continual reduction in node capacitance and supply voltage has made digital systems increasingly vulnerable to soft errors. Although traditional full-chip hardening methods can improve reliability, they often incur unacceptable area and power overhead, making selective hardening a more practical engineering solution. However, existing approaches typically rely on time-consuming fault-injection simulation to determine hardening locations through vulnerability analysis, and still depend heavily on manual stra...
 
 ---
 
 ## 论文 43
 - [ ] **发布**
-- **标题**: Realizing Logical Diagonal Gates via Transversal Physical $Z$-Rotations in CSS Codes
-- **作者**: K. Sai Mineesh Reddy (单位未提供), Navin Kashyap (单位未提供)
-- **发表日期**: 2026-08-19
-- **所属领域**: 硬件故障 (`quant-ph`)
-- **arXiv链接**: [2608.19094v1](https://arxiv.org/pdf/2608.19094v1)
-- **摘要预览**: Calderbank-Shor-Steane (CSS) codes, constructed from nested classical codes $C_2 \subseteq C_1$, are typically optimized for good code parameters. However, practical quantum computing equally demands fault-tolerant logical gates. In this work, we characterize nested pairs $(C_1, C_2)$ whose resulting CSS codes realize a target logical diagonal gate via transversal physical $Z$-rotations. In doing ...
-
----
-
-## 论文 44
-- [ ] **发布**
-- **标题**: Robust and Efficient Feature Extraction for Spike Sorting via the Walsh-Hadamard Transform
-- **作者**: Emily Yang (单位未提供), Liyuan Guo (单位未提供), Seyed Mohammad Ali Zeinolabedin (单位未提供), Meng Zhang (单位未提供), Ke Yang (单位未提供) 等（共8人）
-- **发表日期**: 2026-08-19
+- **标题**: Robust Quantum-MUSIC for DoA Estimation Using Rydberg Atomic Receiver Arrays
+- **作者**: Sourav Banerjee (单位未提供), Neel Kanth Kundu (单位未提供), Prajwalita Borah (单位未提供)
+- **发表日期**: 2026-05-25
 - **所属领域**: 硬件故障 (`eess.SP`)
-- **arXiv链接**: [2608.19048v1](https://arxiv.org/pdf/2608.19048v1)
-- **摘要预览**: Implantable neural interfaces require low-power real-time signal processing to remain within strict thermal and bandwidth constraints, motivating lightweight feature extraction methods for on-chip spike sorting. This work presents the Walsh-Hadamard Transform (WHT) as a hardware-efficient feature extraction method for neural spike classification. WHT can be implemented using only adders, subtracto...
-
----
-
-## 论文 45
-- [ ] **发布**
-- **标题**: Hot Games: Towards a Holistic Assessment of the Planet Warming Emissions of Video Games based on 2024-2025 Data
-- **作者**: Mike Hazas (单位未提供), Kevin C. Dalli (单位未提供), Arjun Menon (单位未提供), Ben Abraham (单位未提供), Ossian Nordgren (单位未提供)
-- **发表日期**: 2026-08-19
-- **所属领域**: 硬件故障 (`cs.CY`)
-- **arXiv链接**: [2608.19040v1](https://arxiv.org/pdf/2608.19040v1)
-- **摘要预览**: Following on recent reports on specific platforms or companies, this paper provides an assessment of the global impact of the production and use of video games. It draws together publicly available data on game development, hardware, games sold, download sizes, time spent playing games on different platforms, and subscriptions to multiplayer and cloud game services. It provides an update to figure...
-
----
-
-## 论文 46
-- [ ] **发布**
-- **标题**: Autonomous Agricultural Tractor: Integrated Weed Detection and LiDAR Navigation for Precision Paddy Farming
-- **作者**: Benjamin Merryman-Smith (单位未提供), Tony Nguyen (单位未提供), Bilal Dogutas (单位未提供), Krish Shah (单位未提供), Anthony Raphael (单位未提供) 等（共6人）
-- **发表日期**: 2026-08-19
-- **所属领域**: 硬件故障 (`cs.RO`)
-- **arXiv链接**: [2608.19004v1](https://arxiv.org/pdf/2608.19004v1)
-- **摘要预览**: Site-specific weed management in paddy farming offers substantial reductions in herbicide use over conventional broadcast spraying, but field deployment has been limited by three persistent challenges: robust crop-row navigation under canopy where GNSS degrades, real-time visual discrimination between rice and morphologically diverse weeds, and the asymmetric cost of misclassifying rice as weed, w...
-
----
-
-## 论文 47
-- [ ] **发布**
-- **标题**: Open at the Edge, Captured at the Center: llama.cpp and the Political Economy of Local AI Inference
-- **作者**: Woohyeuk Lee (单位未提供), Hanlin Li (单位未提供), David Gray Widder (单位未提供)
-- **发表日期**: 2026-08-19
-- **所属领域**: 硬件故障 (`cs.CY`)
-- **arXiv链接**: [2608.19001v1](https://arxiv.org/pdf/2608.19001v1)
-- **摘要预览**: Open AI scholarship has focused on model releases and cloud ecosystems, leaving the local inference infrastructure that makes open-weight models runnable on user-owned devices largely unexamined. We address this gap through a mixed-methods analysis of llama.cpp, combining 7,681 merged pull requests from March 2023 through March 2026 with repository discussions, corporate statements, and contributo...
-
----
-
-## 论文 48
-- [ ] **发布**
-- **标题**: RushHour: A Dynamically Reconfigurable Lattice-Surgery Architecture
-- **作者**: Nathaniel Tornow (单位未提供), Aleksandra Świerkowska (单位未提供), Peter Wegmann (单位未提供), Pramod Bhatotia (单位未提供)
-- **发表日期**: 2026-08-19
-- **所属领域**: 硬件故障 (`quant-ph`)
-- **arXiv链接**: [2608.18985v1](https://arxiv.org/pdf/2608.18985v1)
-- **摘要预览**: Practical fault-tolerant quantum computing (FTQC) requires efficient lattice surgery (LS), so that large algorithms fit on resource-constrained quantum chips. Existing approaches, however, are rigid: qubits, routing space, and resource states are allocated ahead of execution, which prevents running on small chips, leaves statically scheduled executions with large time overheads, and fixes each des...
-
----
-
-## 论文 49
-- [ ] **发布**
-- **标题**: Institutional Newspapers Pipeline: Deriving billions of high quality tokens from historical newspapers
-- **作者**: Matteo Cargnelutti (单位未提供), Catherine Brobston (单位未提供), Eben English (单位未提供), Jake Sadow (单位未提供), Kacie Bailey (单位未提供) 等（共9人）
-- **发表日期**: 2026-08-19
-- **所属领域**: 硬件故障 (`cs.CL`)
-- **arXiv链接**: [2608.18972v1](https://arxiv.org/pdf/2608.18972v1)
-- **摘要预览**: Historical newspapers are an abundant record of public life, but their dense, irregular and sometimes noisy layouts make computational access to these materials both challenging and limited. We present the Institutional Newspapers Pipeline, a modular system we jointly designed with Boston Public Library to extract high-quality, structured datasets from historical newspaper scans. It was architecte...
-
----
-
-## 论文 50
-- [ ] **发布**
-- **标题**: On-chip Bragg peak extraction from MHz frame rate X-ray detectors using a cellular automaton architecture
-- **作者**: S. Fowler (单位未提供), S. Strempfer (单位未提供), D. Beniwal (单位未提供), M. Hammer (单位未提供), H. Shi (单位未提供) 等（共16人）
-- **发表日期**: 2026-08-19
-- **所属领域**: 硬件故障 (`physics.ins-det`)
-- **arXiv链接**: [2608.18970v1](https://arxiv.org/pdf/2608.18970v1)
-- **摘要预览**: High-frame rate pixel detectors can produce data volumes that exceed available off-chip bandwidth, yet in many applications only a sparse subset of each frame carries relevant information. Spatially localized events, including diffraction peaks in crystallography, particle hits in tracking detectors, fluorescence spots in biological imaging, and other applications, all require that clusters of abo...
-
----
-
-## 论文 51
-- [ ] **发布**
-- **标题**: Towards end-to-end Bayesian forward models in global 21-cm cosmology: surrogate modelling and marginalisation of beam uncertainty
-- **作者**: Jacob L. Tutt (单位未提供), Dominic J. Anstey (单位未提供), John Cumner (单位未提供), Harry T. J. Bevins (单位未提供), Jean Cavillot (单位未提供) 等（共6人）
-- **发表日期**: 2026-08-19
-- **所属领域**: 硬件故障 (`astro-ph.CO`)
-- **arXiv链接**: [2608.18962v1](https://arxiv.org/pdf/2608.18962v1)
-- **摘要预览**: Robust statistical inference in global 21-cm cosmology requires end-to-end uncertainty quantification that jointly handles the highly degenerate cosmological signal, foreground emission, and instrumental response. Although electromagnetic simulations capture physical antenna properties in a parametrised way, multi-hour runtimes make their integration within likelihood-based sampling frameworks inf...
-
----
-
-## 论文 52
-- [ ] **发布**
-- **标题**: AlphaClifford: Efficient Clifford Synthesis and Transpilation with Model-based RL
-- **作者**: Daniele Lizzio Bosco (单位未提供), Jacopo Cossio (单位未提供), Carla Piazza (单位未提供), Giuseppe Serra (单位未提供)
-- **发表日期**: 2026-08-19
-- **所属领域**: 硬件故障 (`quant-ph`)
-- **arXiv链接**: [2608.18946v1](https://arxiv.org/pdf/2608.18946v1)
-- **摘要预览**: Clifford circuits play a foundational role in quantum computing, particularly due to their importance in quantum error correction and fault-tolerant logical synthesis. While these circuits can be efficiently simulated and represented as symplectic matrices, standard synthesis methods-such as the Aaronson-Gottesman algorithm-often yield sub-optimal circuits with excessively high gate counts. In thi...
-
----
-
-## 论文 53
-- [ ] **发布**
-- **标题**: Real Classical Shadows with Noise
-- **作者**: Atharva Hingane (单位未提供), Dax Enshan Koh (单位未提供)
-- **发表日期**: 2026-08-19
-- **所属领域**: 硬件故障 (`quant-ph`)
-- **arXiv链接**: [2608.18935v1](https://arxiv.org/pdf/2608.18935v1)
-- **摘要预览**: The real classical shadows protocol of West et al. replaces the unitary (Clifford) ensemble of the Huang--Kueng--Preskill scheme by the orthogonal (real Clifford) ensemble, and for symmetric observables achieves strictly smaller estimator variances: a factor approaching two for global evolution and an exponential factor $(3/2)^k$ for $k$-local real Pauli observables. Real hardware, however, never ...
-
----
-
-## 论文 54
-- [ ] **发布**
-- **标题**: Effects of manufacturing tolerances on the performance of metamaterial microwave anti-reflection coatings
-- **作者**: Rustam Balafendiev (单位未提供), Miranda Eiben (单位未提供), Jon E. Gudmundsson (单位未提供)
-- **发表日期**: 2026-08-19
-- **所属领域**: 容错计算 (`astro-ph.IM`)
-- **arXiv链接**: [2608.19176v1](https://arxiv.org/pdf/2608.19176v1)
-- **摘要预览**: Metamaterial anti-reflection coatings (ARC) are used in a variety of applications, including: lenses, filters, and absorbers. Typically, the design of a given ARC is done within an infinite medium approximation, which presupposes that every unit cell on the interface is identical. However, in realistic applications, the geometry of a given ARC usually has some degree of variability, be it due to t...
-
----
-
-## 论文 55
-- [ ] **发布**
-- **标题**: Multi-Class Electrical and Mechanical Fault Classification Using Random Convolutional Kernels
-- **作者**: Mouhamadou Mansour Lo (单位未提供), Mouad Talbaoui (单位未提供), Gildas Morvan (单位未提供), Mathieu Rossi (单位未提供), Fabrice Morganti (单位未提供) 等（共6人）
-- **发表日期**: 2026-08-19
-- **所属领域**: 容错计算 (`cs.LG`)
-- **arXiv链接**: [2608.18716v1](https://arxiv.org/pdf/2608.18716v1)
-- **摘要预览**: Diagnosing faults in rotating machinery is essential for ensuring the reliability of industrial processes. Random convolutional kernel-based Time Series Classification (TSC) methods, such as ROCKET and its variants, provide an attractive trade-off between predictive performance and computational efficiency. In this work, we evaluate SelF-Rocket for the multi-class diagnosis of both mechanical and ...
-
----
-
-## 论文 56
-- [ ] **发布**
-- **标题**: SoftVTBench: A Deformation-Aware Visuo-Tactile Dataset and Benchmark for Deformable-Object Manipulation
-- **作者**: Bowen Jing (单位未提供), Mingxin Wang (单位未提供), Ruiyang Hao (单位未提供), Chenchen Ge (单位未提供), Hanwen Shen (单位未提供) 等（共18人）
-- **发表日期**: 2026-08-19
-- **所属领域**: 容错计算 (`cs.RO`)
-- **arXiv链接**: [2608.18701v1](https://arxiv.org/pdf/2608.18701v1)
-- **摘要预览**: Physical interaction quality is central to deformable-object manipulation, yet most benchmarks evaluate task success alone. A policy may complete the task while allowing slip or causing excessive compression. A primary bottleneck is the absence of visuo-tactile datasets that pair policy-visible contact observations with independent physical ground truth over complete tasks. We introduce SoftVTBenc...
-
----
-
-## 论文 57
-- [ ] **发布**
-- **标题**: Direct fidelity estimation through joint fiducial grouping
-- **作者**: Júlia Barberà-Rodríguez (单位未提供), Arthur Strauss (单位未提供)
-- **发表日期**: 2026-08-19
-- **所属领域**: 容错计算 (`quant-ph`)
-- **arXiv链接**: [2608.18548v1](https://arxiv.org/pdf/2608.18548v1)
-- **摘要预览**: Fault-tolerant quantum computation hinges on the requirement for low physical error rates. Reaching below threshold regime requires the accounting of circuit dependent noise, that is inherent to the execution context in which a quantum gate is usually embedded. Direct fidelity estimation is a technique that offers natural context preservation as it solely requires the insertion of local Pauli prep...
-
----
-
-## 论文 58
-- [ ] **发布**
-- **标题**: Good Stabilizer Codes from Shallow Clifford Circuits with Random Matchings
-- **作者**: Emile Anand (单位未提供), Elia Gorokhovsky (单位未提供), Jennifer Hritz (单位未提供), Jingtong Sun (单位未提供)
-- **发表日期**: 2026-08-19
-- **所属领域**: 容错计算 (`quant-ph`)
-- **arXiv链接**: [2608.18536v1](https://arxiv.org/pdf/2608.18536v1)
-- **摘要预览**: Encoding quantum information with low circuit overhead is a fundamental challenge in fault-tolerant quantum computation. Random circuits provide a natural mechanism for rapidly spreading logical information through simple gates applied in parallel. Brown and Fawzi showed that random Clifford circuits on two-qubit Clifford gates provide such encoders that achieve the quantum Gilbert-Varshamov rate-...
-
----
-
-## 论文 59
-- [ ] **发布**
-- **标题**: Integer Linear Programming Decoder for Abelian and Non-Abelian Topological Codes
-- **作者**: Dian Jing (单位未提供), Aubrey Zhang (单位未提供), Liang Jiang (单位未提供), Ruben Verresen (单位未提供)
-- **发表日期**: 2026-08-19
-- **所属领域**: 容错计算 (`quant-ph`)
-- **arXiv链接**: [2608.18512v1](https://arxiv.org/pdf/2608.18512v1)
-- **摘要预览**: Topological orders (TOs) are widely used as quantum error-correcting codes, with anyon excitations serving as error syndromes. For certain Abelian TOs, decoding can be performed by independently matching particle-antiparticle pairs of each species. However, matching-based decoders cannot handle more general fusion rules in either Abelian or non-Abelian TOs, nor account for noise that correlates di...
-
----
-
-## 论文 60
-- [ ] **发布**
-- **标题**: Asymptotic Entanglement Hiding under Stabilizer Restrictions
-- **作者**: Jicun Li (单位未提供), Wei Xie (单位未提供), Jun Wu (单位未提供), Honglin Chen (单位未提供), Xiang-Yang Li (单位未提供)
-- **发表日期**: 2026-08-19
-- **所属领域**: 容错计算 (`quant-ph`)
-- **arXiv链接**: [2608.18440v1](https://arxiv.org/pdf/2608.18440v1)
-- **摘要预览**: Entanglement is central to quantum information processing, while stabilizer operations underpin fault-tolerant quantum computation. We ask how much entanglement remains visible or distillable under stabilizer restrictions. We quantify stabilizer-visible entanglement by restricting the measured relative entropy of entanglement to stabilizer measurements, thereby obtaining converse bounds on entangl...
-
----
-
-## 论文 61
-- [ ] **发布**
-- **标题**: A seamless dose-optimization design for monotherapy and combination therapy
-- **作者**: Kentaro Takeda (单位未提供), Masahiro Kojima (单位未提供)
-- **发表日期**: 2026-08-19
-- **所属领域**: 容错计算 (`stat.ME`)
-- **arXiv链接**: [2608.18435v1](https://arxiv.org/pdf/2608.18435v1)
-- **摘要预览**: The emergence of molecular-targeted agents and immune-oncology therapies has fundamentally transformed oncology drug development, necessitating evolution beyond traditional dose-finding approaches designed for cytotoxic agents. While conventional agents exhibit predictable monotonic dose-response relationships, novel anticancer agents often demonstrate plateau-effect patterns where higher doses ma...
-
----
-
-## 论文 62
-- [ ] **发布**
-- **标题**: Low-Power, Neuromorphic, Acoustic Anomaly Detection for Persistent Machine Monitoring
-- **作者**: Steven C. Nesbit (Information Sciences, CAI-3, Los Alamos National Laboratory, Los Alamos, USA), Victor M. Vergara (AeroVironment Inc., Albuquerque, USA), Michael A. Felix (University of New Mexico COSMIAC Research Center, Albuquerque, USA), Evan T. Kain (Air Force Research Laboratory, Kirtland AFB, USA), Luis R. García Carrillo (Air Force Research Laboratory, Kirtland AFB, USA) 等（共7人）
-- **发表日期**: 2026-08-18
-- **所属领域**: 容错计算 (`cs.NE`)
-- **arXiv链接**: [2608.18341v1](https://arxiv.org/pdf/2608.18341v1)
-- **摘要预览**: Persistent acoustic monitoring can detect machine faults without physical contact, but always-on inference is constrained by power, latency, and deployment complexity. We demonstrate autoencoder-based acoustic anomaly detection on an Intel Loihi 2 neuromorphic processor under clean and noisy conditions. Log-mel features are computed off chip; normalization, autoencoder inference, L1 reconstruction...
-
----
-
-## 论文 63
-- [ ] **发布**
-- **标题**: A Benchmark Graph Dataset for Transient Stability Assessment of the IEEE 9-Bus System: 20,000 Scenarios with Full Generator Trajectories
-- **作者**: Hussein Suprême (单位未提供), Martin de Montigny (单位未提供), Arnaud Zinflou (单位未提供)
-- **发表日期**: 2026-08-18
-- **所属领域**: 容错计算 (`eess.SY`)
-- **arXiv链接**: [2608.18318v1](https://arxiv.org/pdf/2608.18318v1)
-- **摘要预览**: Transient stability assessment determines whether a power system retains synchronism after a large disturbance. Machine-learning surrogates can accelerate it, but progress is limited by the lack of open datasets that combine dynamic ground truth, network graph structure, and machine parameters. We release a benchmark of 20,000 three-phase-to-ground fault scenarios on the IEEE 9-bus system. Each sc...
-
----
-
-## 论文 64
-- [ ] **发布**
-- **标题**: Minimizing Commit Rules for DAG-based Atomic Broadcast
-- **作者**: Petr Kuznetsov (单位未提供), Maxence Perion (单位未提供), Sara Tucci-Piergiovanni (单位未提供)
-- **发表日期**: 2026-08-18
-- **所属领域**: 容错计算 (`cs.DC`)
-- **arXiv链接**: [2608.18029v1](https://arxiv.org/pdf/2608.18029v1)
-- **摘要预览**: A popular class of Byzantine fault-tolerant atomic broadcast protocols rely on directed acyclic graphs (DAGs) that represent causal relations between broadcast messages. Each process applies a protocol-specific \emph{commit rule} on its local DAG to determine which vertices can be delivered in a total order. Intuitively, commit rules that impose fewer conditions on the DAG to order its vertices im...
-
----
-
-## 论文 65
-- [ ] **发布**
-- **标题**: Multivalued Consensus: General Adversaries Require More Communication
-- **作者**: Mose Mizrahi (单位未提供), Roger Wattenhofer (单位未提供)
-- **发表日期**: 2026-08-18
-- **所属领域**: 容错计算 (`cs.DC`)
-- **arXiv链接**: [2608.17998v1](https://arxiv.org/pdf/2608.17998v1)
-- **摘要预览**: We study $n$-party fault-tolerant consensus against general (non-threshold) adversaries. We describe an infinite family $Z_\mathsf{proj}^{n,d}$ of $Q^d$-satisfying $n$-party adversary structures based on finite projective geometry which cause error-free $R$-round protocols for interactive consistency on $L$-bit inputs to require $Ω(Ln^{2+1/d})$ bits of expected communication. Likewise, $Z_\mathsf{...
-
----
-
-## 论文 66
-- [ ] **发布**
-- **标题**: An Omitted Mode Is a Rare Rule: The Sampling-Verification Danger Law in Continuous Code World Models
-- **作者**: Javier Aguilar Martín (单位未提供)
-- **发表日期**: 2026-08-18
-- **所属领域**: 容错计算 (`cs.LG`)
-- **arXiv链接**: [2608.17956v1](https://arxiv.org/pdf/2608.17956v1)
-- **摘要预览**: In the Code World Model paradigm an LLM synthesizes an executable world model that a classical planner searches, and the model is accepted when it reproduces sampled transitions. We ask what that acceptance certifies in continuous control. We define the pipeline's danger as an expected risk and isolate its exact factor: the probability that N i.i.d. gate rollouts all miss a critical event of proba...
-
----
-
-## 论文 67
-- [ ] **发布**
-- **标题**: Computationally Efficient Optimization of Per-Qubit Clifford Deformation for Non-uniform Biased Noise
-- **作者**: Won Joon Yun (单位未提供), Andrew Nemec (单位未提供), Jonathan M. Baker (单位未提供)
-- **发表日期**: 2026-08-18
-- **所属领域**: 容错计算 (`quant-ph`)
-- **arXiv链接**: [2608.17870v1](https://arxiv.org/pdf/2608.17870v1)
-- **摘要预览**: In fault-tolerant quantum computing systems with biased noise, Clifford deformation can substantially reduce the logical error rate (LER) without additional physical hardware overhead, such as extra qubits, syndrome extraction rounds, or code distance. Although Google Willow calibration data shows that $43\%$ of qubits exhibit strong $X/Z$ bias, existing calibration-aware deformation techniques re...
+- **arXiv链接**: [2605.25688v1](https://arxiv.org/pdf/2605.25688v1)
+- **摘要预览**: Quantum wireless sensing using Rydberg atomic receivers enables high-sensitivity signal acquisition direction-of-arrival (DoA) estimation. However, it suffers from a fundamental limitation, where only the magnitude of the received signal is observable. The recently proposed Quantum-MUSIC algorithm addresses this problem by recovering phase information through alternating minimization and subsequently applying the MUSIC algorithm for DoA estimation. However, the existing approach relies on an $\ell_2$-norm phase retrieval step, making it highly sensitive to outlier measurements produced by hard...
 
 ---
