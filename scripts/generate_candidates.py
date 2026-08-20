@@ -81,7 +81,12 @@ def get_search_config():
     
     print(f"   [DEBUG] KEYWORD_PRESET='{preset}'")
     print(f"   [DEBUG] CUSTOM_QUERY='{custom}'")
-    
+
+    if custom and custom in KEYWORD_PRESETS:
+        print(f"   [WARN] 检测到自定义框里填的是预设名 '{custom}'，自动使用对应预设")
+        print(f"   [DEBUG] 使用预设: {custom}")
+        return KEYWORD_PRESETS[custom]
+        
     if custom:
         query = f'ti:"{custom}" OR abs:"{custom}"'
         print(f"   [DEBUG] 使用自定义查询（自动补全）: {query}")
