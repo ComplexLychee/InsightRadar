@@ -1,0 +1,28 @@
+name: Publish Selected
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install openai jinja2
+      - name: Publish selected papers
+        env:
+          OPENCODE_API_KEY: ${{ secrets.OPENCODE_API_KEY }}
+          SITE_URL: ${{ vars.SITE_URL || 'https://complexlychee.github.io/InsightRadar' }}
+        run: python scripts/publish_selected.py
+      - name: Commit post
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add _posts/
+          git diff --cached --quiet || (git commit -m "📰 Publish selected papers $(date +%Y-%m-%d)" && git push)
