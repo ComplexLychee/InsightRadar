@@ -4,7 +4,6 @@ import time
 import requests
 import xml.etree.ElementTree as ET
 from datetime import datetime, timedelta
-from openai import OpenAI
 
 # ==================== 配置 ====================
 KEYWORD_PRESETS = {
@@ -102,23 +101,41 @@ def is_relevant_paper(title, summary, keywords):
             return True, kw
     return False, None
 
-def translate_summary(text, client):
-    """调用 LLM 将摘要翻译成中文"""
+import requests
+import json
+
+def translate_summary(text, api_key):
+    """直接用 requests 调用 OpenCode API，无需 openai 包"""
     if not text or not text.strip():
         return "（无摘要）"
     
     text = text[:500].strip()
     
-    prompt = f"将以下学术论文摘要翻译成简洁流畅的中文（保留专业术语英文原文），只输出翻译结果，不要解释：\n\n{text}"
+    headers = {
+        "Authorization": f"Bearer {api_key}",
+        "Content-Type": "application/json"
+    }
+    
+    payload = {
+        "model": "deepseek-v4-flash",
+        "messages": [{
+            "role": "user",
+            "content": f"将以下学术论文摘要翻译成简洁流畅的中文（保留专业术语英文原文），只输出翻译结果，不要解释：\n\n{text}"
+        }],
+        "temperature": 0.3,
+        "max_tokens": 400
+    }
     
     try:
-        resp = client.chat.completions.create(
-            model="deepseek-v4-flash",
-            messages=[{"role": "user", "content": prompt}],
-            temperature=0.3,
-            max_tokens=400,
+        resp = requests.post(
+            "https://opencode.ai/zen/v1/chat/completions",
+            headers=headers,
+            json=payload,
+            timeout=30
         )
-        return resp.choices[0].message.content.strip()
+        resp.raise_for_status()
+        data = resp.json()
+        return data["choices"][0]["message"]["content"].strip()
     except Exception as e:
         print(f"   ⚠️ 翻译失败: {e}")
         return text[:200] + "..."  # 失败时返回原文截断
@@ -318,13 +335,12 @@ def search_papers():
     # ========== 新增：翻译摘要 ==========
     if all_papers:
         print(f"\n🌐 开始翻译 {len(all_papers)} 篇论文摘要...")
-        client = OpenAI(
-            api_key=os.getenv("OPENCODE_API_KEY"),
-            base_url="https://opencode.ai/zen/v1",
-        )
+        
+        api_key = os.getenv("OPENCODE_API_KEY")
         for i, p in enumerate(all_papers, 1):
             print(f"   📝 翻译 {i}/{len(all_papers)}: {p['title'][:40]}...")
-            p["summary_zh"] = translate_summary(p["summary"], client)
+            p["summary_zh"] = translate_summary(p["summary"], api_key)
+            
         print("✅ 翻译完成")
     # ====================================
     
