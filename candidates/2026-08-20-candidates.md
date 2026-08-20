@@ -13,7 +13,7 @@
 ---
 
 ## 论文 1
-- [ ] **发布**
+- [x] **发布**
 - **标题**: SPADE: Self-Play in Adaptive Synthetic Executable Environments
 - **作者**: Bo Liu (单位未提供), Simon Yu (单位未提供), Yiding Jiang (单位未提供), Ao Qu (单位未提供), Andrew Zhao (单位未提供) 等（共18人）
 - **发表日期**: 2026-08-19
@@ -24,7 +24,7 @@
 ---
 
 ## 论文 2
-- [ ] **发布**
+- [x] **发布**
 - **标题**: Beyond the Transcript: Detecting Covert Co ordination in Latent Multi-Agent Communication
 - **作者**: Ramneet Kaur (单位未提供), Pradyumna Chari (单位未提供), Ramesh Raskar (单位未提供), Jugad Singh (单位未提供), Sumit Kumar Jha (单位未提供) 等（共6人）
 - **发表日期**: 2026-08-19
@@ -35,7 +35,7 @@
 ---
 
 ## 论文 3
-- [ ] **发布**
+- [x] **发布**
 - **标题**: Autonomous Cyber Defense in Connected Vehicles: A Multi-Agent Approach to V2X Security
 - **作者**: Krishna Teja Medam (单位未提供)
 - **发表日期**: 2026-08-19
