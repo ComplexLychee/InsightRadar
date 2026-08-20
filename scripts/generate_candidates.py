@@ -1,35 +1,33 @@
-import arxiv
 import os
 import re
 import time
+import requests
+import xml.etree.ElementTree as ET
 from datetime import datetime, timedelta
 
-# ==================== 关键词预设 ====================
+# ==================== 配置 ====================
 KEYWORD_PRESETS = {
     "default": [
-        {"query": 'cat:cs.AI AND (llm OR "large language model" OR transformer)', "name": "大模型"},
-        {"query": 'cat:cs.CV AND (multimodal OR "vision language model" OR VLM)', "name": "多模态"},
-        {"query": 'cat:cs.LG AND ("reinforcement learning" OR RLHF OR alignment)', "name": "强化学习"},
+        {"query": "all:llm OR all:transformer", "name": "大模型"},
+        {"query": "all:multimodal OR all:VLM", "name": "多模态"},
+        {"query": "all:reinforcement learning", "name": "强化学习"},
     ],
     "llm_only": [
-        {"query": 'cat:cs.AI AND (llm OR "large language model" OR transformer OR GPT OR reasoning)', "name": "大模型"},
+        {"query": "all:large language model OR all:GPT", "name": "大模型"},
     ],
     "vision_only": [
-        {"query": 'cat:cs.CV AND (multimodal OR "vision language model" OR VLM OR diffusion OR "image generation")', "name": "多模态与视觉"},
+        {"query": "all:vision language model OR all:diffusion", "name": "多模态与视觉"},
     ],
     "rl_only": [
-        {"query": 'cat:cs.LG AND ("reinforcement learning" OR RLHF OR alignment OR agent OR policy)', "name": "强化学习与智能体"},
+        {"query": "all:reinforcement learning OR all:RLHF", "name": "强化学习与智能体"},
     ],
-    # 核心修复：去掉 cat: 前缀，改用全站搜索
-    # "sdc_reliability": [
-    #     {"query": "silent data corruption", "name": "SDC精确短语"},
-    #     {"query": "soft error", "name": "软错误"},
-    #     {"query": "data corruption", "name": "数据损坏"},
-    #     {"query": "hardware fault", "name": "硬件故障"},
-    #     {"query": "fault tolerance", "name": "容错计算"},
-    # ],
+    # 核心修复：直接用 HTTP 请求，不再依赖 arxiv 库
     "sdc_reliability": [
-    {"query": "all:corruption", "name": "损坏（测试API）"},
+        {"query": "all:silent data corruption", "name": "SDC精确短语"},
+        {"query": "all:soft error", "name": "软错误"},
+        {"query": "all:data corruption", "name": "数据损坏"},
+        {"query": "all:hardware fault", "name": "硬件故障"},
+        {"query": "all:fault tolerance", "name": "容错计算"},
     ],
     "all_areas": [
         {"query": "cat:cs.AI", "name": "人工智能"},
@@ -43,6 +41,12 @@ KEYWORD_PRESETS = {
 ARXIV_DELAY = 5
 MAX_RETRIES = 3
 MAX_RESULTS_PER_QUERY = 20
+
+# arXiv API 命名空间
+NS = {
+    'atom': 'http://www.w3.org/2005/Atom',
+    'arxiv': 'http://arxiv.org/schemas/atom'
+}
 # ===========================================================
 
 def parse_time_range(time_str):
@@ -75,19 +79,110 @@ def get_search_config():
         return [{"query": custom, "name": "自定义检索"}]
     return KEYWORD_PRESETS.get(preset, KEYWORD_PRESETS["sdc_reliability"])
 
-def format_authors(result):
-    parts = []
-    for author in result.authors:
-        name = author.name
-        aff = getattr(author, 'affiliation', None)
-        if aff and aff.strip():
-            parts.append(f"{name} ({aff.strip()})")
-        else:
-            parts.append(f"{name} (单位未提供)")
-    authors_str = ", ".join(parts[:5])
-    if len(result.authors) > 5:
-        authors_str += f" 等（共{len(result.authors)}人）"
-    return authors_str
+def parse_arxiv_xml(xml_content):
+    """解析 arXiv API 返回的 Atom XML"""
+    root = ET.fromstring(xml_content)
+    entries = []
+    
+    for entry in root.findall('atom:entry', NS):
+        # entry_id
+        entry_id = entry.find('atom:id', NS)
+        entry_id = entry_id.text if entry_id is not None else ""
+        
+        # title
+        title_elem = entry.find('atom:title', NS)
+        title = title_elem.text.replace('\n', ' ').strip() if title_elem is not None else "无标题"
+        
+        # authors
+        authors_list = []
+        for author in entry.findall('atom:author', NS):
+            name_elem = author.find('atom:name', NS)
+            name = name_elem.text if name_elem is not None else "Unknown"
+            
+            aff_elem = author.find('arxiv:affiliation', NS)
+            aff = aff_elem.text if aff_elem is not None else None
+            
+            if aff:
+                authors_list.append(f"{name} ({aff})")
+            else:
+                authors_list.append(f"{name} (单位未提供)")
+        
+        authors_str = ", ".join(authors_list[:5])
+        if len(authors_list) > 5:
+            authors_str += f" 等（共{len(authors_list)}人）"
+        
+        # published
+        pub_elem = entry.find('atom:published', NS)
+        published = pub_elem.text if pub_elem is not None else ""
+        
+        # primary_category
+        cat_elem = entry.find('arxiv:primary_category', NS)
+        category = cat_elem.get('term', 'unknown') if cat_elem is not None else "unknown"
+        
+        # summary
+        sum_elem = entry.find('atom:summary', NS)
+        summary = sum_elem.text[:400].replace('\n', ' ') if sum_elem is not None else ""
+        
+        # pdf_url
+        pdf_url = ""
+        for link in entry.findall('atom:link', NS):
+            if link.get('title') == 'pdf':
+                pdf_url = link.get('href', '')
+                break
+        
+        entries.append({
+            "entry_id": entry_id,
+            "title": title,
+            "authors": authors_str,
+            "published_raw": published,
+            "category": category,
+            "summary": summary,
+            "pdf_url": pdf_url,
+        })
+    
+    return entries
+
+def search_arxiv_api(query, max_results=20):
+    """直接请求 arXiv API，绕过 arxiv Python 库"""
+    url = "http://export.arxiv.org/api/query"
+    params = {
+        "search_query": query,
+        "start": 0,
+        "max_results": max_results,
+        "sortBy": "submittedDate",
+        "sortOrder": "descending",
+    }
+    
+    for attempt in range(MAX_RETRIES):
+        try:
+            print(f"   [DEBUG] 请求URL: {url}?search_query={query.replace(' ', '+')}")
+            resp = requests.get(url, params=params, timeout=30)
+            print(f"   [DEBUG] HTTP状态: {resp.status_code}")
+            
+            if resp.status_code == 200:
+                entries = parse_arxiv_xml(resp.content)
+                print(f"   [DEBUG] 解析到 {len(entries)} 条结果")
+                return entries
+            elif resp.status_code in (429, 503):
+                if attempt < MAX_RETRIES - 1:
+                    wait_time = ARXIV_DELAY * (2 ** attempt)
+                    print(f"   ⚠️ 限流(HTTP {resp.status_code})，等待 {wait_time}s...")
+                    time.sleep(wait_time)
+                else:
+                    print(f"   ❌ 超过重试次数")
+                    return []
+            else:
+                print(f"   ❌ HTTP错误: {resp.status_code}")
+                return []
+                
+        except Exception as e:
+            print(f"   ❌ 请求异常: {e}")
+            if attempt < MAX_RETRIES - 1:
+                time.sleep(ARXIV_DELAY * (2 ** attempt))
+            else:
+                return []
+    
+    return []
 
 def search_papers():
     search_config = get_search_config()
@@ -113,84 +208,68 @@ def search_papers():
             "error": None,
         }
         
-        client = arxiv.Client(delay_seconds=ARXIV_DELAY, page_size=MAX_RESULTS_PER_QUERY)
-        search = arxiv.Search(
-            query=cfg["query"],
-            sort_by=arxiv.SortCriterion.SubmittedDate,
-            sort_order=arxiv.SortOrder.Descending,
-            max_results=MAX_RESULTS_PER_QUERY,
-        )
+        # 直接请求 API
+        entries = search_arxiv_api(cfg["query"], MAX_RESULTS_PER_QUERY)
         
-        for attempt in range(MAX_RETRIES):
+        if entries is None:
+            category_log["error"] = "API请求失败"
+            log_records.append(category_log)
+            continue
+        
+        count_kept = 0
+        for e in entries:
+            entry_id = e["entry_id"]
+            
+            # 解析发表日期
             try:
-                count_kept = 0
-                for result in client.results(search):
-                    entry_id = result.entry_id
-                    pub_date = result.published.date()
-                    title = result.title.replace("\n", " ").strip()
-                    
-                    duplicate = entry_id in seen_ids
-                    if not duplicate:
-                        seen_ids.add(entry_id)
-                    
-                    in_range = start.date() <= pub_date <= end.date()
-                    
-                    paper_info = {
-                        "entry_id": entry_id.split("/")[-1],
-                        "title": title,
-                        "published": pub_date.strftime("%Y-%m-%d"),
-                        "primary_category": result.primary_category,
-                        "is_duplicate": duplicate,
-                        "in_time_range": in_range,
-                    }
-                    
-                    category_log["raw_results"].append(paper_info)
-                    
-                    if duplicate:
-                        category_log["excluded"].append({
-                            **paper_info,
-                            "reason": "重复（已在其他分类中检索到）"
-                        })
-                    elif not in_range:
-                        category_log["excluded"].append({
-                            **paper_info,
-                            "reason": f"超出时间范围（目标: {start.date()}~{end.date()}）"
-                        })
-                    else:
-                        category_log["kept"].append(paper_info)
-                        all_papers.append({
-                            "raw": result,
-                            "entry_id": entry_id,
-                            "title": title,
-                            "authors": format_authors(result),
-                            "published": pub_date.strftime("%Y-%m-%d"),
-                            "category": result.primary_category,
-                            "area": cfg["name"],
-                            "summary": result.summary[:400].replace("\n", " "),
-                            "pdf_url": result.pdf_url,
-                        })
-                        count_kept += 1
-                
-                print(f"   ✅ 原始返回 {len(category_log['raw_results'])} 篇，保留 {count_kept} 篇")
-                break
-                
-            except arxiv.HTTPError as e:
-                status = getattr(e, 'status', None)
-                if status in (429, 503) and attempt < MAX_RETRIES - 1:
-                    wait_time = ARXIV_DELAY * (2 ** attempt)
-                    print(f"   ⚠️ 限流(HTTP {status})，等待 {wait_time}s 后重试...")
-                    time.sleep(wait_time)
-                else:
-                    err_msg = f"HTTP {status}" if status else str(e)
-                    category_log["error"] = err_msg
-                    print(f"   ❌ 失败: {err_msg}")
-                    break
-            except Exception as e:
-                category_log["error"] = str(e)
-                print(f"   ❌ 异常: {e}")
-                break
+                pub_date = datetime.fromisoformat(e["published_raw"].replace('Z', '+00:00')).date()
+            except:
+                pub_date = datetime.now().date()
+            
+            duplicate = entry_id in seen_ids
+            if not duplicate:
+                seen_ids.add(entry_id)
+            
+            in_range = start.date() <= pub_date <= end.date()
+            
+            paper_info = {
+                "entry_id": entry_id.split("/")[-1] if "/" in entry_id else entry_id,
+                "title": e["title"],
+                "published": pub_date.strftime("%Y-%m-%d"),
+                "primary_category": e["category"],
+                "is_duplicate": duplicate,
+                "in_time_range": in_range,
+            }
+            
+            category_log["raw_results"].append(paper_info)
+            
+            if duplicate:
+                category_log["excluded"].append({
+                    **paper_info,
+                    "reason": "重复（已在其他分类中检索到）"
+                })
+            elif not in_range:
+                category_log["excluded"].append({
+                    **paper_info,
+                    "reason": f"超出时间范围（目标: {start.date()}~{end.date()}）"
+                })
+            else:
+                category_log["kept"].append(paper_info)
+                all_papers.append({
+                    "entry_id": entry_id,
+                    "title": e["title"],
+                    "authors": e["authors"],
+                    "published": pub_date.strftime("%Y-%m-%d"),
+                    "category": e["category"],
+                    "area": cfg["name"],
+                    "summary": e["summary"],
+                    "pdf_url": e["pdf_url"],
+                })
+                count_kept += 1
         
+        print(f"   ✅ 原始返回 {len(entries)} 篇，保留 {count_kept} 篇")
         log_records.append(category_log)
+        time.sleep(ARXIV_DELAY)
     
     all_papers.sort(key=lambda x: x["published"], reverse=True)
     return all_papers, start, end, display, log_records
@@ -304,7 +383,7 @@ def generate_log_md(log_records, start, end, display, total_kept):
 
 def main():
     print("=" * 60)
-    print("🚀 Insight Radar · 候选池生成器（带日志）")
+    print("🚀 Insight Radar · 候选池生成器（HTTP直连版）")
     print("=" * 60)
     
     papers, start, end, display, log_records = search_papers()
