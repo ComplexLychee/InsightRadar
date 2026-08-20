@@ -75,9 +75,22 @@ def parse_time_range(time_str):
 def get_search_config():
     preset = os.getenv("KEYWORD_PRESET", "sdc_reliability")
     custom = os.getenv("CUSTOM_QUERY", "").strip()
+    
+    # 调试打印（帮助你排查）
+    print(f"   [DEBUG] KEYWORD_PRESET='{preset}'")
+    print(f"   [DEBUG] CUSTOM_QUERY='{custom}'")
+    
+    # 修复：预设优先。只有当 preset 无效且 custom 非空时，才用自定义查询
+    if preset in KEYWORD_PRESETS:
+        print(f"   [DEBUG] 使用预设: {preset}")
+        return KEYWORD_PRESETS[preset]
+    
     if custom:
+        print(f"   [DEBUG] 使用自定义查询: {custom}")
         return [{"query": custom, "name": "自定义检索"}]
-    return KEYWORD_PRESETS.get(preset, KEYWORD_PRESETS["sdc_reliability"])
+    
+    print(f"   [DEBUG] 预设无效且自定义为空，回退到 sdc_reliability")
+    return KEYWORD_PRESETS["sdc_reliability"]
 
 def parse_arxiv_xml(xml_content):
     """解析 arXiv API 返回的 Atom XML"""
