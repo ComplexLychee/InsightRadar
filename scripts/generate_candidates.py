@@ -4,7 +4,7 @@ import re
 import time
 from datetime import datetime, timedelta
 
-# ==================== 配置 ====================
+# ==================== 关键词预设 ====================
 KEYWORD_PRESETS = {
     "default": [
         {"query": 'cat:cs.AI AND (llm OR "large language model" OR transformer)', "name": "大模型"},
@@ -20,48 +20,14 @@ KEYWORD_PRESETS = {
     "rl_only": [
         {"query": 'cat:cs.LG AND ("reinforcement learning" OR RLHF OR alignment OR agent OR policy)', "name": "强化学习与智能体"},
     ],
+    # 核心修复：去掉 cat: 前缀，改用全站搜索
     "sdc_reliability": [
-    # 硬件架构（最核心）
-    {
-        "query": "cat:cs.AR AND (silent data corruption OR soft error OR SDC OR bit flip OR memory error OR transient fault OR hardware fault OR fault tolerance)",
-        "name": "硬件架构可靠性"
-    },
-    # 分布式与集群
-    {
-        "query": "cat:cs.DC AND (silent data corruption OR soft error OR SDC OR fault tolerance OR error resilience OR checkpoint OR reliability)",
-        "name": "分布式系统可靠性"
-    },
-    # 机器学习训练
-    {
-        "query": "cat:cs.LG AND (silent data corruption OR soft error OR SDC OR training fault OR data integrity OR hardware fault OR reliability)",
-        "name": "ML训练可靠性"
-    },
-    # 操作系统
-    {
-        "query": "cat:cs.OS AND (silent data corruption OR soft error OR SDC OR memory error OR fault tolerance OR reliability)",
-        "name": "操作系统可靠性"
-    },
-    # 编程语言/编译器
-    {
-        "query": "cat:cs.PL AND (silent data corruption OR soft error OR SDC OR fault tolerance OR error detection OR reliability)",
-        "name": "编译器与程序可靠性"
-    },
-    # 软件工程
-    {
-        "query": "cat:cs.SE AND (silent data corruption OR soft error OR SDC OR fault injection OR error detection OR reliability)",
-        "name": "软件工程可靠性"
-    },
-    # 安全与密码学
-    {
-        "query": "cat:cs.CR AND (silent data corruption OR soft error OR SDC OR data integrity OR corruption detection OR reliability)",
-        "name": "安全与数据完整性"
-    },
-    # 数据库
-    {
-        "query": "cat:cs.DB AND (silent data corruption OR soft error OR SDC OR data integrity OR fault tolerance OR reliability)",
-        "name": "数据库可靠性"
-    },
-],
+        {"query": "silent data corruption", "name": "SDC精确短语"},
+        {"query": "soft error", "name": "软错误"},
+        {"query": "data corruption", "name": "数据损坏"},
+        {"query": "hardware fault", "name": "硬件故障"},
+        {"query": "fault tolerance", "name": "容错计算"},
+    ],
     "all_areas": [
         {"query": "cat:cs.AI", "name": "人工智能"},
         {"query": "cat:cs.CV", "name": "计算机视觉"},
@@ -83,7 +49,7 @@ def parse_time_range(time_str):
         end = datetime.now()
         start = end - timedelta(days=7)
         return start, end, "过去1周"
-
+    
     num, unit_raw = int(match.group(1)), match.group(2)
     unit_map = {'d':'day','day':'day','days':'day','w':'week','week':'week','weeks':'week',
                 'm':'month','month':'month','months':'month','y':'year','year':'year','years':'year'}
@@ -92,7 +58,7 @@ def parse_time_range(time_str):
         end = datetime.now()
         start = end - timedelta(days=7)
         return start, end, "过去1周"
-
+    
     days = num if unit == 'day' else num*7 if unit == 'week' else num*30 if unit == 'month' else num*365
     end = datetime.now()
     start = end - timedelta(days=days)
@@ -123,17 +89,18 @@ def format_authors(result):
 def search_papers():
     search_config = get_search_config()
     start, end, display = parse_time_range(os.getenv("TIME_RANGE", "1 week"))
-
+    
     print(f"📅 检索区间: {start.date()} ~ {end.date()} ({display})")
+    print(f"🔧 关键词预设: {os.getenv('KEYWORD_PRESET', 'sdc_reliability')}")
     print("=" * 60)
-
+    
     seen_ids = set()
     all_papers = []
     log_records = []
-
+    
     for cfg in search_config:
-        print(f"🔍 {cfg['name']}: {cfg['query'][:80]}...")
-
+        print(f"🔍 {cfg['name']}: {cfg['query']}")
+        
         category_log = {
             "category_name": cfg["name"],
             "query": cfg["query"],
@@ -142,7 +109,7 @@ def search_papers():
             "excluded": [],
             "error": None,
         }
-
+        
         client = arxiv.Client(delay_seconds=ARXIV_DELAY, page_size=MAX_RESULTS_PER_QUERY)
         search = arxiv.Search(
             query=cfg["query"],
@@ -150,7 +117,7 @@ def search_papers():
             sort_order=arxiv.SortOrder.Descending,
             max_results=MAX_RESULTS_PER_QUERY,
         )
-
+        
         for attempt in range(MAX_RETRIES):
             try:
                 count_kept = 0
@@ -158,13 +125,13 @@ def search_papers():
                     entry_id = result.entry_id
                     pub_date = result.published.date()
                     title = result.title.replace("\n", " ").strip()
-
+                    
                     duplicate = entry_id in seen_ids
                     if not duplicate:
                         seen_ids.add(entry_id)
-
+                    
                     in_range = start.date() <= pub_date <= end.date()
-
+                    
                     paper_info = {
                         "entry_id": entry_id.split("/")[-1],
                         "title": title,
@@ -173,9 +140,9 @@ def search_papers():
                         "is_duplicate": duplicate,
                         "in_time_range": in_range,
                     }
-
+                    
                     category_log["raw_results"].append(paper_info)
-
+                    
                     if duplicate:
                         category_log["excluded"].append({
                             **paper_info,
@@ -200,10 +167,10 @@ def search_papers():
                             "pdf_url": result.pdf_url,
                         })
                         count_kept += 1
-
-                print(f"   ✅ 命中 {count_kept} 篇（原始返回 {len(category_log['raw_results'])} 篇）")
+                
+                print(f"   ✅ 原始返回 {len(category_log['raw_results'])} 篇，保留 {count_kept} 篇")
                 break
-
+                
             except arxiv.HTTPError as e:
                 status = getattr(e, 'status', None)
                 if status in (429, 503) and attempt < MAX_RETRIES - 1:
@@ -219,9 +186,9 @@ def search_papers():
                 category_log["error"] = str(e)
                 print(f"   ❌ 异常: {e}")
                 break
-
+        
         log_records.append(category_log)
-
+    
     all_papers.sort(key=lambda x: x["published"], reverse=True)
     return all_papers, start, end, display, log_records
 
@@ -243,7 +210,7 @@ def generate_candidates_md(papers, start, end, display):
         f"---",
         f"",
     ]
-
+    
     for i, p in enumerate(papers, 1):
         lines.extend([
             f"## 论文 {i}",
@@ -258,7 +225,7 @@ def generate_candidates_md(papers, start, end, display):
             f"---",
             f"",
         ])
-
+    
     return "\n".join(lines)
 
 def generate_log_md(log_records, start, end, display, total_kept):
@@ -274,7 +241,7 @@ def generate_log_md(log_records, start, end, display, total_kept):
         f"---",
         f"",
     ]
-
+    
     for rec in log_records:
         lines.extend([
             f"## 📂 分类: {rec['category_name']}",
@@ -285,35 +252,35 @@ def generate_log_md(log_records, start, end, display, total_kept):
             f"```",
             f"",
         ])
-
+        
         if rec.get("error"):
             lines.extend([
                 f"⚠️ **错误**: {rec['error']}",
                 f"",
             ])
             continue
-
+        
         lines.extend([
             f"**原始返回**: {len(rec['raw_results'])} 篇",
             f"**保留**: {len(rec['kept'])} 篇 | **排除**: {len(rec['excluded'])} 篇",
             f"",
         ])
-
+        
         if rec['kept']:
             lines.append("### ✅ 保留的论文（在时间范围内）")
             for p in rec['kept']:
                 lines.append(f"- `{p['published']}` [{p['entry_id']}] {p['title']}")
             lines.append("")
-
+        
         if rec['excluded']:
             lines.append("### ❌ 被排除的论文")
             for p in rec['excluded']:
                 lines.append(f"- `{p['published']}` [{p['entry_id']}] {p['title']} — **原因**: {p['reason']}")
             lines.append("")
-
+        
         lines.append("---")
         lines.append("")
-
+    
     total_raw = sum(len(r['raw_results']) for r in log_records)
     lines.extend([
         f"## 📊 汇总统计",
@@ -329,31 +296,31 @@ def generate_log_md(log_records, start, end, display, total_kept):
         f"",
         f"*此日志用于排查检索匹配度问题，每次生成候选池时自动更新。*",
     ])
-
+    
     return "\n".join(lines)
 
 def main():
     print("=" * 60)
     print("🚀 Insight Radar · 候选池生成器（带日志）")
     print("=" * 60)
-
+    
     papers, start, end, display, log_records = search_papers()
     print(f"\n📚 总计候选: {len(papers)} 篇")
-
+    
     os.makedirs("candidates", exist_ok=True)
     md_content = generate_candidates_md(papers, start, end, display)
     candidate_file = f"candidates/{end.strftime('%Y-%m-%d')}-candidates.md"
     with open(candidate_file, "w", encoding="utf-8") as f:
         f.write(md_content)
     print(f"✅ 候选清单: {candidate_file}")
-
+    
     os.makedirs("logs", exist_ok=True)
     log_content = generate_log_md(log_records, start, end, display, len(papers))
     log_file = f"logs/{end.strftime('%Y-%m-%d-%H%M')}-search-log.md"
     with open(log_file, "w", encoding="utf-8") as f:
         f.write(log_content)
     print(f"✅ 排查日志: {log_file}")
-
+    
     print("\n👉 请打开 candidates/ 目录下的文件，勾选想发布的论文")
     print("👉 同时查看 logs/ 目录下的日志，排查匹配度问题")
 
