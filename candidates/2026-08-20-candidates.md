@@ -2,7 +2,7 @@
 
 > **检索区间**: 2026-05-22 ~ 2026-08-20
 > **候选总数**: 43 篇
-> **生成时间**: 2026-08-20 08:55
+> **生成时间**: 2026-08-20 09:13
 
 ## ✅ 使用说明
 1. 浏览下方论文列表（摘要已翻译为中文）
@@ -19,7 +19,7 @@
 - **发表日期**: 2026-08-17
 - **所属领域**: 容错计算 (`quant-ph`)
 - **arXiv链接**: [2608.16857v1](https://arxiv.org/pdf/2608.16857v1)
-- **摘要预览（中文）**: We prove a fault-tolerance theorem for quantum computation against adversarial noise. For every quantum circuit on $\bar{N}$ logical qudits of depth $\bar{T}$, we construct a fault-tolerant circuit on......
+- **摘要预览（中文）**: 我们证明了针对对抗性噪声的量子计算容错定理。对于任意深度为$\bar{T}$、包含$\bar{N}$个逻辑量子比特（logical qudits）的量子电路（quantum circuit），我们构造了一个深度为$\bar{T}\cdot\bar{N}^{o(1)}$、包含$N=\text{poly}(\bar{N})$个物理量子比特（physical qudits）的容错电路，该电路能够抵御在每个时间步任意选择并破坏接近线性数量$N^{1-o(1)}$个物理量子比特的对手。这一鲁棒性显著优于先前的容错结果。...
 
 ---
 
@@ -30,7 +30,7 @@
 - **发表日期**: 2026-08-13
 - **所属领域**: 容错计算 (`quant-ph`)
 - **arXiv链接**: [2608.13376v1](https://arxiv.org/pdf/2608.13376v1)
-- **摘要预览（中文）**: Magic plays a dual role in quantum computation: it promotes stabilizer dynamics from efficient classical simulability to universality, but it presents a central challenge for fault tolerance, since no......
+- **摘要预览（中文）**: 魔法在量子计算中扮演着双重角色：它既将稳定子动力学从高效经典可模拟性提升至普适性，又对容错构成核心挑战，因为非稳定子操作更难抵御噪声。魔法态蒸馏解决了这一问题；然而，现有协议通常假设输入具有先验结构，如接近目标态或具有特定噪声模型。在此我们引入普适魔法态浓缩：一种...
 
 ---
 
@@ -41,7 +41,7 @@
 - **发表日期**: 2026-08-12
 - **所属领域**: 容错计算 (`quant-ph`)
 - **arXiv链接**: [2608.11563v1](https://arxiv.org/pdf/2608.11563v1)
-- **摘要预览（中文）**: Modular arithmetic is central to quantum algorithms for cryptographic problems, including Shor's algorithm and Grover-based cryptanalysis, with modular reduction contributing substantially to circuit ......
+- **摘要预览（中文）**: 模运算在面向密码学问题的量子算法中占据核心地位，包括Shor算法和基于Grover的密码分析，其中模约减对电路成本贡献显著。伪梅森模数$q=2^n-c$允许经典Crandall约减以折叠和常数运算替代除法，为更高效的量子模约减提供了结构性机遇，优于Barrett约减。我们将这一优势转化为可逆量子设定，具体方法为——...
 
 ---
 
@@ -52,7 +52,7 @@
 - **发表日期**: 2026-08-11
 - **所属领域**: SDC精确短语 (`cs.AR`)
 - **arXiv链接**: [2608.11155v1](https://arxiv.org/pdf/2608.11155v1)
-- **摘要预览（中文）**: Homomorphic Encryption (HE) enables computation on encrypted data without decryption and is a key primitive for privacy-preserving computation in sensitive domains such as healthcare, finance, and gov......
+- **摘要预览（中文）**: 同态加密（HE）支持在不解密的情况下对加密数据进行计算，是医疗、金融和政府等敏感领域中隐私保护计算的关键原语。其安全性依赖于噪声注入，这引入了固有的错误敏感性，并引发了对HE系统容错性的担忧，因为硬件和软件引发的故障可能绕过传统检测机制，导致静默数据损坏。在本工作中，我们分析...
 
 ---
 
@@ -63,7 +63,7 @@
 - **发表日期**: 2026-08-11
 - **所属领域**: SDC精确短语 (`cs.DC`)
 - **arXiv链接**: [2608.11034v1](https://arxiv.org/pdf/2608.11034v1)
-- **摘要预览（中文）**: In LLM pre-training, synchronization propagates rank-local stalls, slowdowns, and numerical errors into job-wide symptoms, obscuring their origin. Existing diagnosis often relies on in-process monitor......
+- **摘要预览（中文）**: 在LLM预训练中，同步机制会将秩局部的停滞、减速和数值误差传播为整个作业范围的症状，从而掩盖其根源。现有诊断方法通常依赖进程内监控器，但这类监控器在训练器阻塞或终止后无法报告；或依赖事后日志，但日志仅保留同步后的症状；离线健康测试则丢失了触发故障的工作负载和运行条件。我们提出SCOUT，一个基于单一去中心化（decentralized）机制构建的统一运行时故障定位框架。...
 
 ---
 
@@ -74,7 +74,7 @@
 - **发表日期**: 2026-08-11
 - **所属领域**: 容错计算 (`eess.SP`)
 - **arXiv链接**: [2608.10361v1](https://arxiv.org/pdf/2608.10361v1)
-- **摘要预览（中文）**: DC-coupled analogue front ends (AFEs) for neural implants provide a low-area solution. However, removing the coupling capacitor eliminates the intrinsic barrier that protects cortical tissue: a single......
+- **摘要预览（中文）**: 用于神经植入物的直流耦合模拟前端（AFE）提供了低面积解决方案。然而，去除耦合电容后，保护皮层组织的固有屏障随之消失：单次故障事件（如低噪声放大器（LNA）输入晶体管的栅氧化层击穿）即可在电源轨与大脑之间形成直接直流通路。在刺激端，这一危害已被充分认识，并通过串联直流隔断电容实现单故障容限；而在记录端，...
 
 ---
 
@@ -85,7 +85,7 @@
 - **发表日期**: 2026-08-06
 - **所属领域**: 软错误 (`cs.AI`)
 - **arXiv链接**: [2608.06183v1](https://arxiv.org/pdf/2608.06183v1)
-- **摘要预览（中文）**: Microarchitecture design space exploration suffers from expansive search spaces and expensive PPA evaluation, leaving only a small simulation budget for design decision-making. Existing methods perfor......
+- **摘要预览（中文）**: 微架构设计空间探索面临搜索空间庞大和PPA评估成本高昂的问题，仅留下极小的仿真预算用于设计决策。现有方法进行盲目搜索，未考虑微架构间的依赖关系，也未能有效从迭代搜索中学习，导致评估资源浪费且帕累托收敛性较弱。本文提出MicroEvo，一种知识引导框架，将现成的大语言模型与蒙特卡洛树搜索相结合。...
 
 ---
 
@@ -96,7 +96,7 @@
 - **发表日期**: 2026-08-06
 - **所属领域**: 容错计算 (`quant-ph`)
 - **arXiv链接**: [2608.05821v1](https://arxiv.org/pdf/2608.05821v1)
-- **摘要预览（中文）**: Reaching fault tolerance means scaling qubit counts by orders of magnitude, a jump that conventional superconducting architectures cannot sustain without solving the so-called `wiring problem'. Global......
+- **摘要预览（中文）**: 实现容错意味着将量子比特数量提升数个数量级，而传统超导架构若不解决所谓的“布线问题”，无法支撑这一跃升。全局控制绕过了这一瓶颈，但在先前提出的全局架构上实现量子纠错（QEC）会带来极其高昂的开销，因为该全局设备中的计算量子比特与辅助量子比特需要分别执行纠错流程。...
 
 ---
 
@@ -107,7 +107,7 @@
 - **发表日期**: 2026-08-06
 - **所属领域**: 容错计算 (`quant-ph`)
 - **arXiv链接**: [2608.05686v1](https://arxiv.org/pdf/2608.05686v1)
-- **摘要预览（中文）**: Quantum error correction protects logical information only when every physical operation remains below the fault-tolerance threshold, a condition that must be maintained continuously rather than only ......
+- **摘要预览（中文）**: 量子纠错仅在每个物理操作都保持在容错阈值以下时才能保护逻辑信息，且这一条件必须持续维持，而非仅在初始校准时满足。然而在实际中，模拟控制参数因环境波动而不可避免地发生漂移。由于未来的容错量子计算预计将持续运行数天甚至数月，反复中断计算进行重新校准将从根本上变得不可行。...
 
 ---
 
@@ -118,7 +118,7 @@
 - **发表日期**: 2026-08-04
 - **所属领域**: 容错计算 (`cs.LG`)
 - **arXiv链接**: [2608.04173v1](https://arxiv.org/pdf/2608.04173v1)
-- **摘要预览（中文）**: Deep neural networks (DNNs) deployed on resource-constrained neuromorphic hardware face three concurrent challenges: the need for model compression through pruning, vulnerability to adversarial input ......
+- **摘要预览（中文）**: 部署在资源受限的神经形态硬件上的深度神经网络（DNNs）面临三个并发挑战：通过剪枝进行模型压缩的需求、对对抗性输入扰动的脆弱性，以及对硬件引起的权重故障（如卡零错误）的敏感性。尽管这些因素各自已被单独研究，但它们对模型可靠性的综合影响却鲜受关注。本文对剪枝、对抗性扰动与硬件故障如何共同影响DNN性能进行了实证研究。...
 
 ---
 
@@ -129,7 +129,7 @@
 - **发表日期**: 2026-08-03
 - **所属领域**: 容错计算 (`quant-ph`)
 - **arXiv链接**: [2608.02944v1](https://arxiv.org/pdf/2608.02944v1)
-- **摘要预览（中文）**: The recent success of error detecting codes points toward their potential application to fault-tolerant simulations of nature. In this work, we examine the utility of sparse error detection for simula......
+- **摘要预览（中文）**: 错误检测码近期取得的成功表明其有望应用于自然界的容错模拟。在本工作中，我们考察了稀疏错误检测在利用量子计算机模拟晶格规范理论中的实用性。具体而言，我们研究了嵌入Iceberg码族$[[N+2, N, 2]]$以及Hypercube码族$[[2^N, N, 2]]$中的晶格Schwinger模型的时间演化。轴向规范下的电子与正电子晶格被e（截断，原文未完整，但按原文翻译）...
 
 ---
 
@@ -140,7 +140,7 @@
 - **发表日期**: 2026-08-03
 - **所属领域**: 容错计算 (`quant-ph`)
 - **arXiv链接**: [2608.01887v2](https://arxiv.org/pdf/2608.01887v2)
-- **摘要预览（中文）**: We introduce Pangaea, a fault-tolerant quantum architecture that uses a quantum bus to mediate logical operations between remote patches of two-dimensional topological codes. The bus is an auxiliary g......
+- **摘要预览（中文）**: 我们提出Pangaea，一种容错量子架构，利用量子总线（quantum bus）在远程二维拓扑码补丁之间协调逻辑操作。该总线是一条辅助规范码条带，其测量重构联合逻辑算符，同时保持最近邻物理连接。通过支持原生异构拓扑码和多量子比特Pauli操作，量子总线可视为晶格手术的三维推广。...
 
 ---
 
@@ -151,7 +151,7 @@
 - **发表日期**: 2026-08-03
 - **所属领域**: 容错计算 (`cs.AR`)
 - **arXiv链接**: [2608.04035v1](https://arxiv.org/pdf/2608.04035v1)
-- **摘要预览（中文）**: The wide adoption of Vision Transformers (ViTs) in safety-critical applications raises reliability concerns related to hardware faults. Algorithm-Based Fault Tolerance (ABFT) methods have emerged as l......
+- **摘要预览（中文）**: 视觉Transformer（ViTs）在安全关键应用中的广泛采用引发了与硬件故障相关的可靠性担忧。基于算法的容错（ABFT）方法已成为针对深度神经网络（DNNs）的轻量级且对称的保护机制。然而，由于ViTs巨大的计算需求，这些方法对其尤为具有挑战性。本工作全面评估了ViTs的可靠性，强调其各层对称保护的必要性。此外，我们……...
 
 ---
 
@@ -162,7 +162,7 @@
 - **发表日期**: 2026-08-02
 - **所属领域**: 软错误 (`cs.AI`)
 - **arXiv链接**: [2608.01149v1](https://arxiv.org/pdf/2608.01149v1)
-- **摘要预览（中文）**: Lifelong LLM agents increasingly adapt through external learning states that store past interactions as retrievable memories or reusable skills, yet existing benchmarks rarely account for how the path......
+- **摘要预览（中文）**: 终身学习型LLM智能体日益通过外部学习状态来适应环境，这些状态将过往交互存储为可检索的记忆或可复用的技能，然而现有基准测试很少考虑经验积累的路径如何影响智能体的迁移与保留。在本工作中，我们建立了PATH-Bench，一个用于终身智能体路径依赖评估的基准。PATH-Bench通过多模型上下文学习估计有向任务关系，构建以探针为中心的序列，并利用对……...
 
 ---
 
@@ -173,7 +173,7 @@
 - **发表日期**: 2026-08-01
 - **所属领域**: 容错计算 (`quant-ph`)
 - **arXiv链接**: [2608.00830v1](https://arxiv.org/pdf/2608.00830v1)
-- **摘要预览（中文）**: Graph codes offer multiple physical representatives of logical observables, while Gottesman-Kitaev-Preskill (GKP) codes retain analog information about bosonic displacement noise. We develop a causal ......
+- **摘要预览（中文）**: 图码为逻辑可观测量提供多种物理表示，而Gottesman-Kitaev-Preskill（GKP）码保留关于玻色子位移噪声的模拟信息。我们发展了一个因果框架，在纯损耗后接量子限制放大的条件下，统一这些机制以实现基于测量的损耗容限。在该框架中，每次局部GKP恢复都会产生一个刷新后的逻辑块、一条连续综合征记录，以及一个关于推断出的Pauli类的置信度评分。...
 
 ---
 
@@ -184,7 +184,7 @@
 - **发表日期**: 2026-07-31
 - **所属领域**: 软错误 (`cs.CV`)
 - **arXiv链接**: [2607.28974v1](https://arxiv.org/pdf/2607.28974v1)
-- **摘要预览（中文）**: The rapid advancement of image generation models has made it increasingly difficult for people to distinguish AI-generated images from real ones. To prevent the potential risks associated with the mis......
+- **摘要预览（中文）**: 图像生成模型的快速发展使得人们越来越难以区分AI生成图像与真实图像。为防止伪造图像被滥用的潜在风险，AI生成图像检测已受到广泛关注。现有方法忽视了真实与虚假图像之间的固有差异，因此缺乏鲁棒性和泛化能力。在本工作中，我们创新性地利用位平面（bit-plan）来研究AI生成图像检测。...
 
 ---
 
@@ -195,7 +195,7 @@
 - **发表日期**: 2026-07-31
 - **所属领域**: 软错误 (`cs.CV`)
 - **arXiv链接**: [2607.28955v1](https://arxiv.org/pdf/2607.28955v1)
-- **摘要预览（中文）**: AI-generated videos are becoming increasingly realistic and difficult to distinguish from authentic ones, which facilitates malicious misuse and poses growing threats to cybersecurity and social gover......
+- **摘要预览（中文）**: AI生成的视频正变得越来越逼真，难以与真实视频区分，这为恶意滥用提供了便利，对网络安全和社会治理构成日益严重的威胁。因此，将AI生成的视频溯源至其特定的生成来源，对取证调查和法律监管至关重要。然而，现有的大多数视觉溯源方法主要聚焦于图像，且尤其依赖于图像生成模型，因而缺乏...
 
 ---
 
@@ -206,7 +206,7 @@
 - **发表日期**: 2026-07-29
 - **所属领域**: 容错计算 (`quant-ph`)
 - **arXiv链接**: [2607.27342v1](https://arxiv.org/pdf/2607.27342v1)
-- **摘要预览（中文）**: Quantum metrology promises a quadratic speedup over the standard quantum limit (SQL), but signal-aligned noise is expected to preclude this advantage in realistic settings. A potential route around kn......
+- **摘要预览（中文）**: 量子计量学有望在标准量子极限（SQL）上实现二次加速，但在现实环境中，与信号对齐的噪声预计会阻碍这一优势。绕过已知不可行结果的一条潜在途径是将传感器编码在量子码中，使物理信号作为逻辑门横向量子门作用。因此，理解横向非Clifford门的限制对量子计量学和容错量子计算都至关重要。在此，我们证明了此类限制。...
 
 ---
 
@@ -217,7 +217,7 @@
 - **发表日期**: 2026-07-29
 - **所属领域**: 容错计算 (`quant-ph`)
 - **arXiv链接**: [2607.27153v1](https://arxiv.org/pdf/2607.27153v1)
-- **摘要预览（中文）**: One of the central challenges in quantum error correction is determining the performance of a code in the low-error regimes needed to implement utility-scale computations. While performance at these e......
+- **摘要预览（中文）**: 量子纠错中的核心挑战之一，是确定码在实现效用级计算所需的低错误率机制下的性能。虽然在这些错误率下的性能无法直接通过蒙特卡洛模拟获得，但可以从更高逻辑错误率下的模拟结果进行外推，前提是逻辑错误率随距离增加或物理错误率降低而呈现可预测的缩放行为。然而，预期的缩放行为高度依赖于……...
 
 ---
 
@@ -228,7 +228,7 @@
 - **发表日期**: 2026-07-28
 - **所属领域**: 容错计算 (`cs.DC`)
 - **arXiv链接**: [2608.14635v2](https://arxiv.org/pdf/2608.14635v2)
-- **摘要预览（中文）**: Large language model (LLM) agents are increasingly trained with reinforcement learning in long-horizon, sandboxed environments. Unlike conventional RL, agentic RL couples GPU-intensive rollout engines......
+- **摘要预览（中文）**: 大语言模型（LLM）智能体越来越多地在长周期、沙盒化环境中通过强化学习进行训练。与传统强化学习不同，智能体强化学习将高GPU消耗的 rollout 引擎与有状态环境容器耦合，后者的动作可能产生可见的副作用，如文件编辑、命令执行和依赖安装。单条轨迹可能跨越多轮生成与环境交互，因此组件故障可能丢弃已完成的工作或暴露...
 
 ---
 
@@ -239,7 +239,7 @@
 - **发表日期**: 2026-07-23
 - **所属领域**: 硬件故障 (`quant-ph`)
 - **arXiv链接**: [2607.21663v1](https://arxiv.org/pdf/2607.21663v1)
-- **摘要预览（中文）**: Calibrating a quantum processor means estimating error parameters, and estimation theory usually assumes a parameter hard to estimate is faint: its signal is weak but present, so more repetitions or a......
+- **摘要预览（中文）**: 校准量子处理器意味着估计误差参数，而估计理论通常假设一个难以估计的参数是微弱的：其信号虽弱但存在，因此更多重复或更丰富的模型可以恢复它。这一假设对一种主要硬件故障并不成立。相干过旋转是一种微小的系统性门校准误差。通过设备返回的最廉价数据——一个固定基矢直方图——来测量时，它并非微弱而是缺失：在一阶近似下，它不改变分布。...
 
 ---
 
@@ -250,7 +250,7 @@
 - **发表日期**: 2026-07-21
 - **所属领域**: SDC精确短语 (`cs.AR`)
 - **arXiv链接**: [2607.18720v1](https://arxiv.org/pdf/2607.18720v1)
-- **摘要预览（中文）**: Fully homomorphic encryption (FHE) enables computation on encrypted data, but its long ciphertext dataflow and high-dimensional modular arithmetic make it vulnerable to silent data corruption caused b......
+- **摘要预览（中文）**: 全同态加密（FHE）支持对加密数据进行计算，但其较长的密文数据流和高维模运算使其容易受到瞬时硬件故障引发的静默数据损坏影响。现有防护方法要么针对专用加速器设计，要么在CPU上带来显著的执行、模运算和内存访问开销。本文提出了一种面向CPU上CKKS计算的高效容错方案，该方案通过检查输入输出——...
 
 ---
 
@@ -261,7 +261,7 @@
 - **发表日期**: 2026-07-17
 - **所属领域**: 硬件故障 (`cs.LG`)
 - **arXiv链接**: [2607.15753v1](https://arxiv.org/pdf/2607.15753v1)
-- **摘要预览（中文）**: Deep Neural Networks (DNNs) used in safety-critical applications are vulnerable to hardware and memory faults that corrupt network weights and degrade reliability. In this paper, we propose a Center o......
+- **摘要预览（中文）**: 用于安全关键应用的深度神经网络（DNNs）易受硬件和内存故障影响，这些故障会破坏网络权重并降低可靠性。本文提出一种基于重心（CoG）引导的权重修正方法，根据每层内权重的空间特征恢复故障权重。该方法利用距离感知修正规则检测并纠正权重故障，无需重新训练或修改网络架构。...
 
 ---
 
@@ -272,7 +272,7 @@
 - **发表日期**: 2026-07-11
 - **所属领域**: 软错误 (`physics.ins-det`)
 - **arXiv链接**: [2607.10458v2](https://arxiv.org/pdf/2607.10458v2)
-- **摘要预览（中文）**: ALFE2 is a front-end ASIC developed for the ATLAS Liquid Argon (LAr) Calorimeter upgrade during the High-Luminosity Large Hadron Collider (HL-LHC) phase. ALFE2 comprises four preamplifier/shaper chann......
+- **摘要预览（中文）**: ALFE2是为高亮度大型强子对撞机（HL-LHC）阶段ATLAS液氩（LAr）量能器升级而开发的前端ASIC。ALFE2包含四个前置放大器/整形器通道，每个通道提供两个不同的增益输出，以覆盖16位动态范围。已开发出一套机器人系统用于ALFE2的自动质量控制测试，截至2025年9月，80,000颗芯片中超过10%已完成评估。该评估使我们能够建立分级标准。...
 
 ---
 
@@ -283,7 +283,7 @@
 - **发表日期**: 2026-07-08
 - **所属领域**: 软错误 (`econ.EM`)
 - **arXiv链接**: [2607.11920v1](https://arxiv.org/pdf/2607.11920v1)
-- **摘要预览（中文）**: Evaluating decisions made under uncertainty is hard when labeled outcomes are scarce, costly, or confounded with luck. We treat subjective expected utility (SEU) maximization as a stated standard and ......
+- **摘要预览（中文）**: 在标注结果稀缺、成本高昂或与运气混杂的情况下，评估不确定性下的决策十分困难。我们将主观期望效用（SEU）最大化视为一种陈述性标准，并定义了一个分级度量——SEU敏感性——用以衡量主体对该标准的符合程度。其载体是一个softmax选择模型，其中包含一个作用于SEU价值备选项的敏感性参数$α$；本文的贡献在于为$α$以及信念与效用参数$(β, δ)$提供了一系列可识别性结果，并已通过验证。...
 
 ---
 
@@ -294,7 +294,7 @@
 - **发表日期**: 2026-07-07
 - **所属领域**: 软错误 (`cs.ET`)
 - **arXiv链接**: [2607.05789v1](https://arxiv.org/pdf/2607.05789v1)
-- **摘要预览（中文）**: In this work, 3D full-domain 3 nm gate-all-around field-effect transistor (GAA-FET) static random access memories (SRAMs) with various substrate isolation techniques are simulated using Technology Com......
+- **摘要预览（中文）**: 本研究采用技术计算机辅助设计（TCAD）模拟了采用不同衬底隔离技术的三维全域3纳米环栅场效应晶体管（GAA-FET）静态随机存取存储器（SRAM）。除了传统的底部介质隔离（BDI）——即隔离源/漏（S/D）与衬底（称为SDBDI）——以及穿通阻挡层（PTS）之外，本文还提出了一种新型沟道BDI（C-BDI），允许S/D与衬底连接。自热效应……...
 
 ---
 
@@ -305,7 +305,7 @@
 - **发表日期**: 2026-07-03
 - **所属领域**: 硬件故障 (`quant-ph`)
 - **arXiv链接**: [2607.03193v1](https://arxiv.org/pdf/2607.03193v1)
-- **摘要预览（中文）**: Calibrating a superconducting transmon chip is a sequential decision problem under noise, drift, and a finite budget: an expert must choose experiments, read ambiguous plots, judge fit quality, and re......
+- **摘要预览（中文）**: 校准超导transmon芯片是一个在噪声、漂移和有限预算条件下的序贯决策问题：专家必须选择实验、解读模糊的图表、判断拟合质量，并在芯片漂移时修正过时的认知。我们研究视觉语言智能体能否在不进行权重更新的情况下闭环这一过程，并使其自身适配于某一具体物理设备，这通过三个协同设计的组件实现。第一个是基于物理的transmon芯片仿真环境：校准观测量...
 
 ---
 
@@ -316,7 +316,7 @@
 - **发表日期**: 2026-07-02
 - **所属领域**: 软错误 (`cs.RO`)
 - **arXiv链接**: [2607.02501v3](https://arxiv.org/pdf/2607.02501v3)
-- **摘要预览（中文）**: Embodied AI models now span vision-language-action (VLA) models and world-action models (WAMs), but practical deployment remains fragmented across model-specific Python stacks, backend assumptions, an......
+- **摘要预览（中文）**: 具身AI模型现已涵盖视觉-语言-动作（VLA）模型和世界动作模型（WAMs），但实际部署仍分散于各类模型专属的Python技术栈、后端假设及机器人...
 
 ---
 
@@ -327,7 +327,7 @@
 - **发表日期**: 2026-07-02
 - **所属领域**: 软错误 (`cs.CL`)
 - **arXiv链接**: [2607.01602v1](https://arxiv.org/pdf/2607.01602v1)
-- **摘要预览（中文）**: SRAM-based FPGAs provide an attractive platform for energy- and latency-constrained CNN inference at the network edge, yet transient faults can lead to silent errors that compromise reliability. Alway......
+- **摘要预览（中文）**: 基于SRAM的FPGA为网络边缘能量和延迟受限的CNN推理提供了有吸引力的平台，然而瞬态故障可能导致静默错误，从而损害可靠性。始终在线的冗余（如完全三模冗余）提高了正确性，但带来了显著的性能和能量开销，而反应式恢复可能在关键路径上引入不可接受的延迟。我们提出\textbf{ProWAFT}，一种面向FPGA-based CNN加速器的主动式工作负载感知容错框架。...
 
 ---
 
@@ -338,7 +338,7 @@
 - **发表日期**: 2026-06-29
 - **所属领域**: SDC精确短语 (`cs.DC`)
 - **arXiv链接**: [2606.30771v1](https://arxiv.org/pdf/2606.30771v1)
-- **摘要预览（中文）**: As the size of computational problems grows, so does the likelihood of Silent Data Corruptions (SDCs). A common defense is replication, where the computation is repeated and correct results are determ......
+- **摘要预览（中文）**: 随着计算问题规模的增大，静默数据损坏（SDC）的发生概率也随之上升。一种常见的防御手段是复制，即重复执行计算，并通过多数投票确定正确结果。异步多任务（AMT）运行时通常非常适合这种方法，因为任务副本的输入和输出可以进行比较，必要时还可以重新计算任务。大多数现有的SDC保护方案假设任务和依赖关系是静态的。动态...
 
 ---
 
@@ -349,7 +349,7 @@
 - **发表日期**: 2026-06-29
 - **所属领域**: 硬件故障 (`cs.DC`)
 - **arXiv链接**: [2606.30848v1](https://arxiv.org/pdf/2606.30848v1)
-- **摘要预览（中文）**: Real-time scientific workflows operate on continuous data streams and must produce timely, high-quality results despite executing on complex, failure-prone infrastructure. Hardware faults, network dis......
+- **摘要预览（中文）**: 实时科学工作流处理连续数据流，必须在复杂且易发生故障的基础设施上运行，同时及时产出高质量结果。硬件故障、网络中断以及由资源争用或系统异构性引起的性能异常，都可能严重降低性能并违反实时约束。我们聚焦于增强生产者-消费者流模式的韧性，该模式是科学流式工作流的基本构建模块。...
 
 ---
 
@@ -360,7 +360,7 @@
 - **发表日期**: 2026-06-24
 - **所属领域**: 软错误 (`cs.SE`)
 - **arXiv链接**: [2606.25402v1](https://arxiv.org/pdf/2606.25402v1)
-- **摘要预览（中文）**: Large software projects often depend on older versions of libraries, even as APIs continue to evolve across releases. This creates a challenge for LLMs: they must maintain knowledge of multiple API ve......
+- **摘要预览（中文）**: 大型软件项目通常依赖旧版本的库，即便API在版本间持续演进。这给LLM带来了挑战：它们必须掌握多个API版本的知识，而不仅仅是最新或最常见的版本。然而，当前LLM在时间混合的语料上训练，缺乏针对此类版本特定推理的显式机制，导致时代错位错误——调用在另一个库版本中存在的API。为系统评估这一问...
 
 ---
 
@@ -371,7 +371,7 @@
 - **发表日期**: 2026-06-19
 - **所属领域**: SDC精确短语 (`cs.GR`)
 - **arXiv链接**: [2606.21791v1](https://arxiv.org/pdf/2606.21791v1)
-- **摘要预览（中文）**: Three-dimensional Gaussian splatting is a standard real-time scene representation increasingly deployed on hardware exposed to transient faults, such as spaceborne processors and robotic edge devices ......
+- **摘要预览（中文）**: 三维高斯泼溅（3D Gaussian Splatting）是一种标准的实时场景表示方法，越来越多地部署在易受瞬态故障影响的硬件上，例如星载处理器和机器人边缘设备，这些环境中会发生静默数据损坏。训练好的模型是GPU内存中的大型浮点参数数组，其中单粒子翻转对应单个比特位翻转。本文测量了这些影响并构建了一种防御机制。一个驻留GPU的并行故障注入引擎应用了超过300万次……...
 
 ---
 
@@ -382,7 +382,7 @@
 - **发表日期**: 2026-06-17
 - **所属领域**: 软错误 (`cs.ET`)
 - **arXiv链接**: [2606.18978v1](https://arxiv.org/pdf/2606.18978v1)
-- **摘要预览（中文）**: Due to their incentivizing features, memristors are a promising candidate for replacing CMOS-based memories, which are faced with various functional challenges in deep submicron process technologies. ......
+- **摘要预览（中文）**: 由于忆阻器具有激励特性，它们是替代基于CMOS存储器（在深亚微米工艺技术中面临多种功能挑战）的有前景候选方案。忆阻器是非易失性的，漏电流低，且与SRAM等基于CMOS的存储器相比密度更高。在这方面，电阻式RAM（ReRAM）和自旋转移矩RAM（STT-RAM）忆阻器在众多基于忆阻器的存储技术中脱颖而出，因为它们在工艺方面具有优越性。...
 
 ---
 
@@ -393,7 +393,7 @@
 - **发表日期**: 2026-06-16
 - **所属领域**: 软错误 (`quant-ph`)
 - **arXiv链接**: [2606.18408v2](https://arxiv.org/pdf/2606.18408v2)
-- **摘要预览（中文）**: We characterize two nested Walsh parity-check filters implemented on Quandela's Belenos cloud photonic processor in a single-photon eight-mode spatial register. The modes are indexed by the vertices o......
+- **摘要预览（中文）**: 我们在Quandela的Belenos云光子处理器上，于单光子八模空间寄存器中实现了两个嵌套的Walsh奇偶校验滤波器。这些模式由立方体$Q_3$的顶点索引。滤波器实现了经典的$[8,7,2]$单奇偶校验码、零和中性子空间$\mathcal{N}$，以及$[8,4,4]$扩展汉明码——即奇偶校验子空间$\mathcal{S}\subset\mathcal{N}$，包含一个DC和三个面奇偶校验综合征通道。这些是首次......
 
 ---
 
@@ -404,7 +404,7 @@
 - **发表日期**: 2026-06-09
 - **所属领域**: 硬件故障 (`cs.RO`)
 - **arXiv链接**: [2606.10501v1](https://arxiv.org/pdf/2606.10501v1)
-- **摘要预览（中文）**: Deploying Vision-Language-Action (VLA) models in real robotic systems requires robustness not only to semantic and perceptual variations, but also to embodiment-side faults that change how actions are......
+- **摘要预览（中文）**: 在真实机器人系统中部署视觉-语言-动作（VLA）模型，不仅需要对其语义和感知变化具有鲁棒性，还需对改变动作物理实现方式的具身侧故障具备鲁棒性。真实机器人可能因执行器退化、硬件故障、安全限制、碰撞损伤或磨损引起的摩擦而经历关节级变化。这些故障至关重要，因为它们改变了策略的动作到运动接口，破坏了已学习到的闭环控制。...
 
 ---
 
@@ -415,7 +415,7 @@
 - **发表日期**: 2026-06-08
 - **所属领域**: 硬件故障 (`cs.CR`)
 - **arXiv链接**: [2606.09548v1](https://arxiv.org/pdf/2606.09548v1)
-- **摘要预览（中文）**: Federated Learning (FL) allows a set of clients to collectively train a global model without sharing local training data. Giving the responsibility of the training to decentralized actors may lead to ......
+- **摘要预览（中文）**: 联邦学习（FL）允许多个客户端在不共享本地训练数据的情况下协同训练全局模型。然而，将训练责任交给去中心化的参与者可能引发投毒攻击：由恶意第三方控制的客户端可能污染训练数据集，从而在神经网络中植入后门。在联邦学习中，这些后门攻击目前仅依赖算法手段，但近年来硬件故障威胁（如Rowhammer）的进展已拓宽了攻击面。...
 
 ---
 
@@ -426,7 +426,7 @@
 - **发表日期**: 2026-06-01
 - **所属领域**: 软错误 (`cs.DC`)
 - **arXiv链接**: [2606.02430v1](https://arxiv.org/pdf/2606.02430v1)
-- **摘要预览（中文）**: Large language models (LLMs) are increasingly integrated into high-performance computing (HPC) workflows, accelerating scientific discovery through diverse perspectives such as code generation and dom......
+- **摘要预览（中文）**: 大语言模型（LLMs）正日益集成到高性能计算（HPC）工作流中，通过代码生成和领域特定决策等多种视角加速科学发现。然而，软错误如何传播并影响LLM推理仍 largely 未被探索。为弥补这一空白，我们基于所提出的 LLMFI（一个可配置且确定性的故障注入框架），对LLM推理中的错误传播进行了全面研究。...
 
 ---
 
@@ -437,7 +437,7 @@
 - **发表日期**: 2026-06-01
 - **所属领域**: 硬件故障 (`cs.DC`)
 - **arXiv链接**: [2606.01680v1](https://arxiv.org/pdf/2606.01680v1)
-- **摘要预览（中文）**: Network failures are among the most frequent hardware faults in large-scale GPU clusters and a leading cause of training-job interruptions. Modern collective communication libraries such as NCCL mitig......
+- **摘要预览（中文）**: 网络故障是大规模GPU集群中最常见的硬件故障之一，也是训练任务中断的主要原因。NCCL等现代集合通信库通过将流量重路由至同一服务器上幸存的NIC来缓解网络故障，以牺牲节点间带宽为代价换取训练不中断。然而，降级后的服务器仍处于标准环形算法的关键路径上，拖慢整个集合通信。我们提出了首个……...
 
 ---
 
@@ -448,7 +448,7 @@
 - **发表日期**: 2026-05-30
 - **所属领域**: 软错误 (`cs.CV`)
 - **arXiv链接**: [2606.07620v1](https://arxiv.org/pdf/2606.07620v1)
-- **摘要预览（中文）**: With the growth of Vision Transformers in safety-critical domains like autonomous systems and medical imaging, ensuring their reliability against soft errors is paramount. While ViTs offer state-of-th......
+- **摘要预览（中文）**: 随着Vision Transformers在自动驾驶和医学影像等安全关键领域的应用增长，确保其抵御软错误的可靠性至关重要。尽管ViT提供了最先进的精度，但其庞大的参数量使得穷举式故障注入实验不可行。为弥合这一差距，提出了一种统计故障注入框架，利用有限总体抽样理论提供形式化的可靠性保证。证明了故障率...
 
 ---
 
@@ -459,7 +459,7 @@
 - **发表日期**: 2026-05-28
 - **所属领域**: SDC精确短语 (`cs.DC`)
 - **arXiv链接**: [2605.29506v1](https://arxiv.org/pdf/2605.29506v1)
-- **摘要预览（中文）**: The trend of increasing cluster sizes of supercomputers leads to a growing susceptibility to Silent Data Corruption (SDC) that can invalidate program results. A common strategy for SDC protection is r......
+- **摘要预览（中文）**: 超级计算机集群规模不断增大的趋势，使其对静默数据损坏（SDC）的敏感性日益增加，这种损坏可能导致程序结果失效。一种常见的SDC防护策略是复制，即重复执行计算，并将至少两次不同计算中相同的结果判定为正确结果。在集群上的异步多任务（AMT）运行时中应用复制具有挑战性，因为任务动态生成和工作窃取机制使情况复杂化。...
 
 ---
 
@@ -470,7 +470,7 @@
 - **发表日期**: 2026-05-27
 - **所属领域**: 软错误 (`cs.AR`)
 - **arXiv链接**: [2605.28169v1](https://arxiv.org/pdf/2605.28169v1)
-- **摘要预览（中文）**: As integrated circuit technologies continue to scale toward advanced process nodes, the continual reduction in node capacitance and supply voltage has made digital systems increasingly vulnerable to s......
+- **摘要预览（中文）**: 随着集成电路技术持续向先进工艺节点演进，节点电容和电源电压的不断降低使得数字系统对软错误愈发敏感。尽管传统的全芯片加固方法能够提升可靠性，但往往带来难以接受的面积和功耗开销，因此选择性加固成为更实用的工程方案。然而，现有方法通常依赖耗时的故障注入仿真来……（原文截断，但根据要求只翻译给出的部分）...
 
 ---
 
@@ -481,6 +481,6 @@
 - **发表日期**: 2026-05-25
 - **所属领域**: 硬件故障 (`eess.SP`)
 - **arXiv链接**: [2605.25688v1](https://arxiv.org/pdf/2605.25688v1)
-- **摘要预览（中文）**: Quantum wireless sensing using Rydberg atomic receivers enables high-sensitivity signal acquisition direction-of-arrival (DoA) estimation. However, it suffers from a fundamental limitation, where only......
+- **摘要预览（中文）**: 基于里德伯原子接收器的量子无线传感能够实现高灵敏度信号采集的到达方向（DoA）估计。然而，该方法存在一个根本性限制，即仅能观测到接收信号的幅度信息。近期提出的Quantum-MUSIC算法通过交替最小化恢复相位信息，进而应用MUSIC算法进行DoA估计，解决了这一问题。然而，现有方法依赖于一个$\e...
 
 ---
