@@ -4,6 +4,7 @@ import time
 import requests
 import xml.etree.ElementTree as ET
 from datetime import datetime, timedelta
+from openai import OpenAI
 
 # ==================== 配置 ====================
 KEYWORD_PRESETS = {
@@ -21,11 +22,10 @@ KEYWORD_PRESETS = {
     "rl_only": [
         {"query": "ti:reinforcement learning OR ti:RLHF OR abs:reinforcement learning", "name": "强化学习与智能体"},
     ],
-    # 核心修复：限定 ti/abs 字段，避免 all: 的宽泛匹配
     "sdc_reliability": [
         {"query": 'ti:"silent data corruption" OR abs:"silent data corruption"', "name": "SDC精确短语"},
         {"query": 'ti:"soft error" OR abs:"soft error" OR ti:SEU OR abs:SEU', "name": "软错误"},
-        {"query": 'ti:corruption AND (ti:hardware OR ti:memory OR ti:storage OR abs:hardware)', "name": "硬件数据损坏"},
+        {"query": "ti:corruption AND (ti:hardware OR ti:memory OR abs:hardware)", "name": "硬件数据损坏"},
         {"query": 'ti:"fault tolerance" OR abs:"fault tolerance" OR ti:"error resilience"', "name": "容错计算"},
         {"query": 'ti:"hardware fault" OR abs:"hardware fault" OR ti:"transient fault"', "name": "硬件故障"},
     ],
@@ -38,7 +38,6 @@ KEYWORD_PRESETS = {
     ],
 }
 
-# 客户端二次过滤关键词（标题或摘要必须真正包含这些词之一）
 SDC_KEYWORDS = [
     "silent data corruption", "soft error", "data corruption", 
     "hardware fault", "fault tolerance", "error resilience",
@@ -47,7 +46,7 @@ SDC_KEYWORDS = [
 
 ARXIV_DELAY = 5
 MAX_RETRIES = 3
-MAX_RESULTS_PER_QUERY = 100  # 从20提升到100，覆盖更多历史论文
+MAX_RESULTS_PER_QUERY = 100
 NS = {
     'atom': 'http://www.w3.org/2005/Atom',
     'arxiv': 'http://arxiv.org/schemas/atom'
@@ -83,25 +82,46 @@ def get_search_config():
     
     print(f"   [DEBUG] KEYWORD_PRESET='{preset}'")
     print(f"   [DEBUG] CUSTOM_QUERY='{custom}'")
-
+    
     if custom:
-        print(f"   [DEBUG] 使用自定义查询: {custom}")
-        return [{"query": custom, "name": "自定义检索"}]
-            
+        query = f'ti:"{custom}" OR abs:"{custom}"'
+        print(f"   [DEBUG] 使用自定义查询（自动补全）: {query}")
+        return [{"query": query, "name": "自定义检索"}]
+    
     if preset in KEYWORD_PRESETS:
         print(f"   [DEBUG] 使用预设: {preset}")
         return KEYWORD_PRESETS[preset]
-
+    
     print(f"   [DEBUG] 回退到 sdc_reliability")
     return KEYWORD_PRESETS["sdc_reliability"]
 
 def is_relevant_paper(title, summary, keywords):
-    """客户端二次过滤：标题或摘要必须真正包含关键词"""
     text = (title + " " + summary).lower()
     for kw in keywords:
         if kw.lower() in text:
             return True, kw
     return False, None
+
+def translate_summary(text, client):
+    """调用 LLM 将摘要翻译成中文"""
+    if not text or not text.strip():
+        return "（无摘要）"
+    
+    text = text[:500].strip()
+    
+    prompt = f"将以下学术论文摘要翻译成简洁流畅的中文（保留专业术语英文原文），只输出翻译结果，不要解释：\n\n{text}"
+    
+    try:
+        resp = client.chat.completions.create(
+            model="deepseek-v4-flash",
+            messages=[{"role": "user", "content": prompt}],
+            temperature=0.3,
+            max_tokens=400,
+        )
+        return resp.choices[0].message.content.strip()
+    except Exception as e:
+        print(f"   ⚠️ 翻译失败: {e}")
+        return text[:200] + "..."  # 失败时返回原文截断
 
 def parse_arxiv_xml(xml_content):
     root = ET.fromstring(xml_content)
@@ -200,7 +220,6 @@ def search_papers():
     start, end, display = parse_time_range(os.getenv("TIME_RANGE", "1 week"))
     preset = os.getenv("KEYWORD_PRESET", "sdc_reliability")
     
-    # 只有 SDC 预设才用二次过滤，其他预设不过滤
     use_filter = (preset == "sdc_reliability")
     filter_keywords = SDC_KEYWORDS if use_filter else []
     
@@ -243,17 +262,15 @@ def search_papers():
             except:
                 pub_date = datetime.now().date()
             
-            # 检查时间范围
             if not (start.date() <= pub_date <= end.date()):
                 category_log["excluded"].append({
                     "entry_id": entry_id.split("/")[-1] if "/" in entry_id else entry_id,
                     "title": e["title"],
                     "published": pub_date.strftime("%Y-%m-%d"),
-                    "reason": f"超出时间范围"
+                    "reason": "超出时间范围"
                 })
                 continue
             
-            # 检查重复
             if entry_id in seen_ids:
                 category_log["excluded"].append({
                     "entry_id": entry_id.split("/")[-1] if "/" in entry_id else entry_id,
@@ -263,7 +280,6 @@ def search_papers():
                 })
                 continue
             
-            # 客户端二次过滤（仅SDC预设）
             if use_filter:
                 relevant, matched_kw = is_relevant_paper(e["title"], e["summary"], filter_keywords)
                 if not relevant:
@@ -299,6 +315,19 @@ def search_papers():
         log_records.append(category_log)
         time.sleep(ARXIV_DELAY)
     
+    # ========== 新增：翻译摘要 ==========
+    if all_papers:
+        print(f"\n🌐 开始翻译 {len(all_papers)} 篇论文摘要...")
+        client = OpenAI(
+            api_key=os.getenv("OPENCODE_API_KEY"),
+            base_url="https://opencode.ai/zen/v1",
+        )
+        for i, p in enumerate(all_papers, 1):
+            print(f"   📝 翻译 {i}/{len(all_papers)}: {p['title'][:40]}...")
+            p["summary_zh"] = translate_summary(p["summary"], client)
+        print("✅ 翻译完成")
+    # ====================================
+    
     all_papers.sort(key=lambda x: x["published"], reverse=True)
     return all_papers, start, end, display, log_records
 
@@ -312,7 +341,7 @@ def generate_candidates_md(papers, start, end, display):
         f"> **生成时间**: {datetime.now().strftime('%Y-%m-%d %H:%M')}",
         f"",
         f"## ✅ 使用说明",
-        f"1. 浏览下方论文列表",
+        f"1. 浏览下方论文列表（摘要已翻译为中文）",
         f"2. 将想发布的论文前面的 `- [ ]` 改为 `- [x]`",
         f"3. 保存文件（Commit）",
         f"4. 手动运行 **Publish Selected** workflow",
@@ -330,7 +359,7 @@ def generate_candidates_md(papers, start, end, display):
             f"- **发表日期**: {p['published']}",
             f"- **所属领域**: {p['area']} (`{p['category']}`)",
             f"- **arXiv链接**: [{p['entry_id'].split('/')[-1]}]({p['pdf_url']})",
-            f"- **摘要预览**: {p['summary']}...",
+            f"- **摘要预览（中文）**: {p.get('summary_zh', p['summary'])}...",
             f"",
             f"---",
             f"",
@@ -374,14 +403,13 @@ def generate_log_md(log_records, start, end, display, total_kept):
         
         if rec['kept']:
             lines.append("### ✅ 保留的论文")
-            for p in rec['kept'][:20]:  # 只显示前20条避免日志太长
+            for p in rec['kept'][:20]:
                 lines.append(f"- `{p['published']}` [{p['entry_id']}] {p['title']}")
             if len(rec['kept']) > 20:
                 lines.append(f"- ... 等共 {len(rec['kept'])} 篇")
             lines.append("")
         
         if rec['excluded']:
-            # 按原因分组统计
             reasons = {}
             for p in rec['excluded']:
                 r = p['reason']
@@ -414,7 +442,7 @@ def generate_log_md(log_records, start, end, display, total_kept):
 
 def main():
     print("=" * 60)
-    print("🚀 Insight Radar · 候选池生成器（字段限定+二次过滤版）")
+    print("🚀 Insight Radar · 候选池生成器（中文摘要版）")
     print("=" * 60)
     
     papers, start, end, display, log_records = search_papers()
