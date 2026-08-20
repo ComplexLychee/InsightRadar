@@ -21,12 +21,47 @@ KEYWORD_PRESETS = {
         {"query": 'cat:cs.LG AND ("reinforcement learning" OR RLHF OR alignment OR agent OR policy)', "name": "强化学习与智能体"},
     ],
     "sdc_reliability": [
-        {"query": 'cat:cs.AR AND ("silent data corruption" OR "soft error" OR SDC OR "bit flip" OR "memory error" OR "transient fault")', "name": "硬件架构可靠性"},
-        {"query": 'cat:cs.DC AND ("silent data corruption" OR "soft error" OR SDC OR "fault tolerance" OR "error resilience" OR checkpoint)', "name": "分布式系统可靠性"},
-        {"query": 'cat:cs.LG AND ("silent data corruption" OR "soft error" OR SDC OR "training fault" OR "data integrity")', "name": "ML训练可靠性"},
-        {"query": 'cat:cs.SE AND ("silent data corruption" OR "soft error" OR SDC OR "fault injection" OR "error detection")', "name": "软件工程可靠性"},
-        {"query": 'cat:cs.CR AND ("silent data corruption" OR "soft error" OR SDC OR "data integrity" OR "corruption detection")', "name": "安全与数据完整性"},
-    ],
+    # 硬件架构（最核心）
+    {
+        "query": "cat:cs.AR AND (silent data corruption OR soft error OR SDC OR bit flip OR memory error OR transient fault OR hardware fault OR fault tolerance)",
+        "name": "硬件架构可靠性"
+    },
+    # 分布式与集群
+    {
+        "query": "cat:cs.DC AND (silent data corruption OR soft error OR SDC OR fault tolerance OR error resilience OR checkpoint OR reliability)",
+        "name": "分布式系统可靠性"
+    },
+    # 机器学习训练
+    {
+        "query": "cat:cs.LG AND (silent data corruption OR soft error OR SDC OR training fault OR data integrity OR hardware fault OR reliability)",
+        "name": "ML训练可靠性"
+    },
+    # 操作系统
+    {
+        "query": "cat:cs.OS AND (silent data corruption OR soft error OR SDC OR memory error OR fault tolerance OR reliability)",
+        "name": "操作系统可靠性"
+    },
+    # 编程语言/编译器
+    {
+        "query": "cat:cs.PL AND (silent data corruption OR soft error OR SDC OR fault tolerance OR error detection OR reliability)",
+        "name": "编译器与程序可靠性"
+    },
+    # 软件工程
+    {
+        "query": "cat:cs.SE AND (silent data corruption OR soft error OR SDC OR fault injection OR error detection OR reliability)",
+        "name": "软件工程可靠性"
+    },
+    # 安全与密码学
+    {
+        "query": "cat:cs.CR AND (silent data corruption OR soft error OR SDC OR data integrity OR corruption detection OR reliability)",
+        "name": "安全与数据完整性"
+    },
+    # 数据库
+    {
+        "query": "cat:cs.DB AND (silent data corruption OR soft error OR SDC OR data integrity OR fault tolerance OR reliability)",
+        "name": "数据库可靠性"
+    },
+],
     "all_areas": [
         {"query": "cat:cs.AI", "name": "人工智能"},
         {"query": "cat:cs.CV", "name": "计算机视觉"},
