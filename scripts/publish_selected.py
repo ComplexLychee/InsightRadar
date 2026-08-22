@@ -198,7 +198,16 @@ def generate_post(papers_data, range_display, start_date, end_date, source_files
             p["score"] = 5
     
     papers_data.sort(key=lambda x: x.get("score", 5), reverse=True)
-
+    
+    # 先定义 title 和 tag_label
+    if range_display == "过去1周":
+        title = f"Insight Radar · 周刊 {date_str}"
+        tag_label = "论文周刊"
+    else:
+        title = f"Insight Radar · {range_display}精选 ({start_date.strftime('%Y-%m-%d')} ~ {end_date.strftime('%Y-%m-%d')})"
+        tag_label = "论文洞察"
+    
+    # 然后再用 tag_label
     all_tags = set(["arXiv", "AI", tag_label])
     all_auto_tags = set()
     for p in papers_data:
@@ -208,15 +217,15 @@ def generate_post(papers_data, range_display, start_date, end_date, source_files
         all_tags.update(llm_tags)
         all_tags.update(auto_tags)
         all_auto_tags.update(auto_tags)
-
+    
     column_badges = ""
     if "SDC" in all_auto_tags:
         column_badges += "<span style='background:#dbeafe;color:#1e40af;padding:2px 8px;border-radius:12px;font-size:0.8em;margin-right:6px;'>🔧 SDC</span>"
     if "Agents" in all_auto_tags:
         column_badges += "<span style='background:#ede9fe;color:#5b21b6;padding:2px 8px;border-radius:12px;font-size:0.8em;'>🤖 Agents</span>"
-
+    
     source_info = " | ".join([f"`{f}`" for f in source_files])
-
+    
     # OCAR 模板博客文章
     template = Template("""{% for paper in papers %}
 ## {{ loop.index }}. {{ paper.title }} {% if paper.score >= 8 %}🔥{% endif %}
@@ -250,9 +259,9 @@ def generate_post(papers_data, range_display, start_date, end_date, source_files
 
 ---
 {% endfor %}""")
-
+    
     content_body = template.render(papers=papers_data) if papers_data else "> ⚠️ 未勾选任何论文"
-
+    
     md = f"""---
 title: "{title}"
 date: {date_str} 08:00:00 +0800
@@ -262,7 +271,7 @@ tags:
 """
     for tag in sorted(all_tags):
         md += f"  - {tag}\n"
-
+    
     md += f"""toc: true
 toc_sticky: true
 ---
