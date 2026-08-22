@@ -4,11 +4,11 @@ on:
   workflow_dispatch:
     inputs:
       candidate_file:
-        description: '候选文件名（留空则使用最新的）'
+        description: '指定候选文件名（如：2026-08-22-1430-candidates.md）。留空则使用最新。'
         required: false
         type: string
       merge_multiple:
-        description: '合并多个候选文件发布？（格式：file1.md,file2.md 或留空）'
+        description: '合并多个文件发布？格式：file1.md,file2.md（留空则不合并）'
         required: false
         type: string
 
@@ -28,6 +28,8 @@ jobs:
         env:
           OPENCODE_API_KEY: ${{ secrets.OPENCODE_API_KEY }}
           SITE_URL: ${{ vars.SITE_URL || 'https://complexlychee.github.io/InsightRadar' }}
+          CANDIDATE_FILE: ${{ github.event.inputs.candidate_file || '' }}
+          MERGE_MULTIPLE: ${{ github.event.inputs.merge_multiple || '' }}
         run: python scripts/publish_selected.py
       - name: Commit post
         run: |
