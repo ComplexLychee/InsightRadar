@@ -15,12 +15,21 @@ remote_theme: mmistakes/minimal-mistakes
 # ==================== 作者信息 ====================
 author:
   name: "ComplexLychee"
-  bio: "PhD in Math&Statistics，working on AI Infra & Agent"
+  bio: "AI 研究者，关注大模型与系统可靠性。每周为你解读最新论文。"
   location: "China"
   links:
+    - label: "🔧 SDC 专栏"
+      icon: "fas fa-fw fa-microchip"
+      url: "/InsightRadar/columns/sdc/"
+    - label: "🤖 Agents 专栏"
+      icon: "fas fa-fw fa-robot"
+      url: "/InsightRadar/columns/agents/"
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
       url: "https://github.com/ComplexLychee"
+    - label: "关于"
+      icon: "fas fa-fw fa-info-circle"
+      url: "/InsightRadar/about/"
 
 # ==================== 构建配置 ====================
 plugins:
