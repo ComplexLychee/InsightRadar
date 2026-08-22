@@ -9,13 +9,12 @@ baseurl: "/InsightRadar"
 repository: "ComplexLychee/InsightRadar"
 
 # ==================== 主题配置 ====================
-# GitHub Pages 不支持直接安装 gem 主题，必须用 remote_theme
 remote_theme: mmistakes/minimal-mistakes
 
-# ==================== 作者信息 ====================
+# ==================== 作者信息（固定，后续勿改） ====================
 author:
   name: "ComplexLychee"
-  bio: "AI 研究者，关注大模型与系统可靠性。每周为你解读最新论文。"
+  bio: "PhD in Mathematics and Statistics, Network Science; Currently working on silent data corruption (SDC) and research agents"
   location: "China"
   links:
     - label: "🔧 SDC 专栏"
@@ -37,11 +36,19 @@ plugins:
   - jekyll-sitemap
   - jekyll-seo-tag
   - jekyll-paginate
-  - jekyll-remote-theme    # ← 关键：支持远程主题
+  - jekyll-remote-theme
   - jekyll-include-cache
 
 paginate: 10
 paginate_path: /page:num/
+
+include:
+  - _pages
+
+collections:
+  pages:
+    output: true
+    permalink: /:path/
 
 # ==================== 默认布局 ====================
 defaults:
@@ -65,14 +72,3 @@ category_archive:
 tag_archive:
   type: liquid
   path: /tags/
-
-
-# 在文件末尾添加
-include:
-  - _pages
-
-# 页面集合配置（可选，但推荐）
-collections:
-  pages:
-    output: true
-    permalink: /:path/
