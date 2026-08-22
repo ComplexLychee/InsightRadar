@@ -9,28 +9,22 @@ SITE_URL = os.getenv("SITE_URL", "https://complexlychee.github.io/InsightRadar")
 API_BASE = "https://opencode.ai/zen/v1"
 
 def find_latest_candidates():
-    """找到最新的候选文件"""
     if not os.path.exists("candidates"):
         raise FileNotFoundError("candidates/ 目录不存在")
-
     files = [f for f in os.listdir("candidates") if f.endswith("-candidates.md")]
     if not files:
         raise FileNotFoundError("没有找到候选文件")
-
     files.sort(reverse=True)
     return os.path.join("candidates", files[0])
 
 def parse_selected_papers(filepath):
-    """解析被勾选的论文"""
     with open(filepath, "r", encoding="utf-8") as f:
         content = f.read()
 
-    # 按 "---" 分割每篇论文区块
     blocks = re.split(r'\n---\n', content)
     selected = []
 
     for block in blocks:
-        # 检查是否有 - [x] 标记
         if not re.search(r'- \[[xX]\]\s*\*\*发布\*\*', block):
             continue
 
@@ -40,7 +34,22 @@ def parse_selected_papers(filepath):
         area = re.search(r'- \*\*所属领域\*\*:\s*(.+?)\s*\(', block)
         category = re.search(r'- \*\*所属领域\*\*:.*?\(`(.+?)`\)', block)
         pdf_url = re.search(r'- \*\*arXiv链接\*\*:\s*\[.*?\]\((.+?)\)', block)
-        summary = re.search(r'- \*\*摘要预览.*?\*\*:\s*(.+)', block)
+
+        # 提取结构化摘要（多行，从 "- **结构化摘要**:" 到下一个以 "- " 或 "## " 开头的行）
+        distilled_match = re.search(
+            r'- \*\*结构化摘要\*\*:\s*\n(.*?)(?=\n- |\n## |\n---\s*$)',
+            block,
+            re.DOTALL
+        )
+        summary_distilled = ""
+        if distilled_match:
+            summary_distilled = distilled_match.group(1).strip()
+
+        # 备用：提取旧的摘要预览字段（兼容旧格式）
+        if not summary_distilled:
+            old_summary = re.search(r'- \*\*摘要预览.*?\*\*:\s*(.+)', block)
+            if old_summary:
+                summary_distilled = old_summary.group(1).strip()
 
         if title:
             selected.append({
@@ -50,45 +59,30 @@ def parse_selected_papers(filepath):
                 "area": area.group(1).strip() if area else "未知",
                 "category_code": category.group(1) if category else "cs.AI",
                 "pdf_url": pdf_url.group(1) if pdf_url else "",
-                "summary": summary.group(1).strip() if summary else "",
+                "summary_distilled": summary_distilled,
             })
 
     return selected
 
 def call_opencode(prompt, api_key, response_format=None):
-    """使用 requests 调用 OpenCode API"""
-    headers = {
-        "Authorization": f"Bearer {api_key}",
-        "Content-Type": "application/json"
-    }
-
-    payload = {
-        "model": "deepseek-v4-flash",
-        "messages": [{"role": "user", "content": prompt}],
-        "temperature": 0.5,
-        "max_tokens": 800
-    }
-
+    headers = {"Authorization": f"Bearer {api_key}", "Content-Type": "application/json"}
+    payload = {"model": "deepseek-v4-flash", "messages": [{"role": "user", "content": prompt}],
+               "temperature": 0.5, "max_tokens": 800}
     if response_format:
         payload["response_format"] = response_format
-
     try:
-        resp = requests.post(
-            f"{API_BASE}/chat/completions",
-            headers=headers,
-            json=payload,
-            timeout=60
-        )
+        resp = requests.post(f"{API_BASE}/chat/completions", headers=headers, json=payload, timeout=60)
         resp.raise_for_status()
-        data = resp.json()
-        return data["choices"][0]["message"]["content"]
+        return resp.json()["choices"][0]["message"]["content"]
     except Exception as e:
         print(f"❌ API 调用失败: {e}")
         return None
 
 def analyze_paper(paper):
-    """调用 LLM 深度解读"""
     api_key = os.getenv("OPENCODE_API_KEY")
+
+    # 如果有结构化摘要，基于它来解读；否则基于标题
+    context = paper.get("summary_distilled", "") or paper["title"]
 
     prompt = f"""请对以下学术论文进行结构化解读，只输出 JSON：
 
@@ -96,7 +90,8 @@ def analyze_paper(paper):
 作者：{paper['authors']}
 发表日期：{paper['published']}
 所属领域：{paper['area']}
-摘要：{paper['summary']}
+背景信息：
+{context}
 
 输出字段：
 - one_sentence: 一句话概括核心贡献（30字以内，中文）
@@ -106,10 +101,9 @@ def analyze_paper(paper):
 - tags: 相关技术标签数组（中文或英文）
 - score: 重要性评分（1-10，整数）
 
-注意：摘要可能截断，请基于已有信息判断。"""
+注意：基于提供的背景信息判断。"""
 
     content = call_opencode(prompt, api_key, {"type": "json_object"})
-
     if content:
         try:
             data = json.loads(content)
@@ -122,9 +116,8 @@ def analyze_paper(paper):
                 data["tags"] = [paper["area"]]
             return data
         except json.JSONDecodeError:
-            print(f"❌ JSON 解析失败，返回原始内容")
+            print(f"❌ JSON 解析失败")
 
-    # 失败回退
     return {
         "one_sentence": paper["title"],
         "highlights": ["请阅读原文了解详情"],
@@ -135,34 +128,27 @@ def analyze_paper(paper):
     }
 
 def auto_tag_paper(paper, analysis_tags):
-    """
-    根据论文标题、摘要、领域自动判断专栏标签。
-    返回要加入 frontmatter 的专栏标签列表（如 ['SDC'] 或 ['Agents'] 或两者都有）。
-    """
     text = (paper.get('title', '') + ' ' + 
-            paper.get('summary', '') + ' ' + 
+            paper.get('summary_distilled', '') + ' ' + 
             paper.get('area', '') + ' ' +
             ' '.join(analysis_tags)).lower()
 
     auto_tags = set()
-
-    # SDC 关键词库
     sdc_keywords = [
-        'silent data corruption', 'soft error', 'sdc', 'hardware fault',
-        'fault tolerance', 'error resilience', 'transient fault', 'seu',
-        'memory error', 'bit flip', 'data integrity', 'corruption detection',
-        '硬件故障', '软错误', '容错', '数据损坏', '可靠性', '硬件架构',
-        '分布式系统可靠性', 'ml训练可靠性'
+        "silent data corruption", "soft error", "sdc", "hardware fault",
+        "fault tolerance", "error resilience", "transient fault", "seu",
+        "memory error", "bit flip", "data integrity", "corruption detection",
+        "硬件故障", "软错误", "容错", "数据损坏", "可靠性", "硬件架构",
+        "分布式系统可靠性", "ml训练可靠性"
     ]
     if any(kw in text for kw in sdc_keywords):
         auto_tags.add('SDC')
 
-    # Agents 关键词库
     agent_keywords = [
-        'agent', 'ai scientist', 'self-research', 'autonomous research',
-        'research agent', 'scientific discovery', 'auto-design', 'auto-design',
-        'multi-agent', '智能体', '自主科研', '自动化研究', 'agentic',
-        'omni-scientist', 'ai for science', 'automated discovery'
+        "research agent", "ai scientist", "self-research", "self evolving",
+        "self-evolving", "autonomous research", "automated discovery",
+        "scientific discovery", "ai for science", "agentic",
+        "omni-scientist", "ai for science", "automated discovery"
     ]
     if any(kw in text for kw in agent_keywords):
         auto_tags.add('Agents')
@@ -170,7 +156,6 @@ def auto_tag_paper(paper, analysis_tags):
     return sorted(auto_tags)
 
 def generate_post(papers_data, range_display, start_date, end_date):
-    """生成博客文章，frontmatter 中自动加入专栏标签"""
     date_str = end_date.strftime("%Y-%m-%d")
 
     if range_display == "过去1周":
@@ -182,13 +167,9 @@ def generate_post(papers_data, range_display, start_date, end_date):
 
     papers_data.sort(key=lambda x: x.get("score", 5), reverse=True)
 
-    # 基础标签
     all_tags = set(["arXiv", "AI", tag_label])
-
-    # 收集所有自动专栏标签
     all_auto_tags = set()
     for p in papers_data:
-        # 合并 LLM 返回的标签和自动判断的标签
         llm_tags = p.get("tags", [])
         auto_tags = auto_tag_paper(p, llm_tags)
         p["auto_tags"] = auto_tags
@@ -196,13 +177,13 @@ def generate_post(papers_data, range_display, start_date, end_date):
         all_tags.update(auto_tags)
         all_auto_tags.update(auto_tags)
 
-    # 如果有专栏标签，在标题里提示
     column_badges = ""
     if "SDC" in all_auto_tags:
         column_badges += "<span style='background:#dbeafe;color:#1e40af;padding:2px 8px;border-radius:12px;font-size:0.8em;margin-right:6px;'>🔧 SDC</span>"
     if "Agents" in all_auto_tags:
         column_badges += "<span style='background:#ede9fe;color:#5b21b6;padding:2px 8px;border-radius:12px;font-size:0.8em;'>🤖 Agents</span>"
 
+    # 新模板：显示完整的结构化摘要
     template = Template("""{% for paper in papers %}
 ## {{ loop.index }}. {{ paper.title }} {% if paper.score >= 8 %}🔥{% endif %}
 
@@ -214,6 +195,11 @@ def generate_post(papers_data, range_display, start_date, end_date):
 
 ### 💡 一句话总结
 {{ paper.one_sentence }}
+
+{% if paper.summary_distilled %}
+### 📋 研究背景与核心内容
+{{ paper.summary_distilled }}
+{% endif %}
 
 ### ✨ 核心亮点
 {% for h in paper.highlights %}
@@ -286,19 +272,16 @@ def main():
         print("👉 提示：请打开 candidates/ 下的最新文件，将 `- [ ]` 改为 `- [x]`")
         return
 
-    # 从文件内容提取日期范围
     with open(candidate_file, "r", encoding="utf-8") as f:
         content = f.read()
 
     range_match = re.search(r'\*\*检索区间\*\*:\s*(\d{4}-\d{2}-\d{2})\s*~\s*(\d{4}-\d{2}-\d{2})', content)
     display_match = re.search(r'# 📋 候选论文池 · (.+)', content)
 
-    # 修复：字符串转 datetime
     if range_match:
         start_date = datetime.strptime(range_match.group(1), "%Y-%m-%d")
         end_date = datetime.strptime(range_match.group(2), "%Y-%m-%d")
     else:
-        # 备用：从文件名解析
         basename = os.path.basename(candidate_file).replace("-candidates.md", "")
         try:
             end_date = datetime.strptime(basename, "%Y-%m-%d")
@@ -309,14 +292,11 @@ def main():
 
     range_display = display_match.group(1).strip() if display_match else "精选"
 
-    # LLM 解读
     papers_data = []
     for p in papers:
         print(f"\n📝 解读: {p['title'][:60]}...")
         analysis = analyze_paper(p)
         papers_data.append({**p, **analysis})
-
-        # 打印自动标签（调试用）
         auto_tags = auto_tag_paper(p, analysis.get("tags", []))
         if auto_tags:
             print(f"   🏷️ 自动标签: {', '.join(auto_tags)}")
