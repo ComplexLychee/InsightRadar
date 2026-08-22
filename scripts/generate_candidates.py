@@ -495,7 +495,9 @@ def main():
     print(f"\n📚 总计候选: {len(papers)} 篇")
     os.makedirs("candidates", exist_ok=True)
     md_content = generate_candidates_md(papers, start, end, display)
-    candidate_file = f"candidates/{end.strftime('%Y-%m-%d')}-candidates.md"
+    
+    # 关键改动：文件名从 2026-08-22-candidates.md 改为 2026-08-22-1430-candidates.md
+    candidate_file = f"candidates/{end.strftime('%Y-%m-%d-%H%M')}-candidates.md"
     with open(candidate_file, "w", encoding="utf-8") as f:
         f.write(md_content)
     print(f"✅ 候选清单: {candidate_file}")
