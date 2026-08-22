@@ -121,16 +121,28 @@ def analyze_paper_ocar(paper):
 注意：基于提供的背景信息判断。"""
 
     content = call_opencode(prompt, api_key, {"type": "json_object"})
-    if content:
+        if content:
         try:
             data = json.loads(content)
             for key in ["opening_challenge", "action", "resolution", "highlights", "why_matters", "audience", "tags", "score"]:
                 if key not in data:
-                    data[key] = "" if key != "tags" and key != "highlights" else []
+                    if key in ("tags", "highlights"):
+                        data[key] = []
+                    elif key == "score":
+                        data[key] = 5
+                    else:
+                        data[key] = ""
             if not isinstance(data["highlights"], list):
                 data["highlights"] = [str(data["highlights"])]
             if not isinstance(data["tags"], list):
                 data["tags"] = [paper["area"]]
+            
+            # 确保 score 是整数
+            try:
+                data["score"] = int(data["score"])
+            except (ValueError, TypeError):
+                data["score"] = 5
+            
             return data
         except json.JSONDecodeError:
             print(f"❌ JSON 解析失败")
@@ -177,14 +189,14 @@ def auto_tag_paper(paper, analysis_tags):
 
 def generate_post(papers_data, range_display, start_date, end_date, source_files):
     date_str = end_date.strftime("%Y-%m-%d")
-
-    if range_display == "过去1周":
-        title = f"Insight Radar · 周刊 {date_str}"
-        tag_label = "论文周刊"
-    else:
-        title = f"Insight Radar · {range_display}精选 ({start_date.strftime('%Y-%m-%d')} ~ {end_date.strftime('%Y-%m-%d')})"
-        tag_label = "论文洞察"
-
+    
+    # 修复：确保所有 score 都是整数
+    for p in papers_data:
+        try:
+            p["score"] = int(p.get("score", 5))
+        except (ValueError, TypeError):
+            p["score"] = 5
+    
     papers_data.sort(key=lambda x: x.get("score", 5), reverse=True)
 
     all_tags = set(["arXiv", "AI", tag_label])
