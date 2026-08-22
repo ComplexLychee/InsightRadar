@@ -13,7 +13,7 @@
 ---
 
 ## 论文 1
-- [ ] **发布**
+- [x] **发布**
 - **标题**: Symposium: Trust via Auditable Records for Communities of AI Scientist Agents
 - **作者**: Dexter Pratt (单位未提供) | 单位: Department of Medicine, University of California San Diego
 - **发表日期**: 2026-08-20
@@ -32,7 +32,7 @@
 ---
 
 ## 论文 2
-- [ ] **发布**
+- [x] **发布**
 - **标题**: Bringing analytic rigor to agentic AI for science: The Brain Researcher platform for neuroimaging data analysis
 - **作者**: Zijiao Chen (单位未提供), Nicholas Lu (单位未提供), Xinhui Li (单位未提供), Jocelyn A. Ricard (单位未提供), Ce Ju (单位未提供) 等（共17人） | 单位: Stanford University
 - **发表日期**: 2026-08-20
@@ -127,7 +127,7 @@
 ---
 
 ## 论文 7
-- [ ] **发布**
+- [x] **发布**
 - **标题**: From Agent Behaviour to Agent-Friendly Documentation: An Empirical Study of How Coding Agents Discover, Read, and Write Technical Documentation
 - **作者**: Zhijun Gao (单位未提供), Jing Chen (单位未提供) | 单位: Peking University
 - **发表日期**: 2026-08-20
@@ -317,7 +317,7 @@
 ---
 
 ## 论文 17
-- [ ] **发布**
+- [x] **发布**
 - **标题**: Beyond Memory Majority: Latent-Source Reasoning for Multi-Agent Memory Arbitration
 - **作者**: Chenchen Lin (单位未提供), Wenhao Yuan (单位未提供), Xuehe Wang (单位未提供), Edith Cheuk Han Ngai (单位未提供) | 单位: Department of Electrical and Computer Engineering, The University of Hong Kong
 - **发表日期**: 2026-08-20
@@ -355,7 +355,7 @@
 ---
 
 ## 论文 19
-- [ ] **发布**
+- [x] **发布**
 - **标题**: ReCache: Efficient KV Cache Reuse and Compression for Tool-Augmented LLM Agents
 - **作者**: Yichu Fang (单位未提供), Sitong Wei (单位未提供), Haozhe Hu (单位未提供), Xiaoyu Shen (单位未提供) | 单位: Eastern Institute of Technology, Ningbo; Shanghai Jiao Tong University; Xi’an Jiaotong University
 - **发表日期**: 2026-08-20
