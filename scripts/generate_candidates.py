@@ -177,26 +177,29 @@ PDF 文本：
         return []
 
 
-def distill_summary(text, api_key):
+def distill_summary_ocar(text, api_key):
+    """按 OCAR 模板提炼摘要：Opening&Challenge / Action / Resolution"""
     if not text or not text.strip():
         return "（无摘要）"
-    text = text[:800].strip()
-    prompt = f"""请对以下学术论文摘要进行结构化提炼，用中文输出：
+    text = text[:1000].strip()
 
-### 研究问题
-文章要解决/回答的核心问题是什么？
+    prompt = f"""请对以下学术论文摘要进行结构化提炼，严格按照 OCAR 框架用中文输出：
 
-### 方法技术
-文章用了什么方法、技术或框架来解决这个问题？
+### Opening & Challenge
+这篇文章研究的是什么领域？面临的核心问题或挑战是什么？（50字以内）
 
-### 效果影响
-最终取得了什么效果？对领域有什么影响或意义？
+### Action
+文章采取了什么具体行动、方法或技术方案来应对上述挑战？（80字以内）
+
+### Resolution
+最终达成了什么效果、解决了什么问题、产生了什么影响？（50字以内）
 
 原文摘要：
 {text}
 
-请严格按上述三个部分输出，每部分用 ### 开头，内容简洁（每部分不超过80字）。"""
-    result = call_opencode(prompt, api_key, max_tokens=500, temperature=0.3)
+请严格按上述三个部分输出，每部分用 ### 开头，内容简洁专业。"""
+
+    result = call_opencode(prompt, api_key, max_tokens=600, temperature=0.3)
     if result:
         return result
     return text[:200] + "..."
@@ -217,7 +220,6 @@ def parse_arxiv_xml(xml_content):
             name = name_elem.text if name_elem is not None else "Unknown"
             aff_elem = author.find('arxiv:affiliation', NS)
             aff = aff_elem.text if aff_elem is not None else None
-            # 修复：arXiv 没提供单位时，只保留作者名，不显示"单位未提供"
             if aff and aff.strip():
                 authors_list.append(f"{name} ({aff.strip()})")
             else:
@@ -233,7 +235,7 @@ def parse_arxiv_xml(xml_content):
         category = cat_elem.get('term', 'unknown') if cat_elem is not None else "unknown"
         sum_elem = entry.find('atom:summary', NS)
         summary = sum_elem.text if sum_elem is not None else ""
-        summary_clean = summary[:800].replace('\n', ' ')
+        summary_clean = summary[:1000].replace('\n', ' ')
 
         pdf_url = ""
         for link in entry.findall('atom:link', NS):
@@ -355,13 +357,10 @@ def search_papers():
             affs = extract_affiliations_from_pdf(p["pdf_url"], api_key)
             if affs:
                 p["affiliations"] = affs
-                # 修复：如果 PDF 提取到单位，显示 "作者名 | 单位: xxx"
-                # 如果 arXiv 已经提供了单位（authors 里有括号），优先用 PDF 的
                 p["authors_display"] = f"{p['authors']} | 单位: {'; '.join(affs)}"
                 print(f"      ✓ {'; '.join(affs)}")
             else:
                 p["affiliations"] = []
-                # 修复：如果没有提取到单位，只显示作者名（不显示"单位未提供"）
                 p["authors_display"] = p["authors"]
                 print(f"      - 无单位信息")
             time.sleep(PDF_DELAY)
@@ -371,16 +370,16 @@ def search_papers():
             p["affiliations"] = []
             p["authors_display"] = p["authors"]
 
-    # 结构化提炼摘要
+    # OCAR 结构化提炼
     if all_papers and api_key:
-        print(f"\n🌐 提炼 {len(all_papers)} 篇论文摘要...")
+        print(f"\n🌐 按 OCAR 模板提炼 {len(all_papers)} 篇论文摘要...")
         for i, p in enumerate(all_papers, 1):
             print(f"   📝 [{i}/{len(all_papers)}] {p['title'][:40]}...")
-            p["summary_distilled"] = distill_summary(p["summary"], api_key)
-        print("✅ 摘要提炼完成")
+            p["summary_ocar"] = distill_summary_ocar(p["summary"], api_key)
+        print("✅ OCAR 提炼完成")
     else:
         for p in all_papers:
-            p["summary_distilled"] = p["summary"][:200] + "..."
+            p["summary_ocar"] = p["summary"][:200] + "..."
 
     all_papers.sort(key=lambda x: x["published"], reverse=True)
     return all_papers, start, end, display, log_records
@@ -396,7 +395,7 @@ def generate_candidates_md(papers, start, end, display):
         f"> **生成时间**: {datetime.now().strftime('%Y-%m-%d %H:%M')}",
         f"",
         f"## ✅ 使用说明",
-        f"1. 浏览下方论文列表（摘要已按模板提炼）",
+        f"1. 浏览下方论文列表（摘要已按 OCAR 模板提炼）",
         f"2. 将想发布的论文前面的 `- [ ]` 改为 `- [x]`",
         f"3. 保存文件（Commit）",
         f"4. 手动运行 **Publish Selected** workflow",
@@ -413,9 +412,9 @@ def generate_candidates_md(papers, start, end, display):
             f"- **发表日期**: {p['published']}",
             f"- **所属领域**: {p['area']} (`{p['category']}`)",
             f"- **arXiv链接**: [{p['entry_id'].split('/')[-1]}]({p['pdf_url']})",
-            f"- **结构化摘要**:",
+            f"- **OCAR 结构化摘要**:",
         ])
-        for line in p.get("summary_distilled", "").split("\n"):
+        for line in p.get("summary_ocar", "").split("\n"):
             lines.append(f"  {line}")
         lines.extend([f"", f"---", f""])
     return "\n".join(lines)
@@ -489,14 +488,12 @@ def generate_log_md(log_records, start, end, display, total_kept):
 
 def main():
     print("=" * 60)
-    print("🚀 Insight Radar · 候选池生成器（PDF单位提取 + 结构化摘要版）")
+    print("🚀 Insight Radar · 候选池生成器（OCAR 模板版）")
     print("=" * 60)
     papers, start, end, display, log_records = search_papers()
     print(f"\n📚 总计候选: {len(papers)} 篇")
     os.makedirs("candidates", exist_ok=True)
     md_content = generate_candidates_md(papers, start, end, display)
-    
-    # 关键改动：文件名从 2026-08-22-candidates.md 改为 2026-08-22-1430-candidates.md
     candidate_file = f"candidates/{end.strftime('%Y-%m-%d-%H%M')}-candidates.md"
     with open(candidate_file, "w", encoding="utf-8") as f:
         f.write(md_content)
