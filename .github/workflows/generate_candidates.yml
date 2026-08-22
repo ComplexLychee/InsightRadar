@@ -2,7 +2,7 @@ name: Generate Candidates
 
 on:
   schedule:
-    - cron: '0 7 * * 2'   # 每周二 UTC 07:00 = 北京时间 15:00
+    - cron: '0 7 * * 2'
   workflow_dispatch:
     inputs:
       time_range:
@@ -40,7 +40,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-      - run: pip install arxiv requests
+      - run: pip install arxiv requests pdfplumber
       - name: Generate candidates
         env:
           TIME_RANGE: ${{ github.event.inputs.time_range || '1 week' }}
