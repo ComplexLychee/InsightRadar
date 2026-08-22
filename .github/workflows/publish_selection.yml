@@ -2,6 +2,15 @@ name: Publish Selected
 
 on:
   workflow_dispatch:
+    inputs:
+      candidate_file:
+        description: '候选文件名（留空则使用最新的）'
+        required: false
+        type: string
+      merge_multiple:
+        description: '合并多个候选文件发布？（格式：file1.md,file2.md 或留空）'
+        required: false
+        type: string
 
 permissions:
   contents: write
