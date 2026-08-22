@@ -78,6 +78,7 @@ MAX_RESULTS_PER_QUERY = 100
 PDF_DELAY = 2
 NS = {'atom': 'http://www.w3.org/2005/Atom', 'arxiv': 'http://arxiv.org/schemas/atom'}
 
+
 def parse_time_range(time_str):
     time_str = time_str.strip().lower()
     match = re.match(r'^(\d+)\s*([a-z]+)$', time_str)
@@ -99,6 +100,7 @@ def parse_time_range(time_str):
     display = f"过去{num}{'天' if unit=='day' else '周' if unit=='week' else '个月' if unit=='month' else '年'}"
     return start, end, display
 
+
 def get_search_config():
     preset = os.getenv("KEYWORD_PRESET", "weekly_auto")
     custom = os.getenv("CUSTOM_QUERY", "").strip()
@@ -117,12 +119,14 @@ def get_search_config():
     print(f"   [DEBUG] 回退到 weekly_auto")
     return KEYWORD_PRESETS["weekly_auto"]
 
+
 def is_relevant_paper(title, summary, keywords):
     text = (title + " " + summary).lower()
     for kw in keywords:
         if kw.lower() in text:
             return True, kw
     return False, None
+
 
 def call_opencode(prompt, api_key, max_tokens=400, temperature=0.3):
     headers = {"Authorization": f"Bearer {api_key}", "Content-Type": "application/json"}
@@ -135,6 +139,7 @@ def call_opencode(prompt, api_key, max_tokens=400, temperature=0.3):
     except Exception as e:
         print(f"   ⚠️ API 失败: {e}")
         return None
+
 
 def extract_affiliations_from_pdf(pdf_url, api_key):
     if not PDFPLUMBER_OK:
@@ -171,6 +176,7 @@ PDF 文本：
         print(f"   ⚠️ PDF 解析失败: {e}")
         return []
 
+
 def distill_summary(text, api_key):
     if not text or not text.strip():
         return "（无摘要）"
@@ -195,6 +201,7 @@ def distill_summary(text, api_key):
         return result
     return text[:200] + "..."
 
+
 def parse_arxiv_xml(xml_content):
     root = ET.fromstring(xml_content)
     entries = []
@@ -203,19 +210,23 @@ def parse_arxiv_xml(xml_content):
         entry_id = entry_id.text if entry_id is not None else ""
         title_elem = entry.find('atom:title', NS)
         title = title_elem.text.replace('\n', ' ').strip() if title_elem is not None else "无标题"
+
         authors_list = []
         for author in entry.findall('atom:author', NS):
             name_elem = author.find('atom:name', NS)
             name = name_elem.text if name_elem is not None else "Unknown"
             aff_elem = author.find('arxiv:affiliation', NS)
             aff = aff_elem.text if aff_elem is not None else None
-            if aff:
-                authors_list.append(f"{name} ({aff})")
+            # 修复：arXiv 没提供单位时，只保留作者名，不显示"单位未提供"
+            if aff and aff.strip():
+                authors_list.append(f"{name} ({aff.strip()})")
             else:
-                authors_list.append(f"{name} (单位未提供)")
+                authors_list.append(name)
+
         authors_str = ", ".join(authors_list[:5])
         if len(authors_list) > 5:
             authors_str += f" 等（共{len(authors_list)}人）"
+
         pub_elem = entry.find('atom:published', NS)
         published = pub_elem.text if pub_elem is not None else ""
         cat_elem = entry.find('arxiv:primary_category', NS)
@@ -223,17 +234,20 @@ def parse_arxiv_xml(xml_content):
         sum_elem = entry.find('atom:summary', NS)
         summary = sum_elem.text if sum_elem is not None else ""
         summary_clean = summary[:800].replace('\n', ' ')
+
         pdf_url = ""
         for link in entry.findall('atom:link', NS):
             if link.get('title') == 'pdf':
                 pdf_url = link.get('href', '')
                 break
+
         entries.append({
             "entry_id": entry_id, "title": title, "authors": authors_str,
             "published_raw": published, "category": category,
             "summary": summary, "summary_clean": summary_clean, "pdf_url": pdf_url,
         })
     return entries
+
 
 def search_arxiv_api(query, max_results=100):
     url = "http://export.arxiv.org/api/query"
@@ -261,6 +275,7 @@ def search_arxiv_api(query, max_results=100):
             else:
                 return []
     return []
+
 
 def search_papers():
     search_config = get_search_config()
@@ -331,7 +346,7 @@ def search_papers():
         log_records.append(category_log)
         time.sleep(ARXIV_DELAY)
 
-    # ===== PDF 提取单位 =====
+    # PDF 提取单位
     api_key = os.getenv("OPENCODE_API_KEY")
     if all_papers and api_key and PDFPLUMBER_OK:
         print(f"\n🏫 提取 {len(all_papers)} 篇论文的作者单位...")
@@ -340,12 +355,15 @@ def search_papers():
             affs = extract_affiliations_from_pdf(p["pdf_url"], api_key)
             if affs:
                 p["affiliations"] = affs
+                # 修复：如果 PDF 提取到单位，显示 "作者名 | 单位: xxx"
+                # 如果 arXiv 已经提供了单位（authors 里有括号），优先用 PDF 的
                 p["authors_display"] = f"{p['authors']} | 单位: {'; '.join(affs)}"
                 print(f"      ✓ {'; '.join(affs)}")
             else:
                 p["affiliations"] = []
+                # 修复：如果没有提取到单位，只显示作者名（不显示"单位未提供"）
                 p["authors_display"] = p["authors"]
-                print(f"      ⚠️ 未提取")
+                print(f"      - 无单位信息")
             time.sleep(PDF_DELAY)
         print("✅ 单位提取完成")
     else:
@@ -353,7 +371,7 @@ def search_papers():
             p["affiliations"] = []
             p["authors_display"] = p["authors"]
 
-    # ===== 结构化提炼摘要 =====
+    # 结构化提炼摘要
     if all_papers and api_key:
         print(f"\n🌐 提炼 {len(all_papers)} 篇论文摘要...")
         for i, p in enumerate(all_papers, 1):
@@ -366,6 +384,7 @@ def search_papers():
 
     all_papers.sort(key=lambda x: x["published"], reverse=True)
     return all_papers, start, end, display, log_records
+
 
 def generate_candidates_md(papers, start, end, display):
     date_str = end.strftime("%Y-%m-%d")
@@ -400,6 +419,7 @@ def generate_candidates_md(papers, start, end, display):
             lines.append(f"  {line}")
         lines.extend([f"", f"---", f""])
     return "\n".join(lines)
+
 
 def generate_log_md(log_records, start, end, display, total_kept):
     lines = [
@@ -466,6 +486,7 @@ def generate_log_md(log_records, start, end, display, total_kept):
     ])
     return "\n".join(lines)
 
+
 def main():
     print("=" * 60)
     print("🚀 Insight Radar · 候选池生成器（PDF单位提取 + 结构化摘要版）")
@@ -484,6 +505,7 @@ def main():
     with open(log_file, "w", encoding="utf-8") as f:
         f.write(log_content)
     print(f"✅ 排查日志: {log_file}")
+
 
 if __name__ == "__main__":
     main()
