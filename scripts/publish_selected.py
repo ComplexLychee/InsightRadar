@@ -121,7 +121,7 @@ def analyze_paper_ocar(paper):
 注意：基于提供的背景信息判断。"""
 
     content = call_opencode(prompt, api_key, {"type": "json_object"})
-        if content:
+    if content:
         try:
             data = json.loads(content)
             for key in ["opening_challenge", "action", "resolution", "highlights", "why_matters", "audience", "tags", "score"]:
