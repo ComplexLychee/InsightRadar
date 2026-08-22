@@ -1,6 +1,8 @@
 name: Generate Candidates
 
 on:
+  schedule:
+    - cron: '0 7 * * 2'   # 每周二 UTC 07:00 = 北京时间 15:00
   workflow_dispatch:
     inputs:
       time_range:
@@ -11,17 +13,19 @@ on:
       keyword_preset:
         description: '关键词预设'
         required: true
-        default: 'default'
+        default: 'weekly_auto'
         type: choice
         options:
+          - weekly_auto
+          - sdc_reliability
+          - research_agents
           - default
           - llm_only
           - vision_only
           - rl_only
-          - sdc_reliability
           - all_areas
       custom_query:
-        description: '自定义 arXiv 查询（留空使用预设）'
+        description: '【高级】自定义 arXiv 查询语句。如需使用上方预设，请务必留空！'
         required: false
         type: string
 
@@ -36,13 +40,13 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-      - run: pip install arxiv
+      - run: pip install arxiv requests
       - name: Generate candidates
         env:
-          TIME_RANGE: ${{ github.event.inputs.time_range }}
-          KEYWORD_PRESET: ${{ github.event.inputs.keyword_preset }}
-          CUSTOM_QUERY: ${{ github.event.inputs.custom_query || 'sdc_reliability' }}
-          OPENCODE_API_KEY: ${{ secrets.OPENCODE_API_KEY }}  #
+          TIME_RANGE: ${{ github.event.inputs.time_range || '1 week' }}
+          KEYWORD_PRESET: ${{ github.event.inputs.keyword_preset || 'weekly_auto' }}
+          CUSTOM_QUERY: ${{ github.event.inputs.custom_query || '' }}
+          OPENCODE_API_KEY: ${{ secrets.OPENCODE_API_KEY }}
         run: python scripts/generate_candidates.py
       - name: Commit candidates and logs
         run: |
