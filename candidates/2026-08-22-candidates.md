@@ -13,7 +13,7 @@
 ---
 
 ## 论文 1
-- [ ] **发布**
+- [x] **发布**
 - **标题**: Fault-Tolerant Quantum Computation with Adversarial Errors
 - **作者**: Nikolas P. Breuckmann, Louis Golowich, Umesh Vazirani | 单位: University of Bristol, UK; UC Berkeley, USA
 - **发表日期**: 2026-08-17
