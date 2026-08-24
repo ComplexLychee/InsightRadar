@@ -2,7 +2,7 @@ name: Generate Candidates
 
 on:
   schedule:
-    - cron: '0 23 * * 1'  # 北京时间每周二早上7点执行
+    - cron: '0 23 * * 0'  # 北京时间每周二早上7点执行
   workflow_dispatch:
     inputs:
       time_range:
