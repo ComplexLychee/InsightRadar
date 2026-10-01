@@ -84,6 +84,9 @@ def parse_selected_papers(filepath):
 
 def call_opencode(prompt, api_key, response_format=None):
     headers = {"Authorization": f"Bearer {api_key}", "Content-Type": "application/json"}
+    headers = {
+    "Content-Type": "application/json",
+    "Authorization": f"Bearer {api_key}"}
     payload = {"model": "deepseek-v4-flash", "messages": [{"role": "user", "content": prompt}],
                "temperature": 0.5, "max_tokens": 800}
     if response_format:
