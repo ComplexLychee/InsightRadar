@@ -98,7 +98,8 @@ def call_opencode(prompt, api_key, response_format=None):
 
 def analyze_paper_ocar(paper):
     """基于 OCAR 模板进行深度解读"""
-    api_key = os.getenv("OPENCODE_API_KEY")
+    # api_key = os.getenv("OPENCODE_API_KEY")
+    api_key = os.getenv("GLM_API_KEY")
     context = paper.get("summary_ocar", "") or paper["title"]
 
     prompt = f"""请对以下学术论文进行 OCAR 结构化解读，只输出 JSON：
