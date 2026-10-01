@@ -27,6 +27,7 @@ jobs:
       - name: Publish selected papers
         env:
           OPENCODE_API_KEY: ${{ secrets.OPENCODE_API_KEY }}
+          GLM_API_KEY: ${{ secrets.GLM_API_KEY }}
           SITE_URL: ${{ vars.SITE_URL || 'https://complexlychee.github.io/InsightRadar' }}
           CANDIDATE_FILE: ${{ github.event.inputs.candidate_file || '' }}
           MERGE_MULTIPLE: ${{ github.event.inputs.merge_multiple || '' }}
