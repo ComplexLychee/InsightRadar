@@ -89,7 +89,7 @@ def call_opencode(prompt, api_key, response_format=None):
     if response_format:
         payload["response_format"] = response_format
     try:
-        resp = requests.post(f"{API_BASE}/chat/completions", headers=headers, json=payload, timeout=60)
+        resp = requests.post(f"{API_BASE}/chat/completions", headers=headers)
         resp.raise_for_status()
         return resp.json()["choices"][0]["message"]["content"]
     except Exception as e:
