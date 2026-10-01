@@ -6,7 +6,9 @@ from datetime import datetime, timedelta
 from jinja2 import Template
 
 SITE_URL = os.getenv("SITE_URL", "https://complexlychee.github.io/InsightRadar")
-API_BASE = "https://opencode.ai/zen/v1"
+# API_BASE = "https://opencode.ai/zen/v1"
+API_BASE = "https://open.bigmodel.cn/api/paas/v4"
+
 
 def find_latest_candidate():
     if not os.path.exists("candidates"):
