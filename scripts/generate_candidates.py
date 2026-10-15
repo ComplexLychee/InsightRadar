@@ -128,12 +128,16 @@ def is_relevant_paper(title, summary, keywords):
     return False, None
 
 
-def call_opencode(prompt, api_key, max_tokens=400, temperature=0.3):
+GLM_MODEL = "glm-4.7-flash"
+GLM_API_URL = "https://open.bigmodel.cn/api/paas/v4/chat/completions"
+
+
+def call_glm(prompt, api_key, max_tokens=400, temperature=0.3):
     headers = {"Authorization": f"Bearer {api_key}", "Content-Type": "application/json"}
-    payload = {"model": "deepseek-v4-flash", "messages": [{"role": "user", "content": prompt}],
+    payload = {"model": GLM_MODEL, "messages": [{"role": "user", "content": prompt}],
                "temperature": temperature, "max_tokens": max_tokens}
     try:
-        resp = requests.post("https://opencode.ai/zen/v1/chat/completions", headers=headers, json=payload, timeout=60)
+        resp = requests.post(GLM_API_URL, headers=headers, json=payload, timeout=60)
         resp.raise_for_status()
         return resp.json()["choices"][0]["message"]["content"].strip()
     except Exception as e:
@@ -167,7 +171,7 @@ PDF 文本：
 {text}
 
 输出格式：单位1 | 单位2 | 单位3"""
-            result = call_opencode(prompt, api_key, max_tokens=200, temperature=0.3)
+            result = call_glm(prompt, api_key, max_tokens=200, temperature=0.3)
             if not result or result == "未找到":
                 return []
             affs = [a.strip() for a in result.split("|") if a.strip() and a.strip() != "未找到"]
@@ -199,7 +203,7 @@ def distill_summary_ocar(text, api_key):
 
 请严格按上述三个部分输出，每部分用 ### 开头，内容简洁专业。"""
 
-    result = call_opencode(prompt, api_key, max_tokens=600, temperature=0.3)
+    result = call_glm(prompt, api_key, max_tokens=600, temperature=0.3)
     if result:
         return result
     return text[:200] + "..."
@@ -349,7 +353,7 @@ def search_papers():
         time.sleep(ARXIV_DELAY)
 
     # PDF 提取单位
-    api_key = os.getenv("OPENCODE_API_KEY")
+    api_key = os.getenv("GLM_KPI_KEY")
     if all_papers and api_key and PDFPLUMBER_OK:
         print(f"\n🏫 提取 {len(all_papers)} 篇论文的作者单位...")
         for i, p in enumerate(all_papers, 1):
