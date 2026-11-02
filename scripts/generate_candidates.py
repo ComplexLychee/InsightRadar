@@ -185,7 +185,8 @@ def distill_summary_ocar(text, api_key):
     """按 OCAR 模板提炼摘要：Opening&Challenge / Action / Resolution"""
     if not text or not text.strip():
         return "（无摘要）"
-    text = text[:1000].strip()
+    # text = text[:1000].strip()
+    text = text.strip()
 
     prompt = f"""请对以下学术论文摘要进行结构化提炼，严格按照 OCAR 框架用中文输出：
 
